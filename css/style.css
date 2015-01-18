@@ -91,6 +91,46 @@ a {
   display: none;
 }
 
+#skills li {
+  height: 50px;
+  width: 50%;
+}
+
+#skills .white-text {
+  font-size: 80%;
+  margin: 0;
+}
+
+.skill-logo {
+  height: 36px;
+  width: 50px;
+  margin: 0;
+  padding: 0;
+  float: left;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.skill-logo img {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.skill-proficiency {
+  height: 12px;
+  margin: 0;
+  padding: 2px 6px;
+  margin-left: 55px;
+  /*float: right;*/
+  border-radius: 6px;
+  width: 0;
+  font-size: 11px;
+}
+
 .orange {
   background-color: #F5AE23;
 }
