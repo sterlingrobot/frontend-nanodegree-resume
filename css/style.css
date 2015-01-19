@@ -86,12 +86,16 @@ a {
   line-height: 28px;
 }
 
+#skills {
+  background: rgba(0, 0, 0, 0.5);
+}
+
 #skillsH3 {
   color: #F5AE23;
   display: none;
 }
 
-#skills li {
+#skills li.flex-item {
   height: 50px;
   width: 50%;
 }
@@ -99,6 +103,25 @@ a {
 #skills .white-text {
   font-size: 80%;
   margin: 0;
+}
+
+.skill-legend {
+  width: 100%;
+}
+
+.skill-level {
+  width: 16.6667%;
+  margin: 0;
+  padding: 0;
+  float: left;
+  text-align: left;
+}
+
+.skill-level a {
+  width: 10px;
+  height: 10px;
+  background: cyan;
+  border-radius: 5px;
 }
 
 .skill-logo {
@@ -154,9 +177,10 @@ a {
   background-color: #4A4A4A;
 }
 
-/* TODO: Replace with image later */
 #header {
-  background-color: #484848;
+  background-image: url(../images/background.jpg);
+  background-size: auto 100%;
+  background-position: 0 0;
 }
 
 .flex-box {

@@ -22,6 +22,7 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
   <title>Tor Gilbertson | Resume</title>
 
   <!-- Load the page styles. -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
   <link href="css/style.css" rel="stylesheet" type="text/css">
 
   <!--
@@ -61,7 +62,7 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
     <div id="header" class="center-content clearfix">
       <ul id="topContacts" class='flex-box'></ul>
     </div>
-    <div style='clear: both;'></div>
+    <div class="clearfix"></div>
     <div id="workExperience" class='gray'>
       <h2>Work Experience</h2>
     </div>
@@ -81,6 +82,7 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
     </div>
   </div>
 
+  <script src="js/bootstrap.min.js"></script>
   <!--
   The next line tells the browser where to download the JavaScript file you'll be
   writing. In resumeBuilder.js, you'll be writing code that builds the resume
@@ -110,7 +112,9 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
     /*
         an opening and closing set of slash asterisks for block comments.
     */
-
+    $(document).ready(function() {
+      $('a[data-toggle="tooltip"]').tooltip();
+    });
 
     if(document.getElementsByClassName('flex-item').length === 0) {
       document.getElementById('topContacts').style.display = 'none';
