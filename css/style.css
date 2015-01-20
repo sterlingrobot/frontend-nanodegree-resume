@@ -95,33 +95,47 @@ a {
   display: none;
 }
 
-#skills li.flex-item {
-  height: 50px;
-  width: 50%;
-}
-
-#skills .white-text {
-  font-size: 80%;
-  margin: 0;
-}
-
-.skill-legend {
+#skills .tab-content {
   width: 100%;
+  min-height: 350px;
+  padding: 20px;
+  margin-top: 20px;
+  position: relative;
+}
+
+#skills .skill-legend {
+  width: 100%;
+  top: 0px;
+  left: 80px;
+  position: absolute;
 }
 
 .skill-level {
-  width: 16.6667%;
+  width: 15%;
+  height: 320px;
   margin: 0;
   padding: 0;
   float: left;
   text-align: left;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .skill-level a {
   width: 10px;
   height: 10px;
+  margin: 0;
+  margin-left: -5px;
   background: cyan;
   border-radius: 5px;
+}
+
+#skills li.flex-item {
+  height: 50px;
+}
+
+#skills .white-text {
+  font-size: 80%;
+  margin: 10px;
 }
 
 .skill-logo {

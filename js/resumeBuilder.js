@@ -9,24 +9,37 @@ var bio = {
 	      location: 'Bozeman, Montana'
   	},
 	welcomeMessage: 'Let\'s get this party started.' ,
-	skills: [
-		{ name: 'HTML5', logoPos: 5, proficiency: 4 },
-		{ name: 'CSS3', logoPos: 6, proficiency: 4 },
-		{ name: 'Bootstrap', logoPos: 7, proficiency: 4 },
-		{ name: 'Apache', logoPos: 2, proficiency: 2 },
-		{ name: 'PHP', logoPos: 0, proficiency: 4 },
-		{ name: 'MySQL', logoPos: 1, proficiency: 3 },
-		{ name: 'JavaScript', logoPos: 4, proficiency: 4 },
-		{ name: 'jQuery', logoPos: 3, proficiency: 4 },
-		{ name: 'AngularJS', logoPos: 8, proficiency: 1 },
-		{ name: 'ActionScript3', logoPos: 15, proficiency: 4 },
-		{ name: 'Photoshop', logoPos: 9, proficiency: 5 },
-		{ name: 'Illustrator', logoPos: 10, proficiency: 5 },
-		{ name: 'Fireworks', logoPos: 13, proficiency: 4 },
-		{ name: 'InDesign', logoPos: 11, proficiency: 4 },
-		{ name: 'Flash', logoPos: 12, proficiency: 4 },
-		{ name: 'Flash Builder', logoPos: 14, proficiency: 3 },
-	],
+	skills: {
+		'Programming': [
+			{ name: 'HTML5', logoPos: 5, proficiency: 4 },
+			{ name: 'CSS3', logoPos: 6, proficiency: 4 },
+			{ name: 'JavaScript', logoPos: 4, proficiency: 4 },
+			{ name: 'PHP', logoPos: 0, proficiency: 4 },
+			{ name: 'ActionScript3', logoPos: 15, proficiency: 4 }
+		],
+		'Design & Software': [
+			{ name: 'Photoshop', logoPos: 9, proficiency: 5 },
+			{ name: 'Illustrator', logoPos: 10, proficiency: 5 },
+			{ name: 'Fireworks', logoPos: 13, proficiency: 4 },
+			{ name: 'InDesign', logoPos: 11, proficiency: 4 },
+			{ name: 'Flash', logoPos: 12, proficiency: 4 },
+			{ name: 'Flash Builder', logoPos: 14, proficiency: 3 }
+		],
+		'CMS & Database': [
+			{ name: 'MySQL', logoPos: 1, proficiency: 4 },
+			{ name: 'osCommerce', logoPos: 16, proficiency: 5 },
+			{ name: 'WordPress', logoPos: 17, proficiency: 3 },
+			{ name: 'Joomla!', logoPos: 18, proficiency: 3 }
+		],
+		'Framework': [
+			{ name: 'Bootstrap', logoPos: 7, proficiency: 4 },
+			{ name: 'jQuery', logoPos: 3, proficiency: 4 },
+			{ name: 'AngularJS', logoPos: 8, proficiency: 1 }
+		],
+		'Misc': [
+			{ name: 'Apache', logoPos: 2, proficiency: 2 }
+		]
+	},
 	biopic: 'images/fry.jpg',
 	display: function() {
 		var self = this,
@@ -38,8 +51,11 @@ var bio = {
 				{ name: 'Using', color: '#23F58D' },
 				{ name: 'Rocking it!', color: '#40F523' },
 			],
+			legend = $('<ul class="skill-legend"></ul>'),
 			colLeft = $('<div class="col-sm-4"></div>'),
-			colRight = $('<div class="col-sm-8"></div>');
+			colRight = $('<div class="col-sm-8"></div>'),
+			skillsTabs = $('<ul id="skillsTabs" class="nav nav-tabs" role="tablist"></ul>'),
+			skillsContent = $('<div class="tab-content"></div>');
 
 		for(var contact in self.contacts) {
 			$('#topContacts, #footerContacts').append(window['HTML'+contact].replace('%data%', self.contacts[contact]));
@@ -53,28 +69,44 @@ var bio = {
 		colRight.append(HTMLskillsStart);
 
 		$('#header').append(colLeft).append(colRight);
-
-		$('#skills').append('<li class="skill-legend"><ul></ul></li>');
+		$('#skills').append(skillsTabs).append(skillsContent);
 
 		levels.forEach(function(level) {
 			var name = level.name || '&nbsp;',
 				toggle = level.name ? 'data-toggle="tooltip"' : '';
-				el = $('#skills').find('.skill-legend > ul');
-			el.append('<li class="skill-level"><a href="" ' + toggle + ' title="' + name + '"></a></li>');
+			legend.append('<li class="skill-level"><a href="" ' + toggle + ' title="' + name + '"></a></li>');
 		});
+		skillsContent.append(legend)
+
+		for(var category in self.skills) {
+			var tab = $('<li><a href="#' + category.replace(/(\s|&)+/g, '-') + '" role="tab" data-toggle="tab">' + category + '</a></li>'),
+				pane = $('<div id="' + category.replace(/(\s|&)+/g, '-') + '" class="tab-pane" role="tabpanel"><ul></ul></div>');
+			skillsTabs.append(tab);
+			skillsContent.append(pane);
+			self.skills[category].forEach(function(skill) {
+				var el = $(HTMLskills.replace('%data%', skill.name));
+				pane.find('ul').append(el);
+				el.find('.skill-logo img').css('top', -skill.logoPos*36 + 'px');
+				el.find('.skill-proficiency')
+					.css({ 'background-color': levels[skill.proficiency].color, opacity : 0.7 })
+					.data('proficiency', skill.proficiency);
+			});
+		}
 
 		$('.skill-level a').on('click', function(e) { e.preventDefault(); });
 
-		self.skills.forEach(function(skill) {
-			var el = $(HTMLskills.replace('%data%', skill.name));
-			el.find('.skill-logo img').css('top', -skill.logoPos*36 + 'px');
-			$('#skills').append(el);
-			el.find('.skill-proficiency')
-				.css({ 'background-color': levels[skill.proficiency].color, opacity : 0.7 })
-				.text(levels[skill.proficiency].name)
-				.animate({ width : '+'+skill.proficiency*15+'%'}, skill.proficiency*500);
-
+		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+			var skills = $($(e.target).attr('href')).find('.skill-proficiency');
+			skills.each(function(i) {
+				$(this).css('width', 0);
+				$(this).animate({ 'width' : '+' + $(this).data('proficiency')*16.667 + '%' }, $(this).data('proficiency')*250);
+			});
 		});
+
+		$('a[data-toggle="tab"]')[0].click();  // Initialize first tab
+
+
+
 	}
 };
 
