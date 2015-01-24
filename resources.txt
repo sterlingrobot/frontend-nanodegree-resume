@@ -1,0 +1,5 @@
+
+
+http://api.jquery.com/animate/
+
+http://www.google.com/design/spec/style/color.html#color-color-palette

@@ -2,11 +2,11 @@ var bio = {
 	name : 'Tor Gilbertson',
 	role : 'Web Developer',
 	contacts : {
-	      mobile: '(406) 624-9775',
-	      email: 'sterlingrobot@gmail.com',
-	      github: 'sterlingrobot',
-	      twitter: '@sterlingrobot',
-	      location: 'Bozeman, Montana'
+	      mobile: { content: '(406) 624-9775', icon: 'iphone' },
+	      email: { content: 'sterlingrobot@gmail.com', icon: 'envelope' },
+	      github: { content: 'sterlingrobot', icon: 'github' },
+	      twitter: { content: '@sterlingrobot', icon: 'twitter' },
+	      location: { content: 'Bozeman, Montana', icon: 'map-marker' }
   	},
 	welcomeMessage: 'Let\'s get this party started.' ,
 	skills: {
@@ -44,13 +44,15 @@ var bio = {
 	display: function() {
 		var self = this,
 			levels = [
-				{},
+				{}, // empty for starting point 0
 				{ name: 'Learning', color: '#F56B23' },
 				{ name: 'Training', color: '#F5AE23' },
-				{ name: 'Developing', color: '#23DDF5' },
-				{ name: 'Using', color: '#23F58D' },
+				{ name: 'Developing Skills', color: '#23DDF5' },
+				{ name: 'Actively Using', color: '#23F58D' },
 				{ name: 'Rocking it!', color: '#40F523' },
 			],
+			banner = $('<div id="banner"></div>'),
+			pic = $(HTMLbioPic.replace('%data%', self.biopic)),
 			legend = $('<ul class="skill-legend"></ul>'),
 			colLeft = $('<div class="col-sm-4"></div>'),
 			colRight = $('<div class="col-sm-8"></div>'),
@@ -58,18 +60,25 @@ var bio = {
 			skillsContent = $('<div class="tab-content"></div>');
 
 		for(var contact in self.contacts) {
-			$('#topContacts, #footerContacts').append(window['HTML'+contact].replace('%data%', self.contacts[contact]));
+			var html = $(window['HTML'+contact].replace('%data%', ''));		// add text on hover
+			html.addClass('z3');
+			$('#topContacts, #footerContacts').append(html);
 		}
 
-		$('#header').prepend(HTMLheaderRole.replace('%data%', self.role))
-		$('#header').prepend(HTMLheaderName.replace('%data%', self.name));
+		banner.addClass('z1')
+			.prepend(HTMLheaderRole.replace('%data%', self.role))
+			.prepend(HTMLheaderName.replace('%data%', self.name));
 
-		colLeft.append(HTMLbioPic.replace('%data%', self.biopic))
+		pic.addClass('z1');
+		colLeft.append(pic)
 		colLeft.prepend(HTMLWelcomeMsg.replace('%data%', self.welcomeMessage))
 		colRight.append(HTMLskillsStart);
 
+		$('#main').prepend(banner);
 		$('#header').append(colLeft).append(colRight);
-		$('#skills').append(skillsTabs).append(skillsContent);
+		$('#skills').addClass('z2')
+			.append(skillsTabs)
+			.append(skillsContent);
 
 		levels.forEach(function(level) {
 			var name = level.name || '&nbsp;',
@@ -88,7 +97,7 @@ var bio = {
 				pane.find('ul').append(el);
 				el.find('.skill-logo img').css('top', -skill.logoPos*36 + 'px');
 				el.find('.skill-proficiency')
-					.css({ 'background-color': levels[skill.proficiency].color, opacity : 0.7 })
+					.css({ 'background-color': '#F5AE23' , opacity : 0.7 })
 					.data('proficiency', skill.proficiency);
 			});
 		}
@@ -221,3 +230,83 @@ var projects = {
 };
 
 [bio, work, projects, education].forEach(function(section) { section.display(); });
+
+(function($) {
+	var i = 0;
+	// $('#skills, [class$="entry"]')
+	// 	.each(function() {
+	// 		$(this).addClass('z'+i);
+	// 		i++;
+	// 		i = i === 7 ? 0 : i;
+	// 	});
+	$('[class*="z"]').each(function() {
+		var z = $(this).attr('class').substr($(this).attr('class').search(/z[0-6]/)+1, 1),
+			bx = (z*0.5) + 'px ' + z + 'px ' + z*5 + 'px ' + z*2 + 'px rgba(0,0,0,0.1)';
+		$(this).css({
+			'z-index' : z*3,
+			'position' : 'relative',
+			'box-shadow' : bx
+			// 'background' : 'rgba(255,255,255,'+z*0.1+')'
+
+		});
+		// .on('click', function() {
+		// 		var bx = $(this).css('box-shadow').split(' '),
+		// 			y = bx[5].substring(0, bx[5].indexOf('px')),
+		// 			bl = bx[6].substring(0, bx[6].indexOf('px')),
+		// 			sp = bx[7].substring(0, bx[7].indexOf('px'));
+
+		// 		bx[5] = parseInt(y)+4 + 'px';
+		// 		bx[6] = parseInt(bl)*5 + 'px';
+		// 		bx[7] = parseInt(sp)*-1 + 'px';
+		// 		$(this).css({ 'box-shadow' : bx.join(' ') })
+		// 			.animate({ 'width' : '+=4', margin : '-=2'}, 100)
+		// 			.on('mouseleave', function() {
+		// 				var bx = $(this).css('box-shadow').split(' '),
+		// 					y = bx[5].substring(0, bx[5].indexOf('px') + 1),
+		// 					bl = bx[6].substring(0, bx[6].indexOf('px')),
+		// 					sp = bx[7].substring(0, bx[7].indexOf('px'));
+
+		// 				bx[5] = parseInt(y)-4 + 'px';
+		// 				bx[6] = parseInt(bl)/5 + 'px';
+		// 				bx[7] = parseInt(sp)*-1 + 'px';
+		// 				$(this).css({ 'box-shadow' : bx.join(' ') })
+		// 					.animate({ 'width' : '-=4', margin : '+=2'}, 50);
+		// 			});
+		// })
+		// .animate({
+		// 	'margin' : '-'+z*0.4+'%',
+		// 	'padding' : '+'+z*4+'%'
+		// }, 100);
+	});
+	$('#topContacts li').each(function() {
+		var el = $(this),
+			txt = el.text(),
+			iconClass = 'icon-' + bio.contacts[txt].icon,
+			icon = $('<span class="icon-large ' + iconClass + '"></span>');
+
+		el.text('').html(icon).attr('data-contact', txt)	// replace text with icon and store in data-contact attr
+			.hover(function() {
+				if(el.hasClass('expanded')) return;
+				el.html('').text(txt)
+			}, function() {
+				if(el.hasClass('expanded')) return;
+				el.text('').html(icon);
+			})
+			.on('click', function() {
+				if($(this).hasClass('expanded')) return;
+				$(this).animate({ width: '+=150px' }, 500)
+					.addClass('expanded')
+					.text(bio.contacts[txt].content);
+ 				$('#topContacts li').not(el).each(function() {
+					// redefine scoped variables
+					var li = $(this),
+						txt = li.attr('data-contact'),
+						iconClass = 'icon-' + bio.contacts[txt].icon,
+						icon = $('<span class="icon-large ' + iconClass + '"></span>');
+					li.animate({ width: '60px' }, 500)
+						.removeClass('expanded')
+						.text('').html(icon);
+				});
+			});
+	});
+})(jQuery);

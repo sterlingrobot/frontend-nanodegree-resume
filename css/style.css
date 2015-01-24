@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,900,700);
 * {
   padding:0;
   margin:0;
@@ -14,8 +15,8 @@
 }
 
 h1 {
-  font-size: 40px;
-  color: #F5A623;
+  font-size: 48px;
+  color: #fff;
   line-height: 48px;
   display: inline;
 }
@@ -29,10 +30,12 @@ h2 {
 }
 
 h3 {
+  margin-top: 5px;
   font-style: italic;
   font-size: 20px;
   color: #000000;
   line-height: 22px;
+  justify-content: none;
 }
 
 h4 {
@@ -47,7 +50,6 @@ h2, h3, h4, h5 {
   padding-left: 5%;
   padding-right: 5%;
 }
-
 
 .date-text {
   font-style: italic;
@@ -79,6 +81,46 @@ a {
   display: block;
 }
 
+#banner {
+  padding: 50px;
+  background: #2196F3;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 0 5px 1px;
+}
+
+#header {
+  overflow: visible;
+  background: #90CAF9;
+}
+
+#topContacts {
+  width: 100%;
+  margin-top: -70px;
+}
+
+#topContacts li.flex-item {
+  margin-bottom: 30px;
+  cursor: pointer;
+  width: 60px;
+  height: 60px;
+  display: inline-block;
+  border-radius: 40px;
+  padding: 20px 0;
+  background: #fff;
+  text-align: center;
+}
+
+#topContacts li.flex-item > span {
+  margin-left: 5px;
+}
+
+#topContacts li.flex-item > span.icon-iphone,
+#topContacts li.flex-item > span.icon-map-marker {
+  margin-left: 14px;
+}
+
+#topContacts .orange-text {
+}
+
 .welcome-message {
   font-style: italic;
   font-size: 18px;
@@ -87,12 +129,30 @@ a {
 }
 
 #skills {
-  background: rgba(0, 0, 0, 0.5);
+  background: #FFF;
+  justify-content: initial;
 }
 
 #skillsH3 {
   color: #F5AE23;
   display: none;
+}
+
+#skills .nav li a {
+  position: relative;
+  z-index: 1;
+  margin: 0 2px;
+  box-shadow: 0 0 3px rgba(0,0,0,0.2);
+}
+
+#skills .nav li.active a {
+  z-index: 3;
+  box-shadow: 1px 2px 8px rgba(0,0,0,0.2);
+}
+
+#skillsTabs li {
+  width: 20%;
+  overflow: hidden;
 }
 
 #skills .tab-content {
@@ -117,7 +177,7 @@ a {
   padding: 0;
   float: left;
   text-align: left;
-  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  border-left: 1px dashed rgba(0, 0, 0, 0.2);
 }
 
 .skill-level a {
@@ -125,7 +185,7 @@ a {
   height: 10px;
   margin: 0;
   margin-left: -5px;
-  background: cyan;
+  background: #F5AE23;
   border-radius: 5px;
 }
 
@@ -178,7 +238,7 @@ a {
 
 .white-text {
   font-weight: bold;
-  color: #FFFFFF;
+  color: #333;
 }
 
 .gray {
@@ -192,7 +252,7 @@ a {
 }
 
 #header {
-  background-image: url(../images/background.jpg);
+  /*background-image: url(../images/background.jpg);*/
   background-size: auto 100%;
   background-position: 0 0;
 }
@@ -218,14 +278,17 @@ ul {
 }
 
 .biopic {
+  width: 500%;
   float: left;
   padding: 10px;
-  width: 200px;
+  background: #1565C0;
+  padding: 0 30%;
+  margin-left: -30%;
   display: none;
 }
 
 img {
-  padding: 10px;
+  /*padding: 10px;*/
 }
 
 /* Bar chart stuff */
@@ -255,7 +318,7 @@ span {
 }
 
 @media only screen and (max-width:900px) {
-  .biopic {
+  .biopic img {
     width: 175px;
   }
 }
@@ -264,7 +327,7 @@ span {
   #letsConnect {
     margin-top: 10%;
   }
-  .biopic {
+  .biopic img {
     width: 150px;
   }
   .welcome-message {
