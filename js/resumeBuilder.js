@@ -2,10 +2,10 @@ var bio = {
 	name : 'Tor Gilbertson',
 	role : 'Web Developer',
 	contacts : {
-	      mobile: { content: '(406) 624-9775', icon: 'iphone' },
-	      email: { content: 'sterlingrobot@gmail.com', icon: 'envelope' },
-	      github: { content: 'sterlingrobot', icon: 'github' },
-	      twitter: { content: '@sterlingrobot', icon: 'twitter' },
+	      mobile: { content: '(406) 624-9775', url: 'tel:4066249775', icon: 'iphone' },
+	      email: { content: 'sterlingrobot@gmail.com', url: 'mailto:sterlingrobot@gmail.com', icon: 'envelope' },
+	      github: { content: 'sterlingrobot', url: 'http://github.com/sterlingrobot', icon: 'github' },
+	      linkedin: { content: 'Tor\'s Profile', url: 'http://www.linkedin.com/pub/tor-gilbertson', icon: 'linked-in' },
 	      location: { content: 'Bozeman, Montana', icon: 'map-marker' }
   	},
 	welcomeMessage: 'Let\'s get this party started.' ,
@@ -193,7 +193,11 @@ var work = {
 			$('#workExperience').append(el);
 			for(var key in job) {
 				var keyTitle = key.charAt(0).toUpperCase() + key.substr(1).toLowerCase();
-				el.append(window['HTMLwork'+keyTitle].replace('%data%', job[key]));
+				if(key === 'title') {
+					el.find('a').append(window['HTMLwork'+keyTitle].replace('%data%', job[key]));
+				} else {
+					el.append(window['HTMLwork'+keyTitle].replace('%data%', job[key]));
+				}
 			}
 		});
 	}
@@ -293,11 +297,14 @@ var projects = {
 			content = el.find('.white-text'),
 			txt = label.text(),
 			iconClass = 'icon-' + bio.contacts[txt].icon,
-			icon = $('<span class="icon-large ' + iconClass + '"></span>');
+			icon = $('<span class="icon-large ' + iconClass + '"></span>'),
+			link = $('<a href="' + bio.contacts[txt].url + '" target="_blank"></a>');
 
 		el.prepend(icon);
 		label.addClass('hidden');
 		content.addClass('hidden');
+		content.appendTo(link);
+		el.append(link);
 		el.hover(function() {
 				if(el.hasClass('expanded')) return;
 				label.removeClass('hidden');

@@ -113,6 +113,14 @@ a:hover {
   text-align: center;
 }
 
+#topContacts li.flex-item a {
+  margin-top: 0;
+}
+
+#topContacts li.flex-item a .white-text {
+  color: #FF9800;
+}
+
 #topContacts li.flex-item > span.icon-large {
   margin-top: -2px;
   margin-left: 5px;
