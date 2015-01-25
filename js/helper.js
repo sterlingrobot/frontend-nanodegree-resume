@@ -24,7 +24,7 @@ var HTMLblog = '<li class="flex-item"><span class="orange-text">blog</span><span
 var HTMLlocation = '<li class="flex-item"><span class="orange-text">location</span><span class="white-text">%data%</span></li>';
 
 var HTMLbioPic = '<div class="biopic"><img src="%data%"></div>';  // wrapped in div
-var HTMLWelcomeMsg = '<span class="welcome-message">%data%</span>';
+var HTMLWelcomeMsg = '<div class="welcome-message">%data%</div>'; // changed to div
 
 var HTMLskillsStart = '<div id="skills" class="flex-box"><h3 id="skillsH3">Skills at a Glance</h3></div>';  // move h3 into #skills
 var HTMLskills = '<li class="flex-item">'
@@ -46,11 +46,11 @@ var HTMLprojectDescription = '<p><br>%data%</p>';
 var HTMLprojectImage = '<img src="%data%">';
 
 var HTMLschoolStart = '<div class="education-entry"></div>';
-var HTMLschoolName = '<a href="#">%data%';
-var HTMLschoolDegree = ' -- %data%</a>';
+var HTMLschoolName = '<a href="#">%data%</a>';  // moved closing tag
+var HTMLschoolDegree = ' -- %data%';
 var HTMLschoolDates = '<div class="date-text">%data%</div>';
 var HTMLschoolLocation = '<div class="location-text">%data%</div>';
-var HTMLschoolMajor = '<em><br>Major: %data%</em>';
+var HTMLschoolMajors = '<em><br>Major: %data%</em>';  // added "s" to match object property
 
 var HTMLonlineClasses = '<h3>Online Classes</h3>';
 var HTMLonlineTitle = '<a href="#">%data%';

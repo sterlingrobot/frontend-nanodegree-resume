@@ -10,14 +10,14 @@ var bio = {
   	},
 	welcomeMessage: 'Let\'s get this party started.' ,
 	skills: {
-		'Programming': [
+		'Coding': [
 			{ name: 'HTML5', logoPos: 5, proficiency: 4 },
 			{ name: 'CSS3', logoPos: 6, proficiency: 4 },
 			{ name: 'JavaScript', logoPos: 4, proficiency: 4 },
 			{ name: 'PHP', logoPos: 0, proficiency: 4 },
 			{ name: 'ActionScript3', logoPos: 15, proficiency: 4 }
 		],
-		'Design & Software': [
+		'Design': [
 			{ name: 'Photoshop', logoPos: 9, proficiency: 5 },
 			{ name: 'Illustrator', logoPos: 10, proficiency: 5 },
 			{ name: 'Fireworks', logoPos: 13, proficiency: 4 },
@@ -25,7 +25,7 @@ var bio = {
 			{ name: 'Flash', logoPos: 12, proficiency: 4 },
 			{ name: 'Flash Builder', logoPos: 14, proficiency: 3 }
 		],
-		'CMS & Database': [
+		'CMS & DB': [
 			{ name: 'MySQL', logoPos: 1, proficiency: 4 },
 			{ name: 'osCommerce', logoPos: 16, proficiency: 5 },
 			{ name: 'WordPress', logoPos: 17, proficiency: 3 },
@@ -40,7 +40,7 @@ var bio = {
 			{ name: 'Apache', logoPos: 2, proficiency: 2 }
 		]
 	},
-	biopic: 'images/fry.jpg',
+	biopic: 'images/bio.jpg',
 	display: function() {
 		var self = this,
 			levels = [
@@ -53,6 +53,7 @@ var bio = {
 			],
 			banner = $('<div id="banner"></div>'),
 			pic = $(HTMLbioPic.replace('%data%', self.biopic)),
+			welcome = $(HTMLWelcomeMsg.replace('%data%', self.welcomeMessage)),
 			legend = $('<ul class="skill-legend"></ul>'),
 			colLeft = $('<div class="col-sm-4"></div>'),
 			colRight = $('<div class="col-sm-8"></div>'),
@@ -60,7 +61,7 @@ var bio = {
 			skillsContent = $('<div class="tab-content"></div>');
 
 		for(var contact in self.contacts) {
-			var html = $(window['HTML'+contact].replace('%data%', ''));		// add text on hover
+			var html = $(window['HTML'+contact].replace('%data%', self.contacts[contact].content));
 			html.addClass('z3');
 			$('#topContacts, #footerContacts').append(html);
 		}
@@ -71,7 +72,12 @@ var bio = {
 
 		pic.addClass('z1');
 		colLeft.append(pic)
-		colLeft.prepend(HTMLWelcomeMsg.replace('%data%', self.welcomeMessage))
+			.append('<div class="clearfix"></div>')
+			.append('<svg class="speech" height="40" width="100%" viewBox="0 0 100 40" preserveAspectRatio="none">'
+					 	+ '   <polyline points="70,40 65,0 80,40"'
+  						+ '			style="fill:#90CAF9;stroke:white;stroke-width:0.5" />'
+						+ '</svg>')
+			.append(welcome);
 		colRight.append(HTMLskillsStart);
 
 		$('#main').prepend(banner);
@@ -88,8 +94,8 @@ var bio = {
 		skillsContent.append(legend)
 
 		for(var category in self.skills) {
-			var tab = $('<li><a href="#' + category.replace(/(\s|&)+/g, '-') + '" role="tab" data-toggle="tab">' + category + '</a></li>'),
-				pane = $('<div id="' + category.replace(/(\s|&)+/g, '-') + '" class="tab-pane" role="tabpanel"><ul></ul></div>');
+			var tab = $('<li><a href="#' + category.replace(/(\s|&|\/)+/g, '-') + '" role="tab" data-toggle="tab">' + category + '</a></li>'),
+				pane = $('<div id="' + category.replace(/(\s|&|\/)+/g, '-') + '" class="tab-pane" role="tabpanel"><ul></ul></div>');
 			skillsTabs.append(tab);
 			skillsContent.append(pane);
 			self.skills[category].forEach(function(skill) {
@@ -97,7 +103,7 @@ var bio = {
 				pane.find('ul').append(el);
 				el.find('.skill-logo img').css('top', -skill.logoPos*36 + 'px');
 				el.find('.skill-proficiency')
-					.css({ 'background-color': '#F5AE23' , opacity : 0.7 })
+					.css({ 'background-color': '#FF9800' , opacity : 0.7 })
 					.data('proficiency', skill.proficiency);
 			});
 		}
@@ -140,15 +146,17 @@ var education = {
 			var el = $(HTMLschoolStart);
 			$('#education').append(el);
 			for(var key in school) {
+				var keyTitle = key.charAt(0).toUpperCase() + key.substr(1, key.length-1).toLowerCase();
+
 				if(Array.isArray(school[key])) {
 					school[key].forEach(function(val) {
-						var keyTitle = key.charAt(0).toUpperCase() + key.substr(1, key.length-2).toLowerCase();
 						el.append(window['HTMLschool'+keyTitle].replace('%data%', val));
 					});
 				} else if(key === 'url') {
 					el.find('a').attr('href', school[key]);
+				} else if(key === 'degree') {
+					el.find('a').append(window['HTMLschool'+keyTitle].replace('%data%', school[key]));
 				} else {
-					var keyTitle = key.charAt(0).toUpperCase() + key.substr(1).toLowerCase();
 					el.append(window['HTMLschool'+keyTitle].replace('%data%', school[key]));
 				}
 			}
@@ -232,7 +240,7 @@ var projects = {
 [bio, work, projects, education].forEach(function(section) { section.display(); });
 
 (function($) {
-	var i = 0;
+	// var i = 0;
 	// $('#skills, [class$="entry"]')
 	// 	.each(function() {
 	// 		$(this).addClass('z'+i);
@@ -240,9 +248,10 @@ var projects = {
 	// 		i = i === 7 ? 0 : i;
 	// 	});
 	$('[class*="z"]').each(function() {
-		var z = $(this).attr('class').substr($(this).attr('class').search(/z[0-6]/)+1, 1),
+		var el = $(this),
+		 	z = el.attr('class').substr(el.attr('class').search(/z[0-6]/)+1, 1),
 			bx = (z*0.5) + 'px ' + z + 'px ' + z*5 + 'px ' + z*2 + 'px rgba(0,0,0,0.1)';
-		$(this).css({
+		el.css({
 			'z-index' : z*3,
 			'position' : 'relative',
 			'box-shadow' : bx
@@ -280,33 +289,50 @@ var projects = {
 	});
 	$('#topContacts li').each(function() {
 		var el = $(this),
-			txt = el.text(),
+			label = el.find('.orange-text'),
+			content = el.find('.white-text'),
+			txt = label.text(),
 			iconClass = 'icon-' + bio.contacts[txt].icon,
 			icon = $('<span class="icon-large ' + iconClass + '"></span>');
 
-		el.text('').html(icon).attr('data-contact', txt)	// replace text with icon and store in data-contact attr
-			.hover(function() {
+		el.prepend(icon);
+		label.addClass('hidden');
+		content.addClass('hidden');
+		el.hover(function() {
 				if(el.hasClass('expanded')) return;
-				el.html('').text(txt)
+				label.removeClass('hidden');
+				icon.addClass('hidden');
 			}, function() {
 				if(el.hasClass('expanded')) return;
-				el.text('').html(icon);
+				label.addClass('hidden');
+				icon.removeClass('hidden');
 			})
 			.on('click', function() {
-				if($(this).hasClass('expanded')) return;
-				$(this).animate({ width: '+=150px' }, 500)
-					.addClass('expanded')
-					.text(bio.contacts[txt].content);
- 				$('#topContacts li').not(el).each(function() {
-					// redefine scoped variables
-					var li = $(this),
-						txt = li.attr('data-contact'),
-						iconClass = 'icon-' + bio.contacts[txt].icon,
-						icon = $('<span class="icon-large ' + iconClass + '"></span>');
-					li.animate({ width: '60px' }, 500)
-						.removeClass('expanded')
-						.text('').html(icon);
-				});
+				if($(this).hasClass('expanded')) {
+					$(this).each(collapseContact);
+					return;
+				}
+				var el2 = $(this),
+					label2 = el.find('.orange-text'),
+					content2 = el.find('.white-text');
+				el2.animate({ width: '+=150px' }, 500)
+					.addClass('expanded');
+				label2.addClass('hidden');
+				content2.removeClass('hidden');
+ 				$('#topContacts li').not(el).each(collapseContact);
 			});
+
+
+			function collapseContact(el) {
+				var el3 = $(this),
+					label3 = el3.find('.orange-text'),
+					content3 = el3.find('.white-text'),
+					icon3 = el3.find('.icon-large');
+				el3.animate({ width: '60px' }, 500)
+					.removeClass('expanded')
+					label3.addClass('hidden');
+					content3.addClass('hidden');
+					icon3.removeClass('hidden');
+			}
 	});
 })(jQuery);
