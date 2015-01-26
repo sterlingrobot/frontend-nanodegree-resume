@@ -6,7 +6,7 @@ var bio = {
 	      email: { content: 'sterlingrobot@gmail.com', url: 'mailto:sterlingrobot@gmail.com', icon: 'envelope' },
 	      github: { content: 'sterlingrobot', url: 'http://github.com/sterlingrobot', icon: 'github' },
 	      linkedin: { content: 'Tor\'s Profile', url: 'http://www.linkedin.com/pub/tor-gilbertson', icon: 'linked-in' },
-	      location: { content: 'Bozeman, Montana', icon: 'map-marker' }
+	      location: { content: 'Bozeman, Montana', url: 'https://www.google.com/maps/place/Bozeman,+MT', icon: 'map-marker' }
   	},
 	welcomeMessage: 'Let\'s get this party started.' ,
 	skills: {
@@ -25,7 +25,7 @@ var bio = {
 			{ name: 'Flash', logoPos: 12, proficiency: 4 },
 			{ name: 'Flash Builder', logoPos: 14, proficiency: 3 }
 		],
-		'CMS & DB': [
+		'DB & CMS': [
 			{ name: 'MySQL', logoPos: 1, proficiency: 4 },
 			{ name: 'osCommerce', logoPos: 16, proficiency: 5 },
 			{ name: 'WordPress', logoPos: 17, proficiency: 3 },
@@ -36,8 +36,9 @@ var bio = {
 			{ name: 'jQuery', logoPos: 3, proficiency: 4 },
 			{ name: 'AngularJS', logoPos: 8, proficiency: 1 }
 		],
-		'Misc': [
-			{ name: 'Apache', logoPos: 2, proficiency: 2 }
+		'Workflow': [
+			{ name: 'Apache', logoPos: 2, proficiency: 2 },
+			{ name: 'Git', logoPos: 19, proficiency: 2 }
 		]
 	},
 	biopic: 'images/bio.jpg',
@@ -94,17 +95,17 @@ var bio = {
 		skillsContent.append(legend)
 
 		for(var category in self.skills) {
-			var tab = $('<li><a href="#' + category.replace(/(\s|&|\/)+/g, '-') + '" role="tab" data-toggle="tab">' + category + '</a></li>'),
-				pane = $('<div id="' + category.replace(/(\s|&|\/)+/g, '-') + '" class="tab-pane" role="tabpanel"><ul></ul></div>');
+			var tab = $('<li><a href="#' + category.replace(/(\s|&|\/)+/g, '-')
+							+ '" role="tab" data-toggle="tab">' + category + '</a></li>'),
+				pane = $('<div id="' + category.replace(/(\s|&|\/)+/g, '-')
+							+ '" class="tab-pane" role="tabpanel"><ul></ul></div>');
 			skillsTabs.append(tab);
 			skillsContent.append(pane);
 			self.skills[category].forEach(function(skill) {
 				var el = $(HTMLskills.replace('%data%', skill.name));
 				pane.find('ul').append(el);
 				el.find('.skill-logo img').css('top', -skill.logoPos*36 + 'px');
-				el.find('.skill-proficiency')
-					.css({ 'background-color': '#FF9800' , opacity : 0.7 })
-					.data('proficiency', skill.proficiency);
+				el.find('.skill-proficiency').data('proficiency', skill.proficiency);
 			});
 		}
 
@@ -113,15 +114,14 @@ var bio = {
 		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 			var skills = $($(e.target).attr('href')).find('.skill-proficiency');
 			skills.each(function(i) {
-				$(this).css('width', 0);
-				$(this).animate({ 'width' : '+' + $(this).data('proficiency')*16.667 + '%' }, $(this).data('proficiency')*250);
+				var sk = $(this);
+				sk.css('width', 0)
+					.animate({ 'width' : '+' + sk.data('proficiency')*16.667 + '%' },
+						sk.data('proficiency')*400, 'easeInQuad');
 			});
 		});
 
 		$('a[data-toggle="tab"]')[0].click();  // Initialize first tab
-
-
-
 	}
 };
 
@@ -244,13 +244,11 @@ var projects = {
 [bio, work, projects, education].forEach(function(section) { section.display(); });
 
 (function($) {
-	// var i = 0;
-	// $('#skills, [class$="entry"]')
-	// 	.each(function() {
-	// 		$(this).addClass('z'+i);
-	// 		i++;
-	// 		i = i === 7 ? 0 : i;
-	// 	});
+
+	$('#mapDiv').append(googleMap);
+
+  	$('a[data-toggle="tooltip"]').tooltip();
+
 	$('[class*="z"]').each(function() {
 		var el = $(this),
 		 	z = el.attr('class').substr(el.attr('class').search(/z[0-6]/)+1, 1),
@@ -262,6 +260,7 @@ var projects = {
 			// 'background' : 'rgba(255,255,255,'+z*0.1+')'
 
 		});
+/*
 		// .on('click', function() {
 		// 		var bx = $(this).css('box-shadow').split(' '),
 		// 			y = bx[5].substring(0, bx[5].indexOf('px')),
@@ -290,6 +289,7 @@ var projects = {
 		// 	'margin' : '-'+z*0.4+'%',
 		// 	'padding' : '+'+z*4+'%'
 		// }, 100);
+*/
 	});
 	$('#topContacts li').each(function() {
 		var el = $(this),
@@ -297,14 +297,12 @@ var projects = {
 			content = el.find('.white-text'),
 			txt = label.text(),
 			iconClass = 'icon-' + bio.contacts[txt].icon,
-			icon = $('<span class="icon-large ' + iconClass + '"></span>'),
-			link = $('<a href="' + bio.contacts[txt].url + '" target="_blank"></a>');
+			icon = $('<span class="icon-large ' + iconClass + '"></span>');
 
 		el.prepend(icon);
 		label.addClass('hidden');
 		content.addClass('hidden');
-		content.appendTo(link);
-		el.append(link);
+		content.wrap('<a href="' + bio.contacts[txt].url + '" target="_blank"></a>');
 		el.hover(function() {
 				if(el.hasClass('expanded')) return;
 				label.removeClass('hidden');
@@ -322,8 +320,8 @@ var projects = {
 				var el2 = $(this),
 					label2 = el.find('.orange-text'),
 					content2 = el.find('.white-text');
-				el2.animate({ width: '+=150px' }, 500)
-					.addClass('expanded');
+				el2.addClass('expanded')
+					.animate({ width: '+=150px' }, 500, 'easeOutCirc');
 				label2.addClass('hidden');
 				content2.removeClass('hidden');
  				$('#topContacts li').not(el).each(collapseContact);
@@ -335,7 +333,7 @@ var projects = {
 					label3 = el3.find('.orange-text'),
 					content3 = el3.find('.white-text'),
 					icon3 = el3.find('.icon-large');
-				el3.animate({ width: '60px' }, 500)
+				el3.animate({ width: '60px' }, 500, 'easeOutCirc')
 					.removeClass('expanded')
 					label3.addClass('hidden');
 					content3.addClass('hidden');

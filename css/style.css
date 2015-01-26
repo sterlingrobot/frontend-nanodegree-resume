@@ -124,7 +124,7 @@ a:hover {
 #topContacts li.flex-item > span.icon-large {
   margin-top: -2px;
   margin-left: 5px;
-  opacity: 0.87;
+  opacity: 0.8;
 }
 
 #topContacts li.flex-item > span.icon-iphone,
@@ -147,8 +147,7 @@ a:hover {
   width: 100vw;
   background: #1565C0;
   padding: 0 15%;
-  margin-left: -25%;
-  margin-top: 20px;
+  margin: 20px 0 20px -25%;
   max-height: 40vh;
   overflow: hidden;
   display: none;
@@ -179,6 +178,7 @@ a:hover {
 
 #skills {
   background: #FFF;
+  border-radius: 2px;
   justify-content: initial;
 }
 
@@ -193,18 +193,26 @@ a:hover {
 
 #skillsTabs li {
   width: 20%;
+  text-align: center;
+  white-space: nowrap;
 }
 
 #skillsTabs li a {
   position: relative;
   z-index: 1;
   margin: 0 2px;
-  box-shadow: 0 -1px 2px rgba(0,0,0,0.1);
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.6);
+  border: none;
+  border-bottom: 2px solid transparent;
+  /*box-shadow: 0 -1px 2px rgba(0,0,0,0.1);*/
 }
 
 #skillsTabs li.active a {
   z-index: 3;
-  box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+  border-bottom: 2px solid #FF9800;
+  color: #FF9800;
+  /*box-shadow: 0 -2px 4px rgba(0,0,0,0.1);*/
 }
 
 #skills .tab-content {
@@ -270,14 +278,13 @@ a:hover {
 }
 
 .skill-proficiency {
+  width: 0;
   height: 12px;
   margin: 0;
   padding: 2px 6px;
   margin-left: 55px;
-  /*float: right;*/
+  background-color: #FF9800;
   border-radius: 6px;
-  width: 0;
-  font-size: 11px;
 }
 
 .orange {
