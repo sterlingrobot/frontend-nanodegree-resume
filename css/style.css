@@ -95,11 +95,13 @@ a:hover {
 #header {
   overflow: visible;
   background: #90CAF9;
+  padding-top: 15px;
 }
 
 #topContacts {
   width: 100%;
   margin-top: -60px;
+  position: relative;
 }
 
 #topContacts li.flex-item {
@@ -111,6 +113,17 @@ a:hover {
   padding: 20px 0;
   background: #fff;
   text-align: center;
+  position: absolute;
+  left: 20px;
+  opacity: 0;
+}
+
+#topContacts li.flex-item.z4 {
+  font-size: 3em;
+  padding-top: 1px;
+  background: #FF9800;
+  color: #fff;
+  opacity: 1;
 }
 
 #topContacts li.flex-item a {
@@ -166,7 +179,7 @@ a:hover {
 
 .welcome-message {
   font: italic 11pt 'Lora', Georgia, serif;
-  color: #F3F3F3;
+  color: #1565C0;
   line-height: 28px;
   padding: 20px;
   border: 1px solid #fff;
@@ -180,6 +193,7 @@ a:hover {
   background: #FFF;
   border-radius: 2px;
   justify-content: initial;
+  margin-top: 0;
 }
 
 #skillsH3 {
@@ -280,11 +294,22 @@ a:hover {
 .skill-proficiency {
   width: 0;
   height: 12px;
-  margin: 0;
+  margin: 0 0 0 55px;
   padding: 2px 6px;
-  margin-left: 55px;
   background-color: #FF9800;
+  opacity: 0.8;
   border-radius: 6px;
+}
+
+.duty-heading {
+  clear: both;
+  margin: 2em 0 0;
+  padding: 0;
+}
+
+.duty-summary {
+  margin-left: 2em;
+  list-style: disc;
 }
 
 .orange {

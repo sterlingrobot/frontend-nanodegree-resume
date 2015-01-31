@@ -44,6 +44,7 @@ var bio = {
 	biopic: 'images/bio.jpg',
 	display: function() {
 		var self = this,
+			flag = true,
 			levels = [
 				{}, // empty for starting point 0
 				{ name: 'Learning', color: '#F56B23' },
@@ -61,11 +62,51 @@ var bio = {
 			skillsTabs = $('<ul id="skillsTabs" class="nav nav-tabs" role="tablist"></ul>'),
 			skillsContent = $('<div class="tab-content"></div>');
 
+	//**** LAYOUT / DOM BUILDING ****//
+
 		for(var contact in self.contacts) {
 			var html = $(window['HTML'+contact].replace('%data%', self.contacts[contact].content));
 			html.addClass('z3');
+			html.find('.white-text').wrap('<a href="' + self.contacts[contact].url + '" target="_blank"></a>');
 			$('#topContacts, #footerContacts').append(html);
 		}
+		$('#topContacts').append('<li id="contactBtn" class="flex-item z4" style="visibility: visible">&plus;</li>');
+		$('#topContacts li:not(#contactBtn)').each(function() {
+			var el = $(this),
+				label = el.find('.orange-text'),
+				content = el.find('.white-text'),
+				txt = label.text(),
+				iconClass = 'icon-' + bio.contacts[txt].icon,
+				icon = $('<span class="icon-large ' + iconClass + '"></span>');
+
+			el.prepend(icon);
+			label.addClass('hidden');
+			content.addClass('hidden');
+			el.hover(function() {
+					if(el.hasClass('expanded')) return;
+					label.removeClass('hidden');
+					icon.addClass('hidden');
+				}, function() {
+					if(el.hasClass('expanded')) return;
+					label.addClass('hidden');
+					icon.removeClass('hidden');
+				})
+				.on('click', function() {
+					if($(this).hasClass('expanded')) {
+						$(this).each(collapseContact);
+						return;
+					}
+					var el2 = $(this),
+						label2 = el.find('.orange-text'),
+						content2 = el.find('.white-text');
+					el2.addClass('expanded')
+						// adjust left position to keep centered
+						.animate({ width: '+=150px', left: '-=75px' }, 500, 'easeOutCirc');
+					label2.addClass('hidden');
+					content2.removeClass('hidden');
+	 				$('#topContacts li:not(#contactBtn)').not(el2).each(collapseContact);
+				});
+		});
 
 		banner.addClass('z1')
 			.prepend(HTMLheaderRole.replace('%data%', self.role))
@@ -109,6 +150,25 @@ var bio = {
 			});
 		}
 
+	//**** EVENT HANDLING  ****//
+
+		$('#contactBtn').click(function() {
+			var i = 1;
+			$('#topContacts li:not(#contactBtn)').each(function() {
+				var el = $(this);
+				if(el.hasClass('expanded')) el.each(collapseContact);
+				el.animate(
+					{ left : flag ? i*16.66667 + '%' : '40px', opacity: flag ? 1 : 0 },
+					flag ? i*200 : i*100,
+					flag ? 'easeOutQuart' : 'easeInCirc');
+				i++;
+			});
+			$(this).html(flag ? '&minus;' : '&plus;');
+			$('#skills').animate({ 'margin-top' : flag ? '+=60px' : '-=60px' }, 800, 'easeOutQuart');
+			flag = !flag;
+		});
+
+		// Prevent link following on skill level tootips
 		$('.skill-level a').on('click', function(e) { e.preventDefault(); });
 
 		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -117,11 +177,30 @@ var bio = {
 				var sk = $(this);
 				sk.css('width', 0)
 					.animate({ 'width' : '+' + sk.data('proficiency')*16.667 + '%' },
-						sk.data('proficiency')*400, 'easeInQuad');
+						sk.data('proficiency')*250, 'easeInQuart');
 			});
 		});
 
-		$('a[data-toggle="tab"]')[0].click();  // Initialize first tab
+	//**** COMMON FUNCTIONS ****//
+
+		function collapseContact() {
+			var el3 = $(this),
+				isExp = el3.hasClass('expanded'),
+				label3 = el3.find('.orange-text'),
+				content3 = el3.find('.white-text'),
+				icon3 = el3.find('.icon-large');
+			el3.animate({ width: '60px', left: isExp ? '+=75px' : '+=0px' }, 500, 'easeOutCirc')
+				.removeClass('expanded');
+			label3.addClass('hidden');
+			content3.addClass('hidden');
+			icon3.removeClass('hidden');
+		}
+
+	//**** INIT ****//
+
+	// Wait a sec so animation is smoother
+	setTimeout(function() { $('a[data-toggle="tab"]')[0].click(); }, 1000);
+
 	}
 };
 
@@ -184,7 +263,82 @@ var work = {
 		title: 'General Manager',
 		location: 'Bozeman, Montana',
 		dates: '2008-present',
-		description: 'Responsible for all day to day operations...'
+		description: {
+			'Overview' : {
+				summaries : [
+					'Develop and maintain consistency and continuity between the sales process and the end product throughout all aspects of operations',
+					'Oversee Human Resources, including hiring, reviews, pay scales, payroll administration',
+					'Organize company financial data, budgeting, reporting and analysis'
+				]
+			},
+			'Production Management': {
+				summaries : [
+					'Ensure that the company stays on schedule according to the production calendar',
+					'Manage inventory levels of raw materials and finished products'
+				],
+				details : [[
+						'Organize production calendar, based on sales and demand',
+						'Schedule production with shop leads',
+						'Lead weekly Sales+Production Meetings, reviewing timelines for the week, discussing solutions to problems and resolving conflicts',
+						'Delegate shop tasks in conjunction with production',
+						'Develop workflows to streamline production (batching orders, finishing, crating)',
+						'Define quality expectations for production'
+					],
+					[
+						'Develop inventory management system',
+						'Maintain vendor relations, oversee purchasing of raw materials'
+					]
+				]
+			},
+			'Sales & Customer Service': {
+				summaries : [
+					'Oversee all aspects of sales, office work',
+					'Develop and define sales lead processes and procedures',
+					'Develop and define order processing procedures',
+					'Define freight and package shipping procedures and damage claims',
+					'Oversee and personally handle customer concerns',
+					'Create and maintain documentation',
+				],
+				details : [
+					[],
+					['Includes quoting and follow-up materials and lead management, utilizing the company website and Customer Relationship Management system, WORKetc'],
+					['Includes contract & work order creation, invoicing and ship date scheduling within CRM'],
+					[],
+					['Resolve quality exceptions, missing parts, shipping damages',
+					 'Develop solutions for preventing such issues from arising again'],
+					['Production procedures, technical specs, instructions for customers']
+				]
+			},
+			'Product Development': {
+				summaries : [
+					'Market analysis',
+					'Product Design',
+					'3D Modeling and rendering in Sketchup',
+					'Costing and pricing',
+					'Production planning, workflows and quality expectations'
+				]
+			},
+			'Marketing': {
+				summaries: [
+					'Website infrastructure, design, layout, development, testing and content',
+					'AdWords campaign management and direction',
+					'Utilize Google Analytics to analyze website performance and troubleshoot underperforming assets',
+					'Print materials design, layout and oversight of production',
+					'Email campaign management, mailing lists',
+					'Trade show'
+				]
+			},
+			'Systems & Development': {
+				summaries: [
+					'Maintain all internal and external software and web tools',
+					'Company website admin tools',
+					'Payment processing, PCI Compliance and integrations with Authorize.net, PayPal',
+					'Xero Bookkeeping',
+					'Company IT Infrastructure, LAN, router, switch and wireless access point',
+					'Company VPS, web hosting, SSL and domain registration management'
+				]
+			}
+		}
 	}],
 	display: function () {
 		var self = this;
@@ -193,7 +347,16 @@ var work = {
 			$('#workExperience').append(el);
 			for(var key in job) {
 				var keyTitle = key.charAt(0).toUpperCase() + key.substr(1).toLowerCase();
-				if(key === 'title') {
+				if(key === 'description' && typeof job[key] !== 'string') {
+					for(var duty in job.description) {
+						var hdg = '<h4 class="duty-heading">' + duty + '</h4>',
+							summary = $('<ul class="duty-summary"></ul>');
+						job.description[duty].summaries.forEach(function(sum) {
+							summary.append('<li>'+sum+'</li>');
+						});
+						el.append(hdg).append(summary);
+					}
+				} else if(key === 'title') {
 					el.find('a').append(window['HTMLwork'+keyTitle].replace('%data%', job[key]));
 				} else {
 					el.append(window['HTMLwork'+keyTitle].replace('%data%', job[key]));
@@ -252,10 +415,10 @@ var projects = {
 	$('[class*="z"]').each(function() {
 		var el = $(this),
 		 	z = el.attr('class').substr(el.attr('class').search(/z[0-6]/)+1, 1),
-			bx = (z*0.5) + 'px ' + z + 'px ' + z*5 + 'px ' + z*2 + 'px rgba(0,0,0,0.1)';
+			bx = (z*0.5) + 'px ' + z + 'px ' + z*5 + 'px ' + z*2 + 'px rgba(0,0,0,0.2)';
 		el.css({
 			'z-index' : z*3,
-			'position' : 'relative',
+			// 'position' : 'relative',
 			'box-shadow' : bx
 			// 'background' : 'rgba(255,255,255,'+z*0.1+')'
 
@@ -290,54 +453,5 @@ var projects = {
 		// 	'padding' : '+'+z*4+'%'
 		// }, 100);
 */
-	});
-	$('#topContacts li').each(function() {
-		var el = $(this),
-			label = el.find('.orange-text'),
-			content = el.find('.white-text'),
-			txt = label.text(),
-			iconClass = 'icon-' + bio.contacts[txt].icon,
-			icon = $('<span class="icon-large ' + iconClass + '"></span>');
-
-		el.prepend(icon);
-		label.addClass('hidden');
-		content.addClass('hidden');
-		content.wrap('<a href="' + bio.contacts[txt].url + '" target="_blank"></a>');
-		el.hover(function() {
-				if(el.hasClass('expanded')) return;
-				label.removeClass('hidden');
-				icon.addClass('hidden');
-			}, function() {
-				if(el.hasClass('expanded')) return;
-				label.addClass('hidden');
-				icon.removeClass('hidden');
-			})
-			.on('click', function() {
-				if($(this).hasClass('expanded')) {
-					$(this).each(collapseContact);
-					return;
-				}
-				var el2 = $(this),
-					label2 = el.find('.orange-text'),
-					content2 = el.find('.white-text');
-				el2.addClass('expanded')
-					.animate({ width: '+=150px' }, 500, 'easeOutCirc');
-				label2.addClass('hidden');
-				content2.removeClass('hidden');
- 				$('#topContacts li').not(el).each(collapseContact);
-			});
-
-
-			function collapseContact(el) {
-				var el3 = $(this),
-					label3 = el3.find('.orange-text'),
-					content3 = el3.find('.white-text'),
-					icon3 = el3.find('.icon-large');
-				el3.animate({ width: '60px' }, 500, 'easeOutCirc')
-					.removeClass('expanded')
-					label3.addClass('hidden');
-					content3.addClass('hidden');
-					icon3.removeClass('hidden');
-			}
 	});
 })(jQuery);
