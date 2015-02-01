@@ -34,6 +34,7 @@ var bio = {
 		'Framework': [
 			{ name: 'Bootstrap', logoPos: 7, proficiency: 4 },
 			{ name: 'jQuery', logoPos: 3, proficiency: 4 },
+			{ name: 'AMFPHP', logoPos: 20, proficiency: 4 },
 			{ name: 'AngularJS', logoPos: 8, proficiency: 1 }
 		],
 		'Workflow': [
@@ -131,7 +132,7 @@ var bio = {
 		levels.forEach(function(level) {
 			var name = level.name || '&nbsp;',
 				toggle = level.name ? 'data-toggle="tooltip"' : '';
-			legend.append('<li class="skill-level"><a href="" ' + toggle + ' title="' + name + '"></a></li>');
+			legend.append('<li class="skill-level"><i ' + toggle + ' title="' + name + '"></i></li>');
 		});
 		skillsContent.append(legend)
 
@@ -168,12 +169,9 @@ var bio = {
 			flag = !flag;
 		});
 
-		// Prevent link following on skill level tootips
-		$('.skill-level a').on('click', function(e) { e.preventDefault(); });
-
 		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 			var skills = $($(e.target).attr('href')).find('.skill-proficiency');
-			skills.each(function(i) {
+			skills.each(function() {
 				var sk = $(this);
 				sk.css('width', 0)
 					.animate({ 'width' : '+' + sk.data('proficiency')*16.667 + '%' },
@@ -367,18 +365,103 @@ var work = {
 };
 
 var projects = {
-	projects: [{
+	projects: [
+		{
 			title: 'Modular Partition Configurator',
 			dates: '2010',
-			description: 'An ActionScript 3 Flash application to select and configure a partition system, from hundreds of possible configurations and product options.',
-			url : '',
+			description: 'An ActionScript3 Flash application to select and configure a partition system, from '
+							+ 'hundreds of possible configurations and product options.  Use Flash remoting to '
+							+ 'fetch product data from a MySQL database.  Leverage Flash timeline '
+							+ 'animation with 3D Sketchup to create rotatable models of partitions.',
+			url: '',
+			skills: ['Flash', 'ActionScript3', 'PHP', 'MySQL'],
 			images: []
 		},
 		{
 			title: 'Space Creator Shoji Configurator',
 			dates: '2011',
-			description: 'An ActionScript 3 Flash application to select, design and configure options for Cherry Tree Design\'s In-Stock and Custom Shoji products, which allowed users to save multiple projects to a database, and allowed administrators to access customer projects, calculate pricing, send an HTML email quote sheet.  Customer requests for quotes are also passed into the company\'s Customer Relationship Management service, WORKetc, by means of a RESTful web service API, via the PHP SOAP extension module.',
-			url : 'http://www.cherrytreedesign.com/shoji/SpaceCreator2.3.php',
+			description: 'An ActionScript3 Flash application to select, design and configure options for '
+							+ 'Cherry Tree Design\'s In-Stock and Custom Shoji products, which allowed users to '
+							+ 'save multiple projects to a database, and allowed administrators to access customer '
+							+ 'projects, calculate pricing, send an HTML email quote sheet.  Customer requests for '
+							+ 'quotes are also passed into the company\'s Customer Relationship Management service, '
+							+ 'WORKetc, by means of a RESTful web service API, via the PHP SOAP extension module.',
+			url: 'http://www.cherrytreedesign.com/shoji/SpaceCreator2.3.php',
+			skills: ['Flash', 'Flash Builder', 'ActionScript3', 'AMFPHP', 'PHP', 'MySQL'],
+			images: []
+		},
+		{
+			title: 'Village Dance Theater Website',
+			dates: '2012',
+			description: 'Using Joomla, a PHP/MySQL based CMS, design and configure a small dance school\'s '
+							+ 'website, allowing for ease of updates and article and gallery creation via '
+							+ 'the Joomla administration portal and use of third-party plugins.',
+			url: 'http://www.villagedancetheatre.com',
+			skills: ['Joomla!', 'PHP', 'MySQL'],
+			images: []
+		},
+		{
+			title: 'Story Arcitech Website',
+			dates: '2013',
+			description: 'Create a dynamic, data-driven website for my wife, a freelance filmmaker and editor, '
+							+ 'to feature embedded videos, AJAX functionality and jQuery animation. Work towards SEO '
+							+ 'best practices to increase website exposure.',
+			url: 'http://www.katiegilbertson.com',
+			skills: ['JavaScript', 'jQuery', 'PHP', 'MySQL'],
+			images: []
+		},
+		{
+			title: 'Cherry Tree Design Website Redesign',
+			dates: '2014',
+			description: 'Update Cherry Tree Design\'s company website, its primary means of reaching potential '
+							+ 'customers, in order to create a responsive designed, interactive and engaging space '
+							+ 'for interested homeowners, designers and architects to learn, plan, design and price '
+							+ 'Cherry Tree Design stock and custom hardwood shoji and doors. Using Bootstrap and '
+							+ 'jQuery, provide mobile friendly, intuitive tools and resources where customers '
+							+ 'and sales staff can coordinate and plan new construction and remodeling projects.'
+							+ 'Integrate with the company Customer Relationship Management platform, WORKetc, '
+							+ 'to create web forms and quoting tools that feed customer and product data directly '
+							+ 'into WORKetc, avoiding unnecessary data entry.',
+			url: '',
+			skills: ['HTML3', 'CSS3', 'JavaScript', 'jQuery', 'Bootstrap', 'WordPress', 'PHP', 'MySQL'],
+			images: []
+		},
+		{
+			title: 'Cherry Tree Design Purchase Orders',
+			dates: '2014',
+			description: 'Extend Xataface, an open-source web based GUI for MySQL in JavaScript and PHP to create,'
+							+ 'update and delete company purchase orders and related materials and supplies line '
+							+ 'items.  Integrate with Xero, a cloud accounting SaaS, for creating and updating '
+							+ 'Accounts Payable invoices.  '
+							+ 'Also leverage WORKetc, a cloud CRM SaaS, via their API to create and retrieve '
+							+ 'vendor contact information.',
+			url: '',
+			skills: ['JavaScript', 'PHP', 'MySQL'],
+			images: []
+		},
+		{
+			title: 'Cherry Tree Design Production Schedule',
+			dates: '2014',
+			description: 'Extend DHTMLX, an open-source JavaScript component library, to create a daily work '
+							+ 'schedule by employee, by pulling current order data from WORKetc, the company\'s'
+							+ 'CRM, via PHP SOAP and AJAX calls to the WORKetc API.',
+			url: '',
+			skills: ['JavaScript', 'jQuery', 'PHP', 'MySQL'],
+			images: []
+		},
+		{
+			title: 'Flat Screen Surrounds Configurator',
+			dates: '2015',
+			description: 'A small AngularJS app to load, sort and filter available product options for '
+							+ 'Cherry Tree Design\'s Flat Screen Surround products.  This module on the main landing '
+							+ 'page allows users to quickly select from the web store\'s database of product options '
+							+ 'to configure a SKU and provide a direct link to the web store listing, with all of the '
+							+ 'user\'s choices pre-selected, ready to add to cart.  A quick sizing check field '
+							+ 'provides a modal quote request form for custom sizes, with Bootstrap and Angular input '
+							+ 'validation.  The form performs an AJAX submit to an AMFPHP service which sends the '
+							+ 'pertinent information by email to Cherry Tree Design sales staff.',
+			url : 'http://www.cherrytreedesign.com/furnishings/flat-screen-tv-cabinets.php',
+			skills: ['JavaScript', 'AngularJS', 'PHP', 'MySQL', 'Bootstrap'],
 			images: []
 		}
 		],
@@ -390,14 +473,49 @@ var projects = {
 			for(var key in project) {
 				if(Array.isArray(project[key])) {
 					project[key].forEach(function(val) {
-						var keyTitle = key.charAt(0).toUpperCase() + key.substr(1, key.length-2).toLowerCase();
-						el.append(window['HTMLschool'+keyTitle].replace('%data%', val));
+						var logoPos,
+							keyTitle = key.charAt(0).toUpperCase() + key.substr(1, key.length-2).toLowerCase(),
+							item = $(window['HTMLproject'+keyTitle].replace('%data%', val));
+						if(key === 'skills') {
+							// find logo position for each skills
+							// TODO:: store skills in common location so we don't have to loop through every time?
+							for(var category in bio.skills) {
+								bio.skills[category].forEach(function(skill) {
+									if(skill.name === val) logoPos = skill.logoPos;
+								});
+							}
+							item.find('img').css({
+									top: -logoPos*36*0.6667 + 'px', // two-thirds-size
+									width: 50*0.6667 + 'px'
+								})
+								.parent()
+									.css({
+										width: '40px',
+										height: 36*0.667 + 'px'
+									})
+									.attr({
+										title: val,
+										'data-toggle': 'tooltip'
+									});
+							el.prepend(item);
+						} else {
+							el.append(item);
+						}
 					});
 				} else if(key === 'url') {
-					el.find('a').attr('href', project[key]);
+					if(project[key].length > 0) {
+						el.find('a').attr('href', project[key]);
+					} else {
+						// remove <a> if url is blank
+						// var title = el.find('h').text();
+						el.find('h4').unwrap();
+					}
 				} else {
-					var keyTitle = key.charAt(0).toUpperCase() + key.substr(1).toLowerCase();
-					el.append(window['HTMLproject'+keyTitle].replace('%data%', project[key]));
+					var keyTitle = key.charAt(0).toUpperCase() + key.substr(1).toLowerCase(),
+						item = $(window['HTMLproject'+keyTitle].replace('%data%', project[key]));
+
+					if(key === 'title') item.html('<h4>' + project[key] + '</h4>');
+					el.append(item);
 				}
 			}
 		});
@@ -410,7 +528,7 @@ var projects = {
 
 	$('#mapDiv').append(googleMap);
 
-  	$('a[data-toggle="tooltip"]').tooltip();
+  	$('[data-toggle="tooltip"]').tooltip();
 
 	$('[class*="z"]').each(function() {
 		var el = $(this),
