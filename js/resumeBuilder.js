@@ -196,8 +196,8 @@ var bio = {
 
 	//**** INIT ****//
 
-	// Wait a sec so animation is smoother
-	setTimeout(function() { $('a[data-toggle="tab"]')[0].click(); }, 1000);
+		// Wait a sec so animation is smoother
+		setTimeout(function() { $('a[data-toggle="tab"]')[0].click(); }, 1000);
 
 	}
 };
@@ -212,10 +212,16 @@ var education = {
 		url: 'http://www.augie.edu'
 	}],
 	onlineCourses: [{
-	     title: 'Front-End Web Developer Nanodegree',
-	     school: 'Udacity',
-	     dates: 2015,
-	     url: 'http://www.udacity.com'
+		name: 'Udacity',
+		dates: 2015,
+		title: ['Front-End Web Developer Nanodegree, Candidate'],
+		url: 'http://www.udacity.com'
+	 },
+	 {
+	 	name: 'Code School',
+	 	dates: 2014,
+	 	title: ['Javascript Road Trip', 'Shaping Up with Angular'],
+	 	url: 'http://www.codeschool.com'
 	 }],
 	display: function () {
 		var self = this;
@@ -243,10 +249,12 @@ var education = {
 			var el = $(HTMLschoolStart);
 			$('#education').append(el);
 			for(var key in course) {
-				if(key === 'url') {
+				var keyTitle = key.charAt(0).toUpperCase() + key.substr(1).toLowerCase();
+				if(Array.isArray(course[key])) {
+					el.append(window['HTMLonline'+keyTitle].replace('%data%', course[key].join('<br>')));
+				} else if(key === 'url') {
 					el.find('a').attr('href', course[key]);
 				} else {
-					var keyTitle = key.charAt(0).toUpperCase() + key.substr(1).toLowerCase();
 					el.append(window['HTMLonline'+keyTitle].replace('%data%', course[key]));
 				}
 			}
@@ -259,7 +267,7 @@ var work = {
 	jobs: [{
 		employer: 'Cherry Tree Design',
 		title: 'General Manager',
-		location: 'Bozeman, Montana',
+		location: ['Bozeman, Montana', 'Zhongshan, China', 'Shenzhen, China', 'Zhuhai, China'],
 		dates: '2008-present',
 		description: {
 			'Overview' : {
@@ -345,7 +353,9 @@ var work = {
 			$('#workExperience').append(el);
 			for(var key in job) {
 				var keyTitle = key.charAt(0).toUpperCase() + key.substr(1).toLowerCase();
-				if(key === 'description' && typeof job[key] !== 'string') {
+				if(Array.isArray(job[key])) {
+					el.prepend(window['HTMLwork'+keyTitle].replace('%data%', job[key].join('<br>')));
+				} else if(key === 'description' && typeof job[key] !== 'string') {
 					for(var duty in job.description) {
 						var hdg = '<h4 class="duty-heading">' + duty + '</h4>',
 							summary = $('<ul class="duty-summary"></ul>');
@@ -416,22 +426,23 @@ var projects = {
 			description: 'Update Cherry Tree Design\'s company website, its primary means of reaching potential '
 							+ 'customers, in order to create a responsive designed, interactive and engaging space '
 							+ 'for interested homeowners, designers and architects to learn, plan, design and price '
-							+ 'Cherry Tree Design stock and custom hardwood shoji and doors. Using Bootstrap and '
+							+ 'Cherry Tree Design stock and custom hardwood shoji and doors.<br>Using Bootstrap and '
 							+ 'jQuery, provide mobile friendly, intuitive tools and resources where customers '
 							+ 'and sales staff can coordinate and plan new construction and remodeling projects.'
-							+ 'Integrate with the company Customer Relationship Management platform, WORKetc, '
+							+ '<br>Integrate with the company Customer Relationship Management platform, WORKetc, '
 							+ 'to create web forms and quoting tools that feed customer and product data directly '
 							+ 'into WORKetc, avoiding unnecessary data entry.',
 			url: '',
-			skills: ['HTML3', 'CSS3', 'JavaScript', 'jQuery', 'Bootstrap', 'WordPress', 'PHP', 'MySQL'],
+			skills: ['HTML5', 'CSS3', 'JavaScript', 'jQuery', 'Bootstrap', 'WordPress', 'PHP', 'MySQL'],
 			images: []
 		},
 		{
 			title: 'Cherry Tree Design Purchase Orders',
 			dates: '2014',
-			description: 'Extend Xataface, an open-source web based GUI for MySQL in JavaScript and PHP to create,'
+			description: 'Extend <a href="http://xataface.com" target="_blank">Xataface</a>, an open-source web '
+							+ 'based GUI for MySQL in JavaScript and PHP to create, '
 							+ 'update and delete company purchase orders and related materials and supplies line '
-							+ 'items.  Integrate with Xero, a cloud accounting SaaS, for creating and updating '
+							+ 'items.<br>Integrate with Xero, a cloud accounting SaaS, for creating and updating '
 							+ 'Accounts Payable invoices.  '
 							+ 'Also leverage WORKetc, a cloud CRM SaaS, via their API to create and retrieve '
 							+ 'vendor contact information.',
@@ -442,7 +453,8 @@ var projects = {
 		{
 			title: 'Cherry Tree Design Production Schedule',
 			dates: '2014',
-			description: 'Extend DHTMLX, an open-source JavaScript component library, to create a daily work '
+			description: 'Extend <a href="http://dhtmlx.com" target="_blank">DHTMLX</a>, an open-source JavaScript '
+							+ 'component library, to create a daily work '
 							+ 'schedule by employee, by pulling current order data from WORKetc, the company\'s'
 							+ 'CRM, via PHP SOAP and AJAX calls to the WORKetc API.',
 			url: '',
@@ -456,12 +468,12 @@ var projects = {
 							+ 'Cherry Tree Design\'s Flat Screen Surround products.  This module on the main landing '
 							+ 'page allows users to quickly select from the web store\'s database of product options '
 							+ 'to configure a SKU and provide a direct link to the web store listing, with all of the '
-							+ 'user\'s choices pre-selected, ready to add to cart.  A quick sizing check field '
+							+ 'user\'s choices pre-selected, ready to add to cart.<br>A quick sizing check field '
 							+ 'provides a modal quote request form for custom sizes, with Bootstrap and Angular input '
 							+ 'validation.  The form performs an AJAX submit to an AMFPHP service which sends the '
 							+ 'pertinent information by email to Cherry Tree Design sales staff.',
 			url : 'http://www.cherrytreedesign.com/furnishings/flat-screen-tv-cabinets.php',
-			skills: ['JavaScript', 'AngularJS', 'PHP', 'MySQL', 'Bootstrap'],
+			skills: ['JavaScript', 'AngularJS', 'PHP', 'AMFPHP', 'MySQL', 'Bootstrap'],
 			images: []
 		}
 		],
@@ -522,20 +534,22 @@ var projects = {
 	}
 };
 
-[bio, work, projects, education].forEach(function(section) { section.display(); });
-
 (function($) {
+
+	[bio, work, projects, education].forEach(function(section) { section.display(); });
 
 	$('#mapDiv').append(googleMap);
 
   	$('[data-toggle="tooltip"]').tooltip();
 
+  	// style sheets of material
 	$('[class*="z"]').each(function() {
 		var el = $(this),
 		 	z = el.attr('class').substr(el.attr('class').search(/z[0-6]/)+1, 1),
 			bx = (z*0.5) + 'px ' + z + 'px ' + z*5 + 'px ' + z*2 + 'px rgba(0,0,0,0.2)';
 		el.css({
 			'z-index' : z*3,
+			'border-radius' : '2px',
 			// 'position' : 'relative',
 			'box-shadow' : bx
 			// 'background' : 'rgba(255,255,255,'+z*0.1+')'

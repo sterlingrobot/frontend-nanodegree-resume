@@ -23,7 +23,7 @@ var HTMLgithub = '<li class="flex-item"><span class="orange-text">github</span><
 var HTMLblog = '<li class="flex-item"><span class="orange-text">blog</span><span class="white-text">%data%</span></li>';
 var HTMLlocation = '<li class="flex-item"><span class="orange-text">location</span><span class="white-text">%data%</span></li>';
 
-var HTMLbioPic = '<div class="biopic"><img src="%data%"></div>';  // wrapped in div
+var HTMLbioPic = '<div class="biopic"><img src="%data%"></div>';
 var HTMLWelcomeMsg = '<div class="welcome-message">%data%</div>'; // changed to div
 
 var HTMLskillsStart = '<div id="skills" class="flex-box"><h3 id="skillsH3">Skills at a Glance</h3></div>';  // move h3 into #skills
@@ -48,16 +48,17 @@ var HTMLprojectImage = '<img src="%data%">';
 
 var HTMLschoolStart = '<div class="education-entry"></div>';
 var HTMLschoolName = '<a href="#">%data%</a>';  // moved closing tag
-var HTMLschoolDegree = ' -- %data%';
+var HTMLschoolDegree = ' - %data%';
 var HTMLschoolDates = '<div class="date-text">%data%</div>';
 var HTMLschoolLocation = '<div class="location-text">%data%</div>';
-var HTMLschoolMajors = '<em><br>Major: %data%</em>';  // added "s" to match object property
+var HTMLschoolMajors = '<br><em>Major: %data%</em>';  // added "s" to match object property, moved br tag outside of em
 
 var HTMLonlineClasses = '<h3>Online Classes</h3>';
-var HTMLonlineTitle = '<a href="#">%data%';
-var HTMLonlineSchool = ' - %data%</a>';
+var HTMLonlineName = '<a href="#">%data%</a>'; // changed name, moved closing tag
+// var HTMLonlineTitle = ' - %data%';
 var HTMLonlineDates = '<div class="date-text">%data%</div>';
 var HTMLonlineURL = '<br><a href="#">%data%</a>';
+var HTMLonlineTitle = '<br><em>%data%</em>';  // added
 
 var internationalizeButton = '<button>Internationalize</button>';
 var googleMap = '<div id="map"></div>';
@@ -138,8 +139,16 @@ function initializeMap() {
     // iterates through work locations and appends each location to
     // the locations array
     for (var job in work.jobs) {
-      locations.push(work.jobs[job].location);
+      if(Array.isArray(work.jobs[job].location)) {
+        locations = locations.concat(work.jobs[job].location);
+      } else {
+        locations.push(work.jobs[job].location);
+      }
     }
+
+    // add a few other locations from personal history
+
+    locations = locations.concat(['Seguin, Texas', 'Minneapolis, Minnesota']);
 
     return locations;
   }
@@ -164,9 +173,31 @@ function initializeMap() {
       title: name
     });
 
+    var getLocationInfo = function(obj) {
+      if(obj.hasOwnProperty('location')) return obj;
+      else {
+        for(var prop in obj) {
+          if(typeof obj[prop] === 'object') {
+            return getLocationInfo(obj[prop]);
+          } else {
+            return;
+          }
+        }
+      }
+    };
+
     // infoWindows are the little helper windows that open when you click
     // or hover over a pin on a map. They usually contain more information
     // about a location.
+    // var str = name.split(',')[0].trim(),
+    //   content;
+    // [bio, work, education].forEach(function(section) {
+    //   var info = getLocationInfo(section);
+    //   console.log(info);
+    //   if(info) {
+    //     if(info.indexOf(str) > -1) content = info;
+    //   }
+    // });
     var infoWindow = new google.maps.InfoWindow({
       content: name
     });
@@ -174,6 +205,7 @@ function initializeMap() {
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
       // your code goes here!
+      infoWindow.open(map, this);
     });
 
     // this is where the pin actually gets added to the map.
