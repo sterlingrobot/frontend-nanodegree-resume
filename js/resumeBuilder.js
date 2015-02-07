@@ -479,6 +479,16 @@ var projects = {
 			images: []
 		},
 		{
+			title: 'SUMO Shoji Product Configurator',
+			dates: '2014',
+			description: 'An HTML5 Canvas and JavaScript adaptation of Space Creator\'s door drawing, '
+							+ 'focusing on Object-Oriented JavaScript programming, intended to explore the '
+							+ 'possibilities for migrating Space Creator, a Flash app, to JavaScript and Canvas. ',
+			url : 'http://www.cherrytreedesign.com/shoji/sumo-shoji.php',
+			skills: ['HTML5', 'JavaScript', 'PHP', 'MySQL', 'Bootstrap'],
+			images: []
+		},
+		{
 			title: 'Flat Screen Surrounds Configurator',
 			dates: '2015',
 			description: 'A small AngularJS app to load, sort and filter available product options for '
