@@ -10,9 +10,11 @@
   overflow: auto;
 }
 
-.education-entry, .work-entry, .project-entry {
-  padding-left: 5%;
-  padding-right: 5%;
+.education-entry,
+.work-entry,
+.project-entry {
+  margin-bottom: 50px;
+  padding: 0 25px 0;
 }
 
 h1 {
@@ -311,11 +313,15 @@ p a, p a:link, p a:active, p a:visited {
 .main-card {
   width: 90%;
   margin: -20px auto 0;
-  padding: 25px 0 50px;
+  padding: 50px 0 50px;
   position: relative;
-  background: #fbfbfb;
+  background: #fdfdfd;
 }
 
+.main-card h2 {
+  margin: 0 25px 25px;
+  padding: 0;
+}
 #main > div.main-card:nth-child(even) {
   left: -2%;
 }
@@ -326,6 +332,14 @@ p a, p a:link, p a:active, p a:visited {
 .main-card > div:last-child {
   margin-bottom: 50px;
 }
+
+.main-card .clear-card {
+  width: 100%;
+  height: 1px;
+  clear: both;
+  display: block;
+  box-sizing: border-box;
+}
 #main {
   background: #BADCF4 url(../images/resume-background.png) no-repeat center;
 }
@@ -335,17 +349,26 @@ p a, p a:link, p a:active, p a:visited {
   font-weight: bold;
 }
 
+.project-entry .skill-logos {
+  clear: both;
+}
+
 .project-entry .skill-logo {
   float: right;
+  margin-top: 15px;
 }
 
 .project-entry h4 {
-  margin: 35px 0 0;
+  margin: 15px 0 0;
   padding: 0;
 }
 
 .project-entry a > h4 {
   color: #FF9800;
+}
+
+.project-entry p {
+  clear: both;
 }
 
 .duty-heading {
@@ -373,7 +396,7 @@ p a, p a:link, p a:active, p a:visited {
 }
 
 .gray {
-  background-color: #F3F3F3;
+  background-color: #fbfbfb;
   padding-bottom: 10px;
   clear:both;
 }
@@ -456,15 +479,15 @@ span {
 
 #map {
   display: block;
-  height: 80%;
+  height: 90%;
   margin-left: 5%;
   margin-right: 5%;
 }
 
 #mapDiv {
   height: 450px;
-  width: 100%;
   padding-bottom: 5%;
+  clear: both;
 }
 
 @media only screen and (min-width: 768px) {

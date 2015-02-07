@@ -224,42 +224,56 @@ var education = {
 	 	url: 'http://www.codeschool.com'
 	 }],
 	display: function () {
-		var self = this;
+
+		var self = this,
+			$education = $('#education'),
+			container = '<div class="col-sm-6"></div>';
+
 		self.schools.forEach(function(school) {
-			var el = $(HTMLschoolStart);
-			$('#education').append(el);
+			var $el = $(HTMLschoolStart);
+			$education.append($el);
 			for(var key in school) {
 				var keyTitle = key.charAt(0).toUpperCase() + key.substr(1, key.length-1).toLowerCase();
 
 				if(Array.isArray(school[key])) {
 					school[key].forEach(function(val) {
-						el.append(window['HTMLschool'+keyTitle].replace('%data%', val));
+						$el.append(window['HTMLschool'+keyTitle].replace('%data%', val));
 					});
 				} else if(key === 'url') {
-					el.find('a').attr('href', school[key]);
+					$el.find('a').attr('href', school[key]);
 				} else if(key === 'degree') {
-					el.find('a').append(window['HTMLschool'+keyTitle].replace('%data%', school[key]));
+					$el.find('a').append(window['HTMLschool'+keyTitle].replace('%data%', school[key]));
 				} else {
-					el.append(window['HTMLschool'+keyTitle].replace('%data%', school[key]));
+					$el.append(window['HTMLschool'+keyTitle].replace('%data%', school[key]));
 				}
 			}
 		});
-		$('#education').append(HTMLonlineClasses);
+		$education.find('.education-entry')
+			.wrapAll(container)
+			.closest('.col-sm-6')
+				.addClass('education-entries');
+
 		self.onlineCourses.forEach(function(course) {
-			var el = $(HTMLschoolStart);
-			$('#education').append(el);
+			var $el = $(HTMLschoolStart);
+			$el.addClass('online-entry');
+			$education.append($el);
 			for(var key in course) {
 				var keyTitle = key.charAt(0).toUpperCase() + key.substr(1).toLowerCase();
 				if(Array.isArray(course[key])) {
-					el.append(window['HTMLonline'+keyTitle].replace('%data%', course[key].join('<br>')));
+					$el.append(window['HTMLonline'+keyTitle].replace('%data%', course[key].join('<br>')));
 				} else if(key === 'url') {
-					el.find('a').attr('href', course[key]);
+					$el.find('a').attr('href', course[key]);
 				} else {
-					el.append(window['HTMLonline'+keyTitle].replace('%data%', course[key]));
+					$el.append(window['HTMLonline'+keyTitle].replace('%data%', course[key]));
 				}
 			}
 		})
 
+		$education.find('.online-entry')
+			.wrapAll(container)
+			.closest('.col-sm-6')
+				.addClass('online-entries')
+				.prepend(HTMLonlineClasses);
 	}
 };
 
@@ -347,27 +361,30 @@ var work = {
 		}
 	}],
 	display: function () {
-		var self = this;
+		var self = this,
+			$workExp = $('#workExperience');
 		self.jobs.forEach(function(job) {
-			var el = $(HTMLworkStart);
-			$('#workExperience').append(el);
+			var $el = $(HTMLworkStart);
+			$workExp.append($el);
 			for(var key in job) {
 				var keyTitle = key.charAt(0).toUpperCase() + key.substr(1).toLowerCase();
 				if(Array.isArray(job[key])) {
-					el.prepend(window['HTMLwork'+keyTitle].replace('%data%', job[key].join('<br>')));
+					$el.prepend(window['HTMLwork'+keyTitle].replace('%data%', job[key].join('<br>')));
 				} else if(key === 'description' && typeof job[key] !== 'string') {
 					for(var duty in job.description) {
-						var hdg = '<h4 class="duty-heading">' + duty + '</h4>',
-							summary = $('<ul class="duty-summary"></ul>');
+						var $workDuty = $('<div class="work-duty col-sm-6 col-md-4 col-lg-3"></div>'),
+							hdg = '<h4 class="duty-heading">' + duty + '</h4>',
+							$summary = $('<ul class="duty-summary"></ul>');
 						job.description[duty].summaries.forEach(function(sum) {
-							summary.append('<li>'+sum+'</li>');
+							$summary.append('<li>'+sum+'</li>');
 						});
-						el.append(hdg).append(summary);
+						$workDuty.append(hdg).append($summary);
+						$el.append($workDuty);
 					}
 				} else if(key === 'title') {
-					el.find('a').append(window['HTMLwork'+keyTitle].replace('%data%', job[key]));
+					$el.find('a').append(window['HTMLwork'+keyTitle].replace('%data%', job[key]));
 				} else {
-					el.append(window['HTMLwork'+keyTitle].replace('%data%', job[key]));
+					$el.append(window['HTMLwork'+keyTitle].replace('%data%', job[key]));
 				}
 			}
 		});
@@ -478,10 +495,12 @@ var projects = {
 		}
 		],
 	display: function () {
-		var self = this;
+		var self = this,
+			$projects = $('#projects');
 		self.projects.forEach(function(project) {
-			var el = $(HTMLprojectStart);
-			$('#projects').append(el);
+			var $el = $(HTMLprojectStart);
+			$projects.append($el);
+			$el.addClass('col-sm-6 col-md-4 col-lg-3');
 			for(var key in project) {
 				if(Array.isArray(project[key])) {
 					project[key].forEach(function(val) {
@@ -509,27 +528,29 @@ var projects = {
 										title: val,
 										'data-toggle': 'tooltip'
 									});
-							el.prepend(item);
+							$el.find('.date-text ').after(item);
 						} else {
-							el.append(item);
+							$el.append(item);
 						}
 					});
 				} else if(key === 'url') {
 					if(project[key].length > 0) {
-						el.find('a').attr('href', project[key]);
+						$el.find('a').attr('href', project[key]);
 					} else {
 						// remove <a> if url is blank
-						// var title = el.find('h').text();
-						el.find('h4').unwrap();
+						$el.find('h4').unwrap();
 					}
 				} else {
 					var keyTitle = key.charAt(0).toUpperCase() + key.substr(1).toLowerCase(),
 						item = $(window['HTMLproject'+keyTitle].replace('%data%', project[key]));
 
 					if(key === 'title') item.html('<h4>' + project[key] + '</h4>');
-					el.append(item);
+					$el.append(item);
 				}
 			}
+			$logosCtr = $('<div class="skill-logos"></div>');
+			$el.find('.skill-logo').wrapAll($logosCtr);
+
 		});
 	}
 };
@@ -550,40 +571,13 @@ var projects = {
 		el.css({
 			'z-index' : z*3,
 			'border-radius' : '2px',
-			// 'position' : 'relative',
 			'box-shadow' : bx
-			// 'background' : 'rgba(255,255,255,'+z*0.1+')'
-
 		});
-/*
-		// .on('click', function() {
-		// 		var bx = $(this).css('box-shadow').split(' '),
-		// 			y = bx[5].substring(0, bx[5].indexOf('px')),
-		// 			bl = bx[6].substring(0, bx[6].indexOf('px')),
-		// 			sp = bx[7].substring(0, bx[7].indexOf('px'));
 
-		// 		bx[5] = parseInt(y)+4 + 'px';
-		// 		bx[6] = parseInt(bl)*5 + 'px';
-		// 		bx[7] = parseInt(sp)*-1 + 'px';
-		// 		$(this).css({ 'box-shadow' : bx.join(' ') })
-		// 			.animate({ 'width' : '+=4', margin : '-=2'}, 100)
-		// 			.on('mouseleave', function() {
-		// 				var bx = $(this).css('box-shadow').split(' '),
-		// 					y = bx[5].substring(0, bx[5].indexOf('px') + 1),
-		// 					bl = bx[6].substring(0, bx[6].indexOf('px')),
-		// 					sp = bx[7].substring(0, bx[7].indexOf('px'));
+	    $('.masonry').masonry({
+			itemSelector : '.work-duty, .project-entry',
+			stamp: 'h2, #workExperience .date-text, #workExperience .location-text'
+		});
 
-		// 				bx[5] = parseInt(y)-4 + 'px';
-		// 				bx[6] = parseInt(bl)/5 + 'px';
-		// 				bx[7] = parseInt(sp)*-1 + 'px';
-		// 				$(this).css({ 'box-shadow' : bx.join(' ') })
-		// 					.animate({ 'width' : '-=4', margin : '+=2'}, 50);
-		// 			});
-		// })
-		// .animate({
-		// 	'margin' : '-'+z*0.4+'%',
-		// 	'padding' : '+'+z*4+'%'
-		// }, 100);
-*/
 	});
 })(jQuery);
