@@ -7,3 +7,7 @@ http://www.google.com/design/spec/style/color.html#color-color-palette
 http://www.w3schools.com/svg/svg_polyline.asp
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat
+
+http://bower.io/
+
+http://gruntjs.com/

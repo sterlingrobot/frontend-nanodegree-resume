@@ -1,6 +1,6 @@
 {
   "name": "frontend-nanodegree-resume",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "homepage": "https://github.com/sterlingrobot/frontend-nanodegree-resume",
   "authors": [
     "Tor Gilbertson <sterlingrobot@gmail.com>"
@@ -9,9 +9,7 @@
   "main": "index.html",
   "keywords": [
     "resume",
-    "front",
-    "end",
-    "development"
+    "front end development"
   ],
   "license": "MIT",
   "private": true,
@@ -23,6 +21,10 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#~0.5.4"
+    "polymer": "Polymer/polymer#~0.5.4",
+    "masonry": "~3.2.2",
+    "bootstrap": "~3.3.2",
+    "grunt": "~0.4.5",
+    "jquery-ui": "~1.11.2"
   }
 }
