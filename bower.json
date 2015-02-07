@@ -1,0 +1,28 @@
+{
+  "name": "frontend-nanodegree-resume",
+  "version": "0.0.0",
+  "homepage": "https://github.com/sterlingrobot/frontend-nanodegree-resume",
+  "authors": [
+    "Tor Gilbertson <sterlingrobot@gmail.com>"
+  ],
+  "description": "Udacity Front End Web Developer Nanodegree Project 2 Resume",
+  "main": "index.html",
+  "keywords": [
+    "resume",
+    "front",
+    "end",
+    "development"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.5.4"
+  }
+}
