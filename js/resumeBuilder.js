@@ -8,11 +8,12 @@ var bio = {
 	      linkedin: { content: 'Tor\'s Profile', url: 'http://www.linkedin.com/pub/tor-gilbertson', icon: 'linked-in' },
 	      location: { content: 'Bozeman, Montana', url: 'https://www.google.com/maps/place/Bozeman,+MT', icon: 'map-marker' }
   	},
-	welcomeMessage: 'Let\'s get this party started.' ,
+	welcomeMessage: 'I enjoy creating practical web-based solutions for '
+					+ 'managing and presenting data via clean, dynamic user interfaces.',
 	skills: {
 		'Coding': [
 			{ name: 'HTML5', logoPos: 5, proficiency: 4 },
-			{ name: 'CSS3', logoPos: 6, proficiency: 4 },
+			{ name: 'CSS3', logoPos: 6, proficiency: 3 },
 			{ name: 'JavaScript', logoPos: 4, proficiency: 4 },
 			{ name: 'PHP', logoPos: 0, proficiency: 4 },
 			{ name: 'ActionScript3', logoPos: 15, proficiency: 4 }
@@ -39,13 +40,15 @@ var bio = {
 		],
 		'Workflow': [
 			{ name: 'Apache', logoPos: 2, proficiency: 2 },
-			{ name: 'Git', logoPos: 19, proficiency: 2 }
+			{ name: 'Git', logoPos: 19, proficiency: 2 },
+			{ name: 'Bower', logoPos: 21, proficiency: 1 }
 		]
 	},
 	biopic: 'images/bio.jpg',
 	display: function() {
 		var self = this,
 			flag = true,
+			viewWidth = $(window).width(),
 			levels = [
 				{}, // empty for starting point 0
 				{ name: 'Learning', color: '#F56B23' },
@@ -54,14 +57,15 @@ var bio = {
 				{ name: 'Actively Using', color: '#23F58D' },
 				{ name: 'Rocking it!', color: '#40F523' },
 			],
-			banner = $('<div id="banner"></div>'),
-			pic = $(HTMLbioPic.replace('%data%', self.biopic)),
-			welcome = $(HTMLWelcomeMsg.replace('%data%', self.welcomeMessage)),
-			legend = $('<ul class="skill-legend"></ul>'),
-			colLeft = $('<div class="col-sm-4"></div>'),
-			colRight = $('<div class="col-sm-8"></div>'),
-			skillsTabs = $('<ul id="skillsTabs" class="nav nav-tabs" role="tablist"></ul>'),
-			skillsContent = $('<div class="tab-content"></div>');
+			$banner = $('<div id="banner"></div>'),
+			$pic = $(HTMLbioPic.replace('%data%', self.biopic)),
+			$welcome = $(HTMLWelcomeMsg.replace('%data%', self.welcomeMessage)),
+			$legend = $('<ul class="skill-legend"></ul>'),
+			$colLeft = $('<div class="col-sm-4"></div>'),
+			$colRight = $('<div class="col-sm-8"></div>'),
+			$container = $('<div class="row"></div>'),
+			$skillsTabs = $('<ul id="skillsTabs" class="nav nav-tabs" role="tablist"></ul>'),
+			$skillsContent = $('<div class="tab-content"></div>');
 
 	//**** LAYOUT / DOM BUILDING ****//
 
@@ -71,94 +75,62 @@ var bio = {
 			html.find('.white-text').wrap('<a href="' + self.contacts[contact].url + '" target="_blank"></a>');
 			$('#topContacts, #footerContacts').append(html);
 		}
-		$('#topContacts').append('<li id="contactBtn" class="flex-item z4" style="visibility: visible">&plus;</li>');
-		$('#topContacts li:not(#contactBtn)').each(function() {
-			var el = $(this),
-				label = el.find('.orange-text'),
-				content = el.find('.white-text'),
-				txt = label.text(),
-				iconClass = 'icon-' + bio.contacts[txt].icon,
-				icon = $('<span class="icon-large ' + iconClass + '"></span>');
+		$('#topContacts').append('<li id="contactBtn" class="flex-item z4">&plus;</li>');
 
-			el.prepend(icon);
-			label.addClass('hidden');
-			content.addClass('hidden');
-			el.hover(function() {
-					if(el.hasClass('expanded')) return;
-					label.removeClass('hidden');
-					icon.addClass('hidden');
-				}, function() {
-					if(el.hasClass('expanded')) return;
-					label.addClass('hidden');
-					icon.removeClass('hidden');
-				})
-				.on('click', function() {
-					if($(this).hasClass('expanded')) {
-						$(this).each(collapseContact);
-						return;
-					}
-					var el2 = $(this),
-						label2 = el.find('.orange-text'),
-						content2 = el.find('.white-text');
-					el2.addClass('expanded')
-						// adjust left position to keep centered
-						.animate({ width: '+=150px', left: '-=75px' }, 500, 'easeOutCirc');
-					label2.addClass('hidden');
-					content2.removeClass('hidden');
-	 				$('#topContacts li:not(#contactBtn)').not(el2).each(collapseContact);
-				});
-		});
-
-		banner.addClass('z1')
+		$banner.addClass('z1')
 			.prepend(HTMLheaderRole.replace('%data%', self.role))
 			.prepend(HTMLheaderName.replace('%data%', self.name));
 
-		pic.addClass('z1');
-		colLeft.append(pic)
-			.append('<div class="clearfix"></div>')
+		$pic.addClass('z1');
+		$colLeft.append($pic)
 			.append('<svg class="speech" height="40" width="100%" viewBox="0 0 100 40" preserveAspectRatio="none">'
 					 	+ '   <polyline points="70,40 65,0 80,40"'
   						+ '			style="fill:#90CAF9;stroke:white;stroke-width:0.5" />'
 						+ '</svg>')
-			.append(welcome);
-		colRight.append(HTMLskillsStart);
+			.append($welcome);
+		$colRight.append(HTMLskillsStart);
 
-		$('#main').prepend(banner);
-		$('#header').append(colLeft).append(colRight);
+		$('#main').prepend($banner);
+		$('#header').append($colLeft).append($colRight);
+		$('#header > .col-sm-4, #header > .col-sm-8').wrapAll('<div class="row"></div>');
 		$('#skills').addClass('z2')
-			.append(skillsTabs)
-			.append(skillsContent);
+			.append($skillsTabs)
+			.append($skillsContent);
 
 		levels.forEach(function(level) {
 			var name = level.name || '&nbsp;',
 				toggle = level.name ? 'data-toggle="tooltip"' : '';
-			legend.append('<li class="skill-level"><i ' + toggle + ' title="' + name + '"></i></li>');
+			$legend.append('<li class="skill-level"><i ' + toggle + ' title="' + name + '"></i></li>');
 		});
-		skillsContent.append(legend)
+		$skillsContent.append($legend)
 
 		for(var category in self.skills) {
-			var tab = $('<li><a href="#' + category.replace(/(\s|&|\/)+/g, '-')
+			var $tab = $('<li><a href="#' + category.replace(/(\s|&|\/)+/g, '-')
 							+ '" role="tab" data-toggle="tab">' + category + '</a></li>'),
-				pane = $('<div id="' + category.replace(/(\s|&|\/)+/g, '-')
+				$pane = $('<div id="' + category.replace(/(\s|&|\/)+/g, '-')
 							+ '" class="tab-pane" role="tabpanel"><ul></ul></div>');
-			skillsTabs.append(tab);
-			skillsContent.append(pane);
+			$skillsTabs.append($tab);
+			$skillsContent.append($pane);
 			self.skills[category].forEach(function(skill) {
-				var el = $(HTMLskills.replace('%data%', skill.name));
-				pane.find('ul').append(el);
-				el.find('.skill-logo img').css('top', -skill.logoPos*36 + 'px');
-				el.find('.skill-proficiency').data('proficiency', skill.proficiency);
+				var $el = $(HTMLskills.replace('%data%', skill.name));
+				$pane.find('ul').append($el);
+				$el.find('.skill-logo img').css('top', -skill.logoPos*36 + 'px');
+				$el.find('.skill-proficiency').data('proficiency', skill.proficiency);
 			});
 		}
 
 	//**** EVENT HANDLING  ****//
 
+		$(window).on('resize', function() {
+			viewWidth = $(window).width();
+		});
+
 		$('#contactBtn').click(function() {
 			var i = 1;
 			$('#topContacts li:not(#contactBtn)').each(function() {
-				var el = $(this);
-				if(el.hasClass('expanded')) el.each(collapseContact);
-				el.animate(
+				var $el = $(this);
+				if($el.hasClass('expanded')) $el.each(collapseContact);
+				$el.animate(
 					{ left : flag ? i*16.66667 + '%' : '40px', opacity: flag ? 1 : 0 },
 					flag ? i*200 : i*100,
 					flag ? 'easeOutQuart' : 'easeInCirc');
@@ -167,6 +139,44 @@ var bio = {
 			$(this).html(flag ? '&minus;' : '&plus;');
 			$('#skills').animate({ 'margin-top' : flag ? '+=60px' : '-=60px' }, 800, 'easeOutQuart');
 			flag = !flag;
+		});
+
+		$('#topContacts li:not(#contactBtn)').each(function() {
+			var $el = $(this),
+				$label = $el.find('.orange-text'),
+				$content = $el.find('.white-text'),
+				txt = $label.text(),
+				iconClass = 'icon-' + bio.contacts[txt].icon,
+				$icon = $('<span class="icon-large ' + iconClass + '"></span>');
+
+			$el.prepend($icon);
+			$label.addClass('hidden');
+			$content.addClass('hidden');
+			$el.hover(function() {
+					if($el.hasClass('expanded')) return;
+					$label.removeClass('hidden');
+					$icon.addClass('hidden');
+				}, function() {
+					if($el.hasClass('expanded')) return;
+					$label.addClass('hidden');
+					$icon.removeClass('hidden');
+				})
+				.on('click', function() {
+					var $el2 = $(this),
+						$label2 = $el2.find('.orange-text'),
+						$content2 = $el2.find('.white-text');
+					if($el2.hasClass('expanded')) {
+						$el2.each(collapseContact);
+						return;
+					}
+					$el2.addClass('expanded')
+						// adjust left position to keep centered
+						.animate({ width: '+=150px', left: '-=75px', top: viewWidth < 768 ? '+=65px' : 0 }, 500, 'easeOutCirc')
+						.css('z-index', '+=5' );
+					$label2.addClass('hidden');
+					$content2.removeClass('hidden');
+	 				$('#topContacts li:not(#contactBtn)').not($el2).each(collapseContact);
+				});
 		});
 
 		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -187,8 +197,13 @@ var bio = {
 				label3 = el3.find('.orange-text'),
 				content3 = el3.find('.white-text'),
 				icon3 = el3.find('.icon-large');
-			el3.animate({ width: '60px', left: isExp ? '+=75px' : '+=0px' }, 500, 'easeOutCirc')
-				.removeClass('expanded');
+			el3.animate({
+					width: '60px',
+					left: isExp ? '+=75px' : '+=0px',
+					top: 0
+				}, 500, 'easeOutCirc')
+				.removeClass('expanded')
+				.css('z-index', isExp ? '-=5' : '+=0');
 			label3.addClass('hidden');
 			content3.addClass('hidden');
 			icon3.removeClass('hidden');
@@ -388,6 +403,7 @@ var work = {
 				}
 			}
 		});
+		$workExp.find('.date-text').after('<hr>');
 	}
 };
 
@@ -565,6 +581,36 @@ var projects = {
 	}
 };
 
+var locationData = {
+	'Bozeman, Mt, USA': '<h4>The Last Best Place</h4><p>I love Bozeman.  How could you complain when your '
+							+ 'commute is surrounded by awe-inspiring snow-capped mountains as far as the '
+							+ 'eye can see?  In 2009, we celebrated the birth of our daughter, who does a '
+							+ 'fine job of keeping us on our toes, and putting a smile on our faces.</p>',
+	'Seguin, TX, USA': '<h4>Home of the World\'s Largest Pecan</h4><p>Yeah, that\'s right.  It\'s also where '
+						+ 'I was born and raised.  There will always be a soft spot in my heart for South Texas '
+						+ 'living... and BBQ.</p>',
+	'Sioux Falls, SD, USA': '<h4>Texas Boy Faces Brutal Winter</h4><p>There\'s more to Sioux Falls, home of my '
+							+ 'alma mater, than cold weather, but it was sure a shock to experience -70&deg;F! '
+							+ 'Augustana cultivated my thirst for knowledge with excellent professors and community.',
+	'Granada, Granada, Spain': 'TEST',
+	'Minneapolis, MN, USA': '<h4>Art Degree = Server</h4><p>After Sioux Falls I wanted to experience some big city life '
+							+ 'and Minneapolis was the closest logical place.  Waiting tables paid the bills, then '
+							+ 'I joined a custom framing shop, which allowed me to utilize some artistic skills.  Most '
+							+ 'importantly though, I met my lovely wife there. We just celebrated 10 years of marriage!</p>',
+	'Zhongshan, Guangdong, China': '<h4>Huaxia Wood Lighting</h4><p>From 2006 - 2011, Cherry Tree Design worked with '
+									+ 'several Chinese factories to produce our line of hardwood lighting and mirrors. '
+									+ 'I coordinated with our agents and the factory to troubleshoot design, construction '
+									+ 'and sourcing challenges, keeping a close eye on quality.</p>',
+	'Zhuhai, Guangdong, China' : '<h4>Comfort Electronics</h4><p>Cherry Tree Design\'s third factory partner introduced '
+									+ 'new capabilities with exotic wood veneers and touch-dimmable LED lamping. I worked '
+									+ 'directly with the lead designer to incorporate these elements into new product '
+									+ 'designs for Cherry Tree\'s lighting catalog.</p>',
+	'Shenzhen, Guangdong, China': '<h4>ArtsMax</h4><p>In 2008, Cherry Tree searched for an alternate supplier as '
+									+ 'quality concerns and slow lead times jeopardized the outsourcing venture. '
+									+ 'I worked with ArtsMax for 6 weeks, developing a new line of eco-conscious EnergyStar '
+									+ 'fluorescent lighting fixtures made in bamboo.</p>'
+};
+
 (function($) {
 
 	[bio, work, projects, education].forEach(function(section) { section.display(); });
@@ -586,7 +632,7 @@ var projects = {
 
 	    $('.masonry').masonry({
 			itemSelector : '.work-duty, .project-entry',
-			stamp: 'h2, #workExperience .date-text, #workExperience .location-text'
+			stamp: 'h2, hr'
 		});
 
 	});

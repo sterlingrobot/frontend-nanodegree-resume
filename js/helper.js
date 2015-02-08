@@ -108,6 +108,7 @@ Start here! initializeMap() is called when page is loaded.
 function initializeMap() {
 
   var locations;
+  var currWindow;
 
   var mapOptions = {
     disableDefaultUI: true
@@ -148,7 +149,7 @@ function initializeMap() {
 
     // add a few other locations from personal history
 
-    locations = locations.concat(['Seguin, Texas', 'Minneapolis, Minnesota']);
+    locations = locations.concat(['Seguin, Texas', 'Minneapolis, Minnesota', 'Granada, Spain']);
 
     return locations;
   }
@@ -173,39 +174,23 @@ function initializeMap() {
       title: name
     });
 
-    var getLocationInfo = function(obj) {
-      if(obj.hasOwnProperty('location')) return obj;
-      else {
-        for(var prop in obj) {
-          if(typeof obj[prop] === 'object') {
-            return getLocationInfo(obj[prop]);
-          } else {
-            return;
-          }
-        }
-      }
-    };
-
     // infoWindows are the little helper windows that open when you click
     // or hover over a pin on a map. They usually contain more information
     // about a location.
-    // var str = name.split(',')[0].trim(),
-    //   content;
-    // [bio, work, education].forEach(function(section) {
-    //   var info = getLocationInfo(section);
-    //   console.log(info);
-    //   if(info) {
-    //     if(info.indexOf(str) > -1) content = info;
-    //   }
-    // });
     var infoWindow = new google.maps.InfoWindow({
-      content: name
+      content: '<div class="location-data">'
+                  + '<span class="location-text">'
+                  + name + '</span>'
+                  + locationData[name]
+                  + '</div>',
+      maxWidth: 300
     });
 
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
-      // your code goes here!
+      if(currWindow) currWindow.close();   // close any previously opened window
       infoWindow.open(map, this);
+      currWindow = infoWindow;
     });
 
     // this is where the pin actually gets added to the map.
