@@ -33,10 +33,10 @@ var bio = {
 			{ name: 'Joomla!', logoPos: 18, proficiency: 3 }
 		],
 		'Framework': [
-			{ name: 'Bootstrap', logoPos: 7, proficiency: 4 },
+			{ name: 'Bootstrap', logoPos: 7, proficiency: 5 },
 			{ name: 'jQuery', logoPos: 3, proficiency: 4 },
 			{ name: 'AMFPHP', logoPos: 20, proficiency: 4 },
-			{ name: 'AngularJS', logoPos: 8, proficiency: 1 }
+			{ name: 'AngularJS', logoPos: 8, proficiency: 2 }
 		],
 		'Workflow': [
 			{ name: 'Apache', logoPos: 2, proficiency: 2 },
@@ -306,23 +306,24 @@ var work = {
 					'Organize company financial data, budgeting, reporting and analysis'
 				]
 			},
-			'Production Management': {
-				summaries : [
-					'Ensure that the company stays on schedule according to the production calendar',
-					'Manage inventory levels of raw materials and finished products'
-				],
-				details : [[
-						'Organize production calendar, based on sales and demand',
-						'Schedule production with shop leads',
-						'Lead weekly Sales+Production Meetings, reviewing timelines for the week, discussing solutions to problems and resolving conflicts',
-						'Delegate shop tasks in conjunction with production',
-						'Develop workflows to streamline production (batching orders, finishing, crating)',
-						'Define quality expectations for production'
-					],
-					[
-						'Develop inventory management system',
-						'Maintain vendor relations, oversee purchasing of raw materials'
-					]
+			'Marketing': {
+				summaries: [
+					'Website infrastructure, design, layout, development, testing and content',
+					'AdWords campaign management and direction',
+					'Utilize Google Analytics to analyze website performance and troubleshoot underperforming assets',
+					'Print materials design, layout and oversight of production',
+					'Email campaign management, mailing lists',
+					'Trade show'
+				]
+			},
+			'Systems & Development': {
+				summaries: [
+					'Maintain all internal and external software and web tools',
+					'Company website admin tools',
+					'Payment processing, PCI Compliance and integrations with Authorize.net, PayPal',
+					'Xero Bookkeeping',
+					'Company IT Infrastructure, LAN, router, switch and wireless access point',
+					'Company VPS, web hosting, SSL and domain registration management'
 				]
 			},
 			'Sales & Customer Service': {
@@ -344,6 +345,25 @@ var work = {
 					['Production procedures, technical specs, instructions for customers']
 				]
 			},
+			'Production Management': {
+				summaries : [
+					'Ensure that the company stays on schedule according to the production calendar',
+					'Manage inventory levels of raw materials and finished products'
+				],
+				details : [[
+						'Organize production calendar, based on sales and demand',
+						'Schedule production with shop leads',
+						'Lead weekly Sales+Production Meetings, reviewing timelines for the week, discussing solutions to problems and resolving conflicts',
+						'Delegate shop tasks in conjunction with production',
+						'Develop workflows to streamline production (batching orders, finishing, crating)',
+						'Define quality expectations for production'
+					],
+					[
+						'Develop inventory management system',
+						'Maintain vendor relations, oversee purchasing of raw materials'
+					]
+				]
+			},
 			'Product Development': {
 				summaries : [
 					'Market analysis',
@@ -353,31 +373,13 @@ var work = {
 					'Production planning, workflows and quality expectations'
 				]
 			},
-			'Marketing': {
-				summaries: [
-					'Website infrastructure, design, layout, development, testing and content',
-					'AdWords campaign management and direction',
-					'Utilize Google Analytics to analyze website performance and troubleshoot underperforming assets',
-					'Print materials design, layout and oversight of production',
-					'Email campaign management, mailing lists',
-					'Trade show'
-				]
-			},
-			'Systems & Development': {
-				summaries: [
-					'Maintain all internal and external software and web tools',
-					'Company website admin tools',
-					'Payment processing, PCI Compliance and integrations with Authorize.net, PayPal',
-					'Xero Bookkeeping',
-					'Company IT Infrastructure, LAN, router, switch and wireless access point',
-					'Company VPS, web hosting, SSL and domain registration management'
-				]
-			}
 		}
 	}],
 	display: function () {
 		var self = this,
-			$workExp = $('#workExperience');
+			$workExp = $('#workExperience'),
+			$row = $('<div class="row"></div>');
+
 		self.jobs.forEach(function(job) {
 			var $el = $(HTMLworkStart);
 			$workExp.append($el);
@@ -387,7 +389,7 @@ var work = {
 					$el.prepend(window['HTMLwork'+keyTitle].replace('%data%', job[key].join('<br>')));
 				} else if(key === 'description' && typeof job[key] !== 'string') {
 					for(var duty in job.description) {
-						var $workDuty = $('<div class="work-duty col-sm-6 col-md-4 col-lg-3"></div>'),
+						var $workDuty = $('<div class="work-duty col-sm-6 col-md-4"></div>'),
 							hdg = '<h4 class="duty-heading">' + duty + '</h4>',
 							$summary = $('<ul class="duty-summary"></ul>');
 						job.description[duty].summaries.forEach(function(sum) {
@@ -402,8 +404,10 @@ var work = {
 					$el.append(window['HTMLwork'+keyTitle].replace('%data%', job[key]));
 				}
 			}
+			$el.find('.date-text').after('<hr>');
 		});
-		$workExp.find('.date-text').after('<hr>');
+		$('.work-entry').wrapAll($row);
+		$row.wrap('<div class="container"></div>');
 	}
 };
 
@@ -454,7 +458,7 @@ var projects = {
 			images: []
 		},
 		{
-			title: 'Cherry Tree Design Website Redesign',
+			title: 'CTD Website Redesign',
 			dates: '2014',
 			description: 'Update Cherry Tree Design\'s company website, its primary means of reaching potential '
 							+ 'customers, in order to create a responsive designed, interactive and engaging space '
@@ -470,7 +474,7 @@ var projects = {
 			images: []
 		},
 		{
-			title: 'Cherry Tree Design Purchase Orders',
+			title: 'CTD Admin Purchase Orders',
 			dates: '2014',
 			description: 'Extend <a href="http://xataface.com" target="_blank">Xataface</a>, an open-source web '
 							+ 'based GUI for MySQL in JavaScript and PHP to create, '
@@ -484,7 +488,7 @@ var projects = {
 			images: []
 		},
 		{
-			title: 'Cherry Tree Design Production Schedule',
+			title: 'CTD Admin Production Schedule',
 			dates: '2014',
 			description: 'Extend <a href="http://dhtmlx.com" target="_blank">DHTMLX</a>, an open-source JavaScript '
 							+ 'component library, to create a daily work '
@@ -495,7 +499,7 @@ var projects = {
 			images: []
 		},
 		{
-			title: 'SUMO Shoji Product Configurator',
+			title: 'SUMO Shoji Configurator',
 			dates: '2014',
 			description: 'An HTML5 Canvas and JavaScript adaptation of Space Creator\'s door drawing, '
 							+ 'focusing on Object-Oriented JavaScript programming, intended to explore the '
@@ -505,7 +509,7 @@ var projects = {
 			images: []
 		},
 		{
-			title: 'Flat Screen Surrounds Configurator',
+			title: 'Flat Screen Surrounds Configure',
 			dates: '2015',
 			description: 'A small AngularJS app to load, sort and filter available product options for '
 							+ 'Cherry Tree Design\'s Flat Screen Surround products.  This module on the main landing '
@@ -522,11 +526,15 @@ var projects = {
 		],
 	display: function () {
 		var self = this,
-			$projects = $('#projects');
+			$projects = $('#projects'),
+			$row = $('<div class="row"></div>');
+
 		self.projects.forEach(function(project) {
 			var $el = $(HTMLprojectStart);
+
 			$projects.append($el);
 			$el.addClass('col-sm-6 col-md-4 col-lg-3');
+
 			for(var key in project) {
 				if(Array.isArray(project[key])) {
 					project[key].forEach(function(val) {
@@ -542,13 +550,13 @@ var projects = {
 								});
 							}
 							item.find('img').css({
-									top: -logoPos*36*0.6667 + 'px', // two-thirds-size
-									width: 50*0.6667 + 'px'
+									top: -logoPos*36*0.5 + 'px',
+									width: 50*0.5 + 'px'
 								})
 								.parent()
 									.css({
-										width: '40px',
-										height: 36*0.667 + 'px'
+										width: '31px',
+										height: 36*0.5 + 'px'
 									})
 									.attr({
 										title: val,
@@ -576,7 +584,38 @@ var projects = {
 			}
 			$logosCtr = $('<div class="skill-logos"></div>');
 			$el.find('.skill-logo').wrapAll($logosCtr);
+		});
 
+		$('.project-entry').wrapAll($row);
+		$row.wrap('<div class="container"></div>');
+		$('.project-entry p').each(function() {
+			var $el = $(this),
+				$more = $('<span class="moretext">&plus;</span>');
+			console.log($el.get(0).scrollHeight, $el.height());
+			if($el.get(0).scrollHeight > $el.height()) {
+				$el.addClass('truncated');
+				$el.append($more);
+				$more.click(function() {
+					var $span = $(this);
+						$p = $span.parent('p');
+					$p.css({
+						'position': 'absolute',
+						'top': $p.position().top,
+						'left': $p.position().left,
+						'width': $p.width(),
+						'padding-bottom': $p.hasClass('expanded') ? '0' : '20px',
+						'box-shadow': $p.hasClass('expanded') ? 'none' : '0px 20px 15px -10px rgba(0, 0, 0, 0.2)'
+					}).animate({
+						'height': $p.hasClass('expanded') ? '168px' : $p.get(0).scrollHeight
+					}, 100, 'easeInQuad', function() {
+						$p.css({
+							'position': $p.hasClass('expanded') ? 'absolute' : 'static'
+						});
+					});
+					$p.toggleClass('expanded');
+					$span.html($p.hasClass('expanded') ? '&minus;' : '&plus;')
+				});
+			}
 		});
 	}
 };
@@ -630,10 +669,10 @@ var locationData = {
 			'box-shadow' : bx
 		});
 
-	    $('.masonry').masonry({
-			itemSelector : '.work-duty, .project-entry',
-			stamp: 'h2, hr'
-		});
+	 //    $('.masonry').masonry({
+		// 	itemSelector : '.work-duty',
+		// 	stamp: 'h2, hr'
+		// });
 
 	});
 })(jQuery);

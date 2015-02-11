@@ -109,6 +109,8 @@ hr {
 #header {
   overflow: visible;
   width: 100%;
+  min-height: 400px;
+  padding-top: 0;
   background: #90caf9;
 }
 #topContacts {
@@ -273,7 +275,6 @@ hr {
   height: 36px;
   margin: 0;
   padding: 0;
-  border-radius: 10px;
 }
 .skill-logo img {
   position: absolute;
@@ -295,7 +296,7 @@ hr {
   position: relative;
   width: 90%;
   margin: -20px auto 0;
-  padding: 50px 0 50px;
+  padding: 50px 10px;
   background: #fdfdfd;
 }
 .main-card h2 {
@@ -320,12 +321,15 @@ hr {
   height: 1px;
 }
 #main {
-  background: #badcf4 url(../images/resume-background.png) no-repeat center 33%;
+  background: #badcf4 url(../images/resume-background.png) repeat center 33%;
   background-size: 150%;
 }
 .work-entry > a {
   font-size: 18px;
   font-weight: bold;
+}
+.project-entry {
+  min-height: 260px;
 }
 .project-entry .skill-logos {
   clear: both;
@@ -342,7 +346,32 @@ hr {
   color: #ff9800;
 }
 .project-entry p {
+  z-index: 2;
   clear: both;
+  height: 168px;
+  background: #fbfbfb;
+}
+.project-entry p.truncated {
+  overflow: hidden;
+  border-bottom: 1px solid #ccc;
+}
+.project-entry p.truncated.expanded {
+  overflow: visible;
+}
+.project-entry p .moretext {
+  font-size: 24px;
+  position: absolute;
+  bottom: -12px;
+  left: 46%;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  cursor: pointer;
+  text-align: center;
+  color: #ff9800;
+  border: 1px dotted #ff9800;
+  border-radius: 12px;
+  background: #fff;
 }
 .duty-heading {
   clear: both;
@@ -450,6 +479,9 @@ span {
     margin-bottom: 25px;
     padding-bottom: 25px;
     border-bottom: 1px solid #ccc;
+  }
+  .project-entry p {
+    height: auto;
   }
   .main-card {
     left: 0 !important;

@@ -89,7 +89,7 @@ function logClicks(x,y) {
 }
 
 $(document).click(function(loc) {
-  // your code goes here!
+    logClicks(loc.pageX, loc.pageY);
 });
 
 
@@ -148,7 +148,6 @@ function initializeMap() {
     }
 
     // add a few other locations from personal history
-
     locations = locations.concat(['Seguin, Texas', 'Minneapolis, Minnesota', 'Granada, Spain']);
 
     return locations;
@@ -188,6 +187,7 @@ function initializeMap() {
 
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
+      console.log(this);
       if(currWindow) currWindow.close();   // close any previously opened window
       infoWindow.open(map, this);
       currWindow = infoWindow;
@@ -199,7 +199,7 @@ function initializeMap() {
     // fit the map to the new marker
     map.fitBounds(bounds);
     // center the map
-    map.setCenter(bounds.getCenter());
+    map.setCenter(new google.maps.LatLng(56.64226565583054, -123.18580179218753)); //  bounds.getCenter()
   }
 
   /*
