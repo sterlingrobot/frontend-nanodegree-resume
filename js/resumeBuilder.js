@@ -1,15 +1,38 @@
 var bio = {
-	name : 'Tor Gilbertson',
-	role : 'Web Developer',
-	contacts : {
-	      mobile: { content: '(406) 624-9775', url: 'tel:4066249775', icon: 'iphone' },
-	      email: { content: 'sterlingrobot@gmail.com', url: 'mailto:sterlingrobot@gmail.com', icon: 'envelope' },
-	      github: { content: 'sterlingrobot', url: 'http://github.com/sterlingrobot', icon: 'github' },
-	      linkedin: { content: 'Tor\'s Profile', url: 'http://www.linkedin.com/pub/tor-gilbertson', icon: 'linked-in' },
-	      location: { content: 'Bozeman, Montana', url: 'https://www.google.com/maps/place/Bozeman,+MT', icon: 'map-marker' }
+	title: 'Contact',
+	element: '#header',
+	name: 'Tor Gilbertson',
+	role: 'Web Developer',
+	contacts: {
+	      mobile: {
+	      	content: '(406) 624-9775',
+	      	url: 'tel:4066249775',
+	      	icon: 'iphone'
+	      },
+	      email: {
+	      	content: 'sterlingrobot@gmail.com',
+	      	url: 'mailto:sterlingrobot@gmail.com',
+	      	icon: 'envelope'
+	      },
+	      github: {
+	      	content: 'sterlingrobot',
+	      	url: 'http://github.com/sterlingrobot',
+	      	icon: 'github'
+	      },
+	      linkedin: {
+	      	content: 'Tor\'s Profile',
+	      	url: 'http://www.linkedin.com/pub/tor-gilbertson',
+	      	icon: 'linked-in'
+	      },
+	      location: {
+	      	content: 'Bozeman, Montana',
+	      	url: 'https://www.google.com/maps/place/Bozeman,+MT',
+	      	icon: 'map-marker'
+	      }
   	},
-	welcomeMessage: 'I enjoy creating practical web-based solutions for '
-					+ 'managing and presenting data via clean, dynamic user interfaces.',
+	welcomeMessage: 'I look forward to honing my web development skills within a team environment '
+					+ 'in a challenging and rewarding position that utilizes my creative problem solving '
+					+ 'capabilities and design acumen.',
 	skills: {
 		'Coding': [
 			{ name: 'HTML5', logoPos: 5, proficiency: 4 },
@@ -48,6 +71,7 @@ var bio = {
 	display: function() {
 		var self = this,
 			flag = true,
+			scrolled = false,
 			viewWidth = $(window).width(),
 			levels = [
 				{}, // empty for starting point 0
@@ -58,6 +82,8 @@ var bio = {
 				{ name: 'Rocking it!', color: '#40F523' },
 			],
 			$banner = $('<div id="banner"></div>'),
+			$menu = $('<ul id="navigation" class="z3 collapse"></ul>'),
+			$menuBtn = $('<a id="menuBtn" href="#" data-toggle="collapse" data-target="#navigation"></a>'),
 			$pic = $(HTMLbioPic.replace('%data%', self.biopic)),
 			$welcome = $(HTMLWelcomeMsg.replace('%data%', self.welcomeMessage)),
 			$legend = $('<ul class="skill-legend"></ul>'),
@@ -75,11 +101,22 @@ var bio = {
 			html.find('.white-text').wrap('<a href="' + self.contacts[contact].url + '" target="_blank"></a>');
 			$('#topContacts, #footerContacts').append(html);
 		}
-		$('#topContacts').append('<li id="contactBtn" class="flex-item z4">&plus;</li>');
+		$('#topContacts').append('<li id="contactBtn" class="flex-item z5">&plus;</li>');
+
+		[bio, work, projects, education, locationData].forEach(function(nav) {
+			$menu.append('<li><a href="' + nav.element + '">' + nav.title + '</a></li>');
+		});
 
 		$banner.addClass('z1')
 			.prepend(HTMLheaderRole.replace('%data%', self.role))
 			.prepend(HTMLheaderName.replace('%data%', self.name));
+
+		$('body').prepend($menu)
+			.prepend($menuBtn);
+
+		for(var i=0; i < 3; i++) {
+			$menuBtn.append('<span class="bar"></span>');
+		}
 
 		$pic.addClass('z1');
 		$colLeft.append($pic)
@@ -91,11 +128,14 @@ var bio = {
 		$colRight.append(HTMLskillsStart);
 
 		$('#main').prepend($banner);
+		$('#main').prepend('<div id="scrollTop">&uarr;</div>');
 		$('#header').append($colLeft).append($colRight);
 		$('#header > .col-sm-4, #header > .col-sm-8').wrapAll('<div class="row"></div>');
 		$('#skills').addClass('z2')
 			.append($skillsTabs)
 			.append($skillsContent);
+
+		// Build tab panes and skill-proficiency bars
 
 		levels.forEach(function(level) {
 			var name = level.name || '&nbsp;',
@@ -121,25 +161,41 @@ var bio = {
 
 	//**** EVENT HANDLING  ****//
 
-		$(window).on('resize', function() {
-			viewWidth = $(window).width();
+		$(window)
+			.on('resize', function() {
+				viewWidth = $(window).width();
+			})
+			.on('scroll', function() {
+				scrolled = true;
+			})
+
+		setInterval(function() {
+			var scrollY = window.scrollY,
+				$scrollTop = $('#scrollTop');
+			if(scrolled) {
+				if(scrollY === 0) {
+					$scrollTop.fadeOut()
+						.removeClass('shown');
+					return;
+				}
+				if($scrollTop.hasClass('shown')) return;
+				if(scrollY > 200) {
+					$scrollTop.fadeIn()
+						.addClass('shown');
+				}
+			}
+		}, 1000);
+
+		$('body').on('click', function(e) {
+
+			if(e.target !== $menuBtn) {
+				if($menu.hasClass('in')) {
+					$menu.collapse('hide');
+				}
+			}
 		});
 
-		$('#contactBtn').click(function() {
-			var i = 1;
-			$('#topContacts li:not(#contactBtn)').each(function() {
-				var $el = $(this);
-				if($el.hasClass('expanded')) $el.each(collapseContact);
-				$el.animate(
-					{ left : flag ? i*16.66667 + '%' : '40px', opacity: flag ? 1 : 0 },
-					flag ? i*200 : i*100,
-					flag ? 'easeOutQuart' : 'easeInCirc');
-				i++;
-			});
-			$(this).html(flag ? '&minus;' : '&plus;');
-			$('#skills').animate({ 'margin-top' : flag ? '+=60px' : '-=60px' }, 800, 'easeOutQuart');
-			flag = !flag;
-		});
+		$('#contactBtn').on('click', function() { bio.showContacts(); });
 
 		$('#topContacts li:not(#contactBtn)').each(function() {
 			var $el = $(this),
@@ -161,35 +217,77 @@ var bio = {
 					$label.addClass('hidden');
 					$icon.removeClass('hidden');
 				})
-				.on('click', function() {
-					var $el2 = $(this),
-						$label2 = $el2.find('.orange-text'),
-						$content2 = $el2.find('.white-text');
-					if($el2.hasClass('expanded')) {
-						$el2.each(collapseContact);
-						return;
-					}
-					$el2.addClass('expanded')
-						// adjust left position to keep centered
-						.animate({ width: '+=150px', left: '-=75px', top: viewWidth < 768 ? '+=65px' : 0 }, 500, 'easeOutCirc')
-						.css('z-index', '+=5' );
-					$label2.addClass('hidden');
-					$content2.removeClass('hidden');
-	 				$('#topContacts li:not(#contactBtn)').not($el2).each(collapseContact);
-				});
+				.on('click', expandContact);
 		});
 
 		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-			var skills = $($(e.target).attr('href')).find('.skill-proficiency');
-			skills.each(function() {
-				var sk = $(this);
-				sk.css('width', 0)
-					.animate({ 'width' : '+' + sk.data('proficiency')*16.667 + '%' },
-						sk.data('proficiency')*250, 'easeInQuart');
+			var $skills = $($(e.target).attr('href')).find('.skill-proficiency');
+			$skills.each(function() {
+				var $sk = $(this);
+				$sk.css('width', 0)
+					.animate({ 'width' : '+' + $sk.data('proficiency')*16.667 + '%' },
+						$sk.data('proficiency')*250, 'easeInQuart');
 			});
 		});
 
+		$('#scrollTop').on('click', function() {
+			$('body').animate({ scrollTop: 0 }, 500);
+		});
+
+	  	$('#navigation').on('click', 'a', function(e) {
+
+	  		var href = $(this).attr('href');
+
+	  		if(href === '#header') { bio.showContacts(); }
+			else $('body').animate({scrollTop: $(href).offset().top }, 500);
+
+	  		e.preventDefault();
+
+	  	});
+
+
 	//**** COMMON FUNCTIONS ****//
+
+		this.showContacts = function() {
+			var i = 1,
+				$contactBtn = $('#contactBtn')
+				$skills = $('#skills');
+
+			$('#topContacts li:not(#contactBtn)').each(function() {
+				var $el = $(this);
+				if($el.hasClass('expanded')) $el.each(collapseContact);
+				$el.animate(
+					{ left : flag ? i*16.66667 + '%' : '40px', opacity: flag ? 1 : 0 },
+					flag ? i*200 : i*100,
+					flag ? 'easeOutQuart' : 'easeInCirc');
+				i++;
+			});
+			$contactBtn.html(flag ? '&minus;' : '&plus;');
+			$skills.animate({ 'margin-top' : flag ? '+=60px' : '-=60px' }, 800, 'easeOutQuart');
+			flag = !flag;
+		};
+
+
+		function expandContact() {
+			var $el2 = $(this),
+				$label2 = $el2.find('.orange-text'),
+				$content2 = $el2.find('.white-text');
+			if($el2.hasClass('expanded')) {
+				$el2.each(collapseContact);
+				return;
+			}
+			$el2.addClass('expanded')
+				// adjust left position to keep centered
+				.animate({
+					width: '+=150px',
+					left: '-=75px',
+					top: viewWidth < 768 ? '+=65px' : 0
+				}, 500, 'easeOutCirc')
+					.css('z-index', '+=5' );
+			$label2.addClass('hidden');
+			$content2.removeClass('hidden');
+				$('#topContacts li:not(#contactBtn)').not($el2).each(collapseContact);
+		}
 
 		function collapseContact() {
 			var el3 = $(this),
@@ -218,6 +316,8 @@ var bio = {
 };
 
 var education = {
+	title: 'Education',
+	element: '#education',
 	schools: [{
 		name: 'Augustana College',
 		degree: 'Bachelor of Arts',
@@ -242,11 +342,13 @@ var education = {
 
 		var self = this,
 			$education = $('#education'),
-			container = '<div class="col-sm-6"></div>';
+			$colLeft = $('<div class="col-sm-5"></div>'),
+			$colRight = $('<div class="col-sm-7"></div>'),
+			$row = $('<div class="row"></div>');
 
 		self.schools.forEach(function(school) {
 			var $el = $(HTMLschoolStart);
-			$education.append($el);
+			$colLeft.append($el);
 			for(var key in school) {
 				var keyTitle = key.charAt(0).toUpperCase() + key.substr(1, key.length-1).toLowerCase();
 
@@ -263,15 +365,13 @@ var education = {
 				}
 			}
 		});
-		$education.find('.education-entry')
-			.wrapAll(container)
-			.closest('.col-sm-6')
-				.addClass('education-entries');
+
+		$colLeft.addClass('education-entries');
 
 		self.onlineCourses.forEach(function(course) {
 			var $el = $(HTMLschoolStart);
 			$el.addClass('online-entry');
-			$education.append($el);
+			$colRight.append($el);
 			for(var key in course) {
 				var keyTitle = key.charAt(0).toUpperCase() + key.substr(1).toLowerCase();
 				if(Array.isArray(course[key])) {
@@ -284,15 +384,19 @@ var education = {
 			}
 		})
 
-		$education.find('.online-entry')
-			.wrapAll(container)
-			.closest('.col-sm-6')
-				.addClass('online-entries')
-				.prepend(HTMLonlineClasses);
+		$colRight.addClass('online-entries')
+			.prepend(HTMLonlineClasses);
+
+		$row.append($colLeft).append($colRight);
+		$row.wrap('<div class="container"></div>');
+
+		$education.append($row);
 	}
 };
 
 var work = {
+	title: 'Employment',
+	element: '#workExperience',
 	jobs: [{
 		employer: 'Cherry Tree Design',
 		title: 'General Manager',
@@ -301,7 +405,8 @@ var work = {
 		description: {
 			'Overview' : {
 				summaries : [
-					'Develop and maintain consistency and continuity between the sales process and the end product throughout all aspects of operations',
+					'Develop and maintain consistency and continuity between the sales process and the end product '
+						+ 'throughout all aspects of operations',
 					'Oversee Human Resources, including hiring, reviews, pay scales, payroll administration',
 					'Organize company financial data, budgeting, reporting and analysis'
 				]
@@ -337,7 +442,8 @@ var work = {
 				],
 				details : [
 					[],
-					['Includes quoting and follow-up materials and lead management, utilizing the company website and Customer Relationship Management system, WORKetc'],
+					['Includes quoting and follow-up materials and lead management, utilizing the company website and '
+						+ 'Customer Relationship Management system, WORKetc'],
 					['Includes contract & work order creation, invoicing and ship date scheduling within CRM'],
 					[],
 					['Resolve quality exceptions, missing parts, shipping damages',
@@ -353,7 +459,8 @@ var work = {
 				details : [[
 						'Organize production calendar, based on sales and demand',
 						'Schedule production with shop leads',
-						'Lead weekly Sales+Production Meetings, reviewing timelines for the week, discussing solutions to problems and resolving conflicts',
+						'Lead weekly Sales+Production Meetings, reviewing timelines for the week, discussing solutions '
+							+ 'to problems and resolving conflicts',
 						'Delegate shop tasks in conjunction with production',
 						'Develop workflows to streamline production (batching orders, finishing, crating)',
 						'Define quality expectations for production'
@@ -381,8 +488,10 @@ var work = {
 			$row = $('<div class="row"></div>');
 
 		self.jobs.forEach(function(job) {
+
 			var $el = $(HTMLworkStart);
 			$workExp.append($el);
+
 			for(var key in job) {
 				var keyTitle = key.charAt(0).toUpperCase() + key.substr(1).toLowerCase();
 				if(Array.isArray(job[key])) {
@@ -406,12 +515,15 @@ var work = {
 			}
 			$el.find('.date-text').after('<hr>');
 		});
+
 		$('.work-entry').wrapAll($row);
 		$row.wrap('<div class="container"></div>');
 	}
 };
 
 var projects = {
+	title: 'Projects',
+	element: '#projects',
 	projects: [
 		{
 			title: 'Modular Partition Configurator',
@@ -523,13 +635,14 @@ var projects = {
 			skills: ['JavaScript', 'AngularJS', 'PHP', 'AMFPHP', 'MySQL', 'Bootstrap'],
 			images: []
 		}
-		],
+	],
 	display: function () {
 		var self = this,
 			$projects = $('#projects'),
 			$row = $('<div class="row"></div>');
 
 		self.projects.forEach(function(project) {
+
 			var $el = $(HTMLprojectStart);
 
 			$projects.append($el);
@@ -537,10 +650,12 @@ var projects = {
 
 			for(var key in project) {
 				if(Array.isArray(project[key])) {
+
 					project[key].forEach(function(val) {
 						var logoPos,
 							keyTitle = key.charAt(0).toUpperCase() + key.substr(1, key.length-2).toLowerCase(),
 							item = $(window['HTMLproject'+keyTitle].replace('%data%', val));
+
 						if(key === 'skills') {
 							// find logo position for each skills
 							// TODO:: store skills in common location so we don't have to loop through every time?
@@ -588,10 +703,12 @@ var projects = {
 
 		$('.project-entry').wrapAll($row);
 		$row.wrap('<div class="container"></div>');
+
+		// Add blind animation for content reveal on longer paragraphs
 		$('.project-entry p').each(function() {
 			var $el = $(this),
 				$more = $('<span class="moretext">&plus;</span>');
-			console.log($el.get(0).scrollHeight, $el.height());
+
 			if($el.get(0).scrollHeight > $el.height()) {
 				$el.addClass('truncated');
 				$el.append($more);
@@ -621,6 +738,9 @@ var projects = {
 };
 
 var locationData = {
+	title: 'Locations',
+	element: '#mapDiv',
+
 	'Bozeman, Mt, USA': '<h4>The Last Best Place</h4><p>I love Bozeman.  How could you complain when your '
 							+ 'commute is surrounded by awe-inspiring snow-capped mountains as far as the '
 							+ 'eye can see?  In 2009, we celebrated the birth of our daughter, who does a '
@@ -631,23 +751,26 @@ var locationData = {
 	'Sioux Falls, SD, USA': '<h4>Texas Boy Faces Brutal Winter</h4><p>There\'s more to Sioux Falls, home of my '
 							+ 'alma mater, than cold weather, but it was sure a shock to experience -70&deg;F! '
 							+ 'Augustana cultivated my thirst for knowledge with excellent professors and community.',
-	'Granada, Granada, Spain': 'TEST',
-	'Minneapolis, MN, USA': '<h4>Art Degree = Server</h4><p>After Sioux Falls I wanted to experience some big city life '
-							+ 'and Minneapolis was the closest logical place.  Waiting tables paid the bills, then '
-							+ 'I joined a custom framing shop, which allowed me to utilize some artistic skills.  Most '
-							+ 'importantly though, I met my lovely wife there. We just celebrated 10 years of marriage!</p>',
+	'Granada, Granada, Spain': '<h4>Study Abroad</h4><p>I was very fortunate in college to participate in a semester '
+								+ 'of Spanish language and culture study in Granada, a beautiful city of  great '
+								+ 'historical significance, and home of the the great Moorish palace, Alhambra.' ,
+	'Minneapolis, MN, USA': '<h4>Art Degree = Server</h4><p>After Sioux Falls I wanted to experience some big city '
+							+ 'life and Minneapolis was the closest logical place.  Waiting tables paid the bills, '
+							+ 'then I joined a custom framing shop, which allowed me to utilize some artistic skills. '
+							+ ' Most importantly though, I met my lovely wife there. We just celebrated 10 years of '
+							+ 'marriage!</p>',
 	'Zhongshan, Guangdong, China': '<h4>Huaxia Wood Lighting</h4><p>From 2006 - 2011, Cherry Tree Design worked with '
 									+ 'several Chinese factories to produce our line of hardwood lighting and mirrors. '
-									+ 'I coordinated with our agents and the factory to troubleshoot design, construction '
-									+ 'and sourcing challenges, keeping a close eye on quality.</p>',
-	'Zhuhai, Guangdong, China' : '<h4>Comfort Electronics</h4><p>Cherry Tree Design\'s third factory partner introduced '
-									+ 'new capabilities with exotic wood veneers and touch-dimmable LED lamping. I worked '
-									+ 'directly with the lead designer to incorporate these elements into new product '
-									+ 'designs for Cherry Tree\'s lighting catalog.</p>',
+									+ 'I coordinated with our agents and the factory to troubleshoot design, '
+									+ 'construction and sourcing challenges, keeping a close eye on quality.</p>',
+	'Zhuhai, Guangdong, China' : '<h4>Comfort Electronics</h4><p>Cherry Tree Design\'s third factory partner '
+									+ 'introduced new capabilities with exotic wood veneers and touch-dimmable LED '
+									+ 'lamping. I worked directly with the lead designer to incorporate these elements '
+									+ 'into new product designs for Cherry Tree\'s lighting catalog.</p>',
 	'Shenzhen, Guangdong, China': '<h4>ArtsMax</h4><p>In 2008, Cherry Tree searched for an alternate supplier as '
 									+ 'quality concerns and slow lead times jeopardized the outsourcing venture. '
-									+ 'I worked with ArtsMax for 6 weeks, developing a new line of eco-conscious EnergyStar '
-									+ 'fluorescent lighting fixtures made in bamboo.</p>'
+									+ 'I worked with ArtsMax for an intensive 6 week stint, developing a new line of '
+									+ 'eco-conscious EnergyStar fluorescent lighting fixtures made in bamboo.</p>'
 };
 
 (function($) {
@@ -668,11 +791,6 @@ var locationData = {
 			'border-radius' : '2px',
 			'box-shadow' : bx
 		});
-
-	 //    $('.masonry').masonry({
-		// 	itemSelector : '.work-duty',
-		// 	stamp: 'h2, hr'
-		// });
-
 	});
+
 })(jQuery);
