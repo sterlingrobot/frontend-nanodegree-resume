@@ -82,7 +82,7 @@ var bio = {
 				{ name: 'Rocking it!', color: '#40F523' },
 			],
 			$banner = $('<div id="banner"></div>'),
-			$menu = $('<ul id="navigation" class="z3 collapse"></ul>'),
+			$menu = $('<ul id="navigation" class="z4 collapse"></ul>'),
 			$menuBtn = $('<a id="menuBtn" href="#" data-toggle="collapse" data-target="#navigation"></a>'),
 			$pic = $(HTMLbioPic.replace('%data%', self.biopic)),
 			$welcome = $(HTMLWelcomeMsg.replace('%data%', self.welcomeMessage)),
