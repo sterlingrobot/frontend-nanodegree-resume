@@ -72,7 +72,7 @@ var bio = {
 		var self = this,
 			flag = true,
 			scrolled = false,
-			viewWidth = $(window).width(),
+			viewWidth = window.innerWidth,
 			levels = [
 				{}, // empty for starting point 0
 				{ name: 'Learning', color: '#F56B23' },
@@ -96,10 +96,10 @@ var bio = {
 	//**** LAYOUT / DOM BUILDING ****//
 
 		for(var contact in self.contacts) {
-			var html = $(window['HTML'+contact].replace('%data%', self.contacts[contact].content));
-			html.addClass('z3');
-			html.find('.white-text').wrap('<a href="' + self.contacts[contact].url + '" target="_blank"></a>');
-			$('#topContacts, #footerContacts').append(html);
+			var $html = $(window['HTML'+contact].replace('%data%', self.contacts[contact].content));
+			$html.addClass('z3');
+			$html.find('.white-text').wrap('<a href="' + self.contacts[contact].url + '" target="_blank"></a>');
+			$('#topContacts, #footerContacts').append($html);
 		}
 		$('#topContacts').append('<li id="contactBtn" class="flex-item z5">&plus;</li>');
 
@@ -163,7 +163,7 @@ var bio = {
 
 		$(window)
 			.on('resize', function() {
-				viewWidth = $(window).width();
+				viewWidth = window.innerWidth;
 			})
 			.on('scroll', function() {
 				scrolled = true;
@@ -604,7 +604,7 @@ var projects = {
 			dates: '2014',
 			description: 'Extend <a href="http://dhtmlx.com" target="_blank">DHTMLX</a>, an open-source JavaScript '
 							+ 'component library, to create a daily work '
-							+ 'schedule by employee, by pulling current order data from WORKetc, the company\'s'
+							+ 'schedule by employee, by pulling current order data from WORKetc, the company\'s '
 							+ 'CRM, via PHP SOAP and AJAX calls to the WORKetc API.',
 			url: '',
 			skills: ['JavaScript', 'jQuery', 'PHP', 'MySQL'],
@@ -777,8 +777,7 @@ var locationData = {
 
 	[bio, work, projects, education].forEach(function(section) { section.display(); });
 
-	$('#mapDiv').append(googleMap);
-
+  	// Bootstrap tooltips for skill-levels and project icons
   	$('[data-toggle="tooltip"]').tooltip();
 
   	// style sheets of material

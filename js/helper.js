@@ -114,6 +114,8 @@ function initializeMap() {
     disableDefaultUI: true
   };
 
+  $('#mapDiv').append(googleMap);
+
   // This next line makes `map` a new Google Map JavaScript Object and attaches it to
   // <div id="map">, which is appended as part of an exercise late in the course.
   map = new google.maps.Map(document.querySelector('#map'), mapOptions);
@@ -187,7 +189,6 @@ function initializeMap() {
 
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
-      console.log(this);
       if(currWindow) currWindow.close();   // close any previously opened window
       infoWindow.open(map, this);
       currWindow = infoWindow;
@@ -253,11 +254,14 @@ Uncomment the code below when you're ready to implement a Google Map!
 */
 
 // Calls the initializeMap() function when the page loads
-window.addEventListener('load', initializeMap);
+if(typeof google !== 'undefined') {
 
-// Vanilla JS way to listen for resizing of the window
-// and adjust map bounds
-window.addEventListener('resize', function(e) {
-  // Make sure the map bounds get updated on page resize
-  map.fitBounds(mapBounds);
-});
+  window.addEventListener('load', initializeMap);
+
+  // Vanilla JS way to listen for resizing of the window
+  // and adjust map bounds
+  window.addEventListener('resize', function(e) {
+    // Make sure the map bounds get updated on page resize
+    map.fitBounds(mapBounds);
+  });
+}

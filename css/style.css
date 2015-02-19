@@ -147,7 +147,7 @@ hr {
   text-align: right;
   text-transform: uppercase;
   background: #fdfdfd;
-  padding: 15px;
+  padding: 0 15px;
   margin: 8px 0 0;
 }
 #navigation li {
@@ -155,7 +155,6 @@ hr {
   margin: 15px 5px;
 }
 #navigation li a {
-  font-size: 18px;
   color: rgba(0, 0, 0, 0.67);
 }
 #navigation li a:hover {
@@ -492,7 +491,7 @@ span {
   position: relative;
   top: -20px;
   left: -20px;
-  width: 30%;
+  width: 260px;
   margin: 0;
   color: #fff;
 }
@@ -511,6 +510,9 @@ span {
   }
 }
 @media only screen and (max-width:768px) {
+  #navigation {
+    font-size: 18px;
+  }
   #letsConnect {
     margin-top: 10%;
   }
