@@ -21,10 +21,7 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#~0.5.4",
-    "masonry": "~3.2.2",
     "bootstrap": "~3.3.2",
-    "grunt": "~0.4.5",
     "jquery-ui": "~1.11.2",
     "jquery": "~2.1.3"
   }
