@@ -74,6 +74,34 @@ var HTMLonlineURL = '<br><a href="#">%data%</a>';
 // added
 var HTMLonlineTitle = '<br><em>%data%</em>';
 
+// other reusable elements
+var HTMLcontainer = '<div class="container"></div>';
+var HTMLrow = '<div class="row"></div>';
+var HTMLdiv = '<div></div>';
+var HTMLmenu = '<ul id="navigation" class="z4 collapse"></ul>';
+var HTMLmenulink = '<li><a href="%href%">%title%</a></li>';
+var HTMLmenubtn = '<a id="menuBtn" href="#" data-toggle="collapse" data-target="#navigation"></a>';
+var HTMLmenubar = '<span class="bar"></span>';
+var HTMLcontactbtn = '<li id="contactBtn" class="flex-item z5">&plus;</li>';
+var HTMLcontactlink = '<a href="%data%" target="_blank"></a>';
+var HTMLcontacticon = '<span class="icon-large %class%"></span>';
+var HTMLskilllegend = '<ul class="skill-legend"></ul>';
+var HTMLskillstabs = '<ul id="skillsTabs" class="nav nav-tabs" role="tablist"></ul>';
+var HTMLskilltab = '<li><a href="#%id%" role="tab" data-toggle="tab">%data%</a></li>';
+var HTMLskillpane = '<div id="%id%" class="tab-pane" role="tabpanel"><ul></ul></div>';
+var HTMLskilllevel = '<li class="skill-level"><i %toggle% title="%name%"></i></li>';
+var HTMLlogos = '<div class="skill-logos"></div>';
+var HTMLworkduty = '<div class="work-duty col-sm-6 col-md-4"></div>';
+var HTMLdutyheading = '<h4 class="duty-heading">%data%</h4>';
+var HTMLdutysummary = '<ul class="duty-summary"></ul>';
+var HTMLmoretext = '<span class="moretext">&plus;</span>';
+var HTMLscrolltop = '<span class="scrollTop">&uarr;</span>';
+var HTMLspeechsvg = '<svg class="speech" height="40" width="100%" viewBox="0 0 100 40" preserveAspectRatio="none">'
+          + '   <polyline points="70,40 65,0 80,40"'
+            + '     style="fill:#90CAF9;stroke:white;stroke-width:0.5" />'
+          + '</svg>';
+var HTMLinfowindow = '<div class="location-data"><span class="location-text">%location%</span>%data%</div>';
+
 var internationalizeButton = '<button>Internationalize</button>';
 var googleMap = '<div id="map"></div>';
 
@@ -192,11 +220,7 @@ function initializeMap() {
     // or hover over a pin on a map. They usually contain more information
     // about a location.
     var infoWindow = new google.maps.InfoWindow({
-      content: '<div class="location-data">'
-                  + '<span class="location-text">'
-                  + name + '</span>'
-                  + locationData[name]
-                  + '</div>',
+      content: HTMLinfowindow.replace('%location%', name).replace('%data%', locationData[name]),
       maxWidth: 300
     });
 

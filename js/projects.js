@@ -112,105 +112,106 @@ var projects = {
 			skills: ['JavaScript', 'AngularJS', 'PHP', 'AMFPHP', 'MySQL', 'Bootstrap'],
 			images: []
 		}
-	],
-	display: function () {
-		var self = this,
-			$projects = $('#projects'),
-			$row = $('<div class="row"></div>');
-
-		self.projects.forEach(function(project) {
-
-			var $el = $(HTMLprojectStart);
-
-			$projects.append($el);
-			$el.addClass('col-sm-6 col-md-4 col-lg-3');
-
-			for(var key in project) {
-				if(Array.isArray(project[key])) {
-
-					project[key].forEach(function(val) {
-						var logoPos,
-							keyTitle = key.charAt(0).toUpperCase() + key.substr(1, key.length-2).toLowerCase(),
-							item = $(window['HTMLproject'+keyTitle].replace('%data%', val));
-
-						if(key === 'skills') {
-							// find logo position for each skills
-							// TODO:: store skills in common location so we don't have
-							// to loop through every time?
-							for(var category in bio.skills) {
-								bio.skills[category].forEach(function(skill) {
-									if(skill.name === val) logoPos = skill.logoPos;
-								});
-							}
-							item.find('img').css({
-									top: -logoPos*36*0.5 + 'px',
-									width: 50*0.5 + 'px'
-								})
-								.parent()
-									.css({
-										width: '31px',
-										height: 36*0.5 + 'px'
-									})
-									.attr({
-										title: val,
-										'data-toggle': 'tooltip'
-									});
-							$el.find('.date-text ').after(item);
-						} else {
-							$el.append(item);
-						}
-					});
-				} else if(key === 'url') {
-					if(project[key].length > 0) {
-						$el.find('a').attr('href', project[key]);
-					} else {
-						// remove <a> if url is blank
-						$el.find('h4').unwrap();
-					}
-				} else {
-					var keyTitle = key.charAt(0).toUpperCase() + key.substr(1).toLowerCase(),
-						item = $(window['HTMLproject'+keyTitle].replace('%data%', project[key]));
-
-					if(key === 'title') item.html('<h4>' + project[key] + '</h4>');
-					$el.append(item);
-				}
-			}
-			$logosCtr = $('<div class="skill-logos"></div>');
-			$el.find('.skill-logo').wrapAll($logosCtr);
-		});
-
-		$('.project-entry').wrapAll($row);
-		$row.wrap('<div class="container"></div>');
-
-		// Add blind animation for content reveal on longer paragraphs
-		$('.project-entry p').each(function() {
-			var $el = $(this),
-				$more = $('<span class="moretext">&plus;</span>');
-
-			if($el.get(0).scrollHeight > $el.height()) {
-				$el.addClass('truncated');
-				$el.append($more);
-				$more.click(function() {
-					var $span = $(this);
-						$p = $span.parent('p');
-					$p.css({
-						'position': 'absolute',
-						'top': $p.position().top,
-						'left': $p.position().left,
-						'width': $p.width(),
-						'padding-bottom': $p.hasClass('expanded') ? '0' : '20px',
-						'box-shadow': $p.hasClass('expanded') ? 'none' : '0px 20px 15px -10px rgba(0, 0, 0, 0.2)'
-					}).animate({
-						'height': $p.hasClass('expanded') ? '168px' : $p.get(0).scrollHeight
-					}, 100, 'easeInQuad', function() {
-						$p.css({
-							'position': $p.hasClass('expanded') ? 'absolute' : 'static'
-						});
-					});
-					$p.toggleClass('expanded');
-					$span.html($p.hasClass('expanded') ? '&minus;' : '&plus;')
-				});
-			}
-		});
-	}
+	]
 };
+
+projects.display = function () {
+	var self = this,
+		$projects = $('#projects'),
+		$row = $(HTMLrow);
+
+	self.projects.forEach(function(project) {
+
+		var $el = $(HTMLprojectStart);
+
+		$projects.append($el);
+		$el.addClass('col-sm-6 col-md-4 col-lg-3');
+
+		for(var key in project) {
+			if(Array.isArray(project[key])) {
+
+				project[key].forEach(function(val) {
+					var logoPos,
+						keyTitle = key.charAt(0).toUpperCase() + key.substr(1, key.length-2).toLowerCase(),
+						item = $(window['HTMLproject'+keyTitle].replace('%data%', val));
+
+					if(key === 'skills') {
+						// find logo position for each skills
+						// TODO:: store skills in common location so we don't have
+						// to loop through every time?
+						for(var category in bio.skills) {
+							bio.skills[category].forEach(function(skill) {
+								if(skill.name === val) logoPos = skill.logoPos;
+							});
+						}
+						item.find('img').css({
+								top: -logoPos*36*0.5 + 'px',
+								width: 50*0.5 + 'px'
+							})
+							.parent()
+								.css({
+									width: '31px',
+									height: 36*0.5 + 'px'
+								})
+								.attr({
+									title: val,
+									'data-toggle': 'tooltip'
+								});
+						$el.find('.date-text ').after(item);
+					} else {
+						$el.append(item);
+					}
+				});
+			} else if(key === 'url') {
+				if(project[key].length > 0) {
+					$el.find('a').attr('href', project[key]);
+				} else {
+					// remove <a> if url is blank
+					$el.find('h4').unwrap();
+				}
+			} else {
+				var keyTitle = key.charAt(0).toUpperCase() + key.substr(1).toLowerCase(),
+					item = $(window['HTMLproject'+keyTitle].replace('%data%', project[key]));
+
+				if(key === 'title') item.html('<h4>' + project[key] + '</h4>');
+				$el.append(item);
+			}
+		}
+		$logosCtr = $(HTMLlogos);
+		$el.find('.skill-logo').wrapAll($logosCtr);
+	});
+
+	$('.project-entry').wrapAll($row);
+	$row.wrap(HTMLcontainer);
+
+	// Add blind animation for content reveal on longer paragraphs
+	$('.project-entry p').each(function() {
+		var $el = $(this),
+			$more = $('<span class="moretext">&plus;</span>');
+
+		if($el.get(0).scrollHeight > $el.height()) {
+			$el.addClass('truncated');
+			$el.append($more);
+			$more.click(function() {
+				var $span = $(this);
+					$p = $span.parent('p');
+				$p.css({
+					'position': 'absolute',
+					'top': $p.position().top,
+					'left': $p.position().left,
+					'width': $p.width(),
+					'padding-bottom': $p.hasClass('expanded') ? '0' : '20px',
+					'box-shadow': $p.hasClass('expanded') ? 'none' : '0px 20px 15px -10px rgba(0, 0, 0, 0.2)'
+				}).animate({
+					'height': $p.hasClass('expanded') ? '168px' : $p.get(0).scrollHeight
+				}, 100, 'easeInQuad', function() {
+					$p.css({
+						'position': $p.hasClass('expanded') ? 'absolute' : 'static'
+					});
+				});
+				$p.toggleClass('expanded');
+				$span.html($p.hasClass('expanded') ? '&minus;' : '&plus;')
+			});
+		}
+	});
+}

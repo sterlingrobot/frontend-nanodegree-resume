@@ -3,13 +3,15 @@
 http://api.jquery.com/animate/
 
 http://www.google.com/design/spec/style/color.html#color-color-palette
+Getting interested in Material by Google, and like the design principles.
 
 http://www.w3schools.com/svg/svg_polyline.asp
+I haven't used SVG before but wanted a simple way to draw a triangle!  Seems like less
+overhead than canvas for something like that.
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat
 
 http://bower.io/
 
-http://gruntjs.com/
-
 http://csscomb.com/
+Helpful for ordering and formatting rules

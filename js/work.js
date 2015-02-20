@@ -85,42 +85,47 @@ var work = {
 				]
 			},
 		}
-	}],
-	display: function () {
-		var self = this,
-			$workExp = $('#workExperience'),
-			$row = $('<div class="row"></div>');
-
-		self.jobs.forEach(function(job) {
-
-			var $el = $(HTMLworkStart);
-			$workExp.append($el);
-
-			for(var key in job) {
-				var keyTitle = key.charAt(0).toUpperCase() + key.substr(1).toLowerCase();
-				if(Array.isArray(job[key])) {
-					$el.prepend(window['HTMLwork'+keyTitle].replace('%data%', job[key].join('<br>')));
-				} else if(key === 'description' && typeof job[key] !== 'string') {
-					for(var duty in job.description) {
-						var $workDuty = $('<div class="work-duty col-sm-6 col-md-4"></div>'),
-							hdg = '<h4 class="duty-heading">' + duty + '</h4>',
-							$summary = $('<ul class="duty-summary"></ul>');
-						job.description[duty].summaries.forEach(function(sum) {
-							$summary.append('<li>'+sum+'</li>');
-						});
-						$workDuty.append(hdg).append($summary);
-						$el.append($workDuty);
-					}
-				} else if(key === 'title') {
-					$el.find('a').append(window['HTMLwork'+keyTitle].replace('%data%', job[key]));
-				} else {
-					$el.append(window['HTMLwork'+keyTitle].replace('%data%', job[key]));
-				}
-			}
-			$el.find('.date-text').after('<hr>');
-		});
-
-		$('.work-entry').wrapAll($row);
-		$row.wrap('<div class="container"></div>');
-	}
+	}]
 };
+
+work.display = function () {
+
+	var self = this,
+		$workExp = $('#workExperience'),
+		$row = $(HTMLrow);
+
+	self.jobs.forEach(function(job) {
+
+		var $el = $(HTMLworkStart);
+		$workExp.append($el);
+
+		for(var key in job) {
+
+			var keyTitle = key.charAt(0).toUpperCase() + key.substr(1).toLowerCase();
+
+			if(Array.isArray(job[key])) {
+				$el.prepend(window['HTMLwork'+keyTitle].replace('%data%', job[key].join('<br>')));
+			} else if(key === 'description' && typeof job[key] !== 'string') {
+				for(var duty in job.description) {
+					var $workDuty = $(HTMLworkduty),
+						hdg = HTMLdutyheading.replace('%data%', duty),
+						$summary = $(HTMLdutysummary);
+					job.description[duty].summaries.forEach(function(sum) {
+						$summary.append('<li>'+sum+'</li>');
+					});
+					$workDuty.append(hdg).append($summary);
+					$el.append($workDuty);
+				}
+			} else if(key === 'title') {
+				$el.find('a').append(window['HTMLwork'+keyTitle].replace('%data%', job[key]));
+			} else {
+				$el.append(window['HTMLwork'+keyTitle].replace('%data%', job[key]));
+			}
+		}
+		$el.find('.date-text').after('<hr>');
+	});
+
+	$('.work-entry').wrapAll($row);
+	$row.wrap(HTMLcontainer);
+}
+

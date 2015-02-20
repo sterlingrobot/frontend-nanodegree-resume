@@ -31,8 +31,9 @@ var locationData = {
 	'Shenzhen, Guangdong, China': '<h4>ArtsMax</h4><p>In 2008, Cherry Tree searched for an alternate supplier as '
 									+ 'quality concerns and slow lead times jeopardized the outsourcing venture. '
 									+ 'I worked with ArtsMax for an intensive 6 week stint, developing a new line of '
-									+ 'eco-conscious EnergyStar fluorescent lighting fixtures made in bamboo.</p>',
-	  display: function() {
-	  	$('#mapDiv').append(googleMap);
-	  }
+									+ 'eco-conscious EnergyStar fluorescent lighting fixtures made in bamboo.</p>'
 };
+
+locationData.display = function() {
+	$('#mapDiv').append(googleMap);
+}

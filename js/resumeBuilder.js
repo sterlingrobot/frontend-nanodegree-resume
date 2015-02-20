@@ -1,7 +1,42 @@
 (function($) {
 
-	[bio, work, projects, education, locationData].forEach(function(section) { section.display(); });
+	var $menu = $(HTMLmenu),
+		$menuBtn = $(HTMLmenubtn);
 
+	[bio, work, projects, education, locationData].forEach(function(section) {
+		$menu.append(HTMLmenulink.replace('%href%', section.element).replace('%title%', section.title));
+		section.display();
+	});
+
+	$('body').prepend($menu).prepend($menuBtn);
+
+	for(var i=0; i < 3; i++) {
+		$menuBtn.append(HTMLmenubar);
+	}
+
+	$('body').on('click', function(e) {
+
+		if(e.target !== $menuBtn) {
+			if($menu.hasClass('in')) {
+				$menu.collapse('hide');
+			}
+		}
+	});
+
+	$('.scrollTop').on('click', function() {
+		$('body').animate({ scrollTop: 0 }, 500);
+	});
+
+	$('#navigation').on('click', 'a', function(e) {
+
+		var href = $(this).attr('href');
+
+		if(href === '#header') { bio.showContacts(); }
+		else $('html, body').animate({scrollTop: $(href).offset().top }, 500);
+
+		e.preventDefault();
+
+	});
   	// Bootstrap tooltips for skill-levels and project icons
   	$('[data-toggle="tooltip"]').tooltip();
 
