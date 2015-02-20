@@ -116,7 +116,6 @@ bio.display = function() {
 	$colRight.append(HTMLskillsStart);
 
 	$('#main').prepend($banner);
-	$('#main').prepend(HTMLscrolltop);
 	$('#header').append($colLeft).append($colRight);
 	$('#header > .col-sm-4, #header > .col-sm-8').wrapAll(HTMLrow);
 	$('#skills').addClass('z2')
@@ -148,30 +147,9 @@ bio.display = function() {
 
 	//**** EVENT HANDLING  ****//
 
-	$(window)
-		.on('resize', function() {
-			viewWidth = window.innerWidth;
-		})
-		.on('scroll', function() {
-			scrolled = true;
-		})
-
-	setInterval(function() {
-		var scrollY = window.scrollY,
-			$scrollTop = $('.scrollTop');
-		if(scrolled) {
-			if(scrollY === 0) {
-				$scrollTop.fadeOut()
-					.removeClass('shown');
-				return;
-			}
-			if($scrollTop.hasClass('shown')) return;
-			if(scrollY > 200) {
-				$scrollTop.fadeIn()
-					.addClass('shown');
-			}
-		}
-	}, 1000);
+	$(window).on('resize', function() {
+		viewWidth = window.innerWidth;
+	});
 
 
 	$('#contactBtn').on('click', function() { bio.showContacts(); });

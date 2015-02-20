@@ -187,7 +187,7 @@ projects.display = function () {
 	// Add blind animation for content reveal on longer paragraphs
 	$('.project-entry p').each(function() {
 		var $el = $(this),
-			$more = $('<span class="moretext">&plus;</span>');
+			$more = $(HTMLmoretext);
 
 		if($el.get(0).scrollHeight > $el.height()) {
 			$el.addClass('truncated');
