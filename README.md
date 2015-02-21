@@ -1,4 +1,4 @@
-### See the completed project at [http://sterlingrobot.github.io/frontend-nanodegree-resume](http://sterlingrobot.github.io/frontend-nanodegree-resume/)
+**See the completed project at** [http://sterlingrobot.github.io/frontend-nanodegree-resume](http://sterlingrobot.github.io/frontend-nanodegree-resume/)
 
 ## How do I complete this project?
 
