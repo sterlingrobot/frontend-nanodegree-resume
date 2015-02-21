@@ -120,6 +120,8 @@ projects.display = function () {
 		$projects = $('#projects'),
 		$row = $(HTMLrow);
 
+	$projects.addClass('z3 main-card');
+
 	self.projects.forEach(function(project) {
 
 		var $el = $(HTMLprojectStart);

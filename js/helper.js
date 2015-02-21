@@ -16,20 +16,20 @@ var HTMLheaderName = '<h1 id="name">%data%</h1>';
 var HTMLheaderRole = '<span>%data%</span>';  // removed <hr>
 
 var HTMLcontactGeneric = '<li class="flex-item"><span class="orange-text">'
-                  +'%contact%</span><span class="white-text">%data%</span></li>';
+                  +'%contact%</span><span class="data-text">%data%</span></li>';
 var HTMLmobile = '<li class="flex-item"><span class="orange-text">mobile</span>'
-                  +'<span class="white-text">%data%</span></li>';
+                  +'<span class="data-text">%data%</span></li>';
 var HTMLemail = '<li class="flex-item"><span class="orange-text">email</span>'
-                  +'<span class="white-text">%data%</span></li>';
+                  +'<span class="data-text">%data%</span></li>';
 // changed to linkedin
 var HTMLlinkedin = '<li class="flex-item"><span class="orange-text">linkedin</span>'
-                    +'<span class="white-text">%data%</span></li>';
+                    +'<span class="data-text">%data%</span></li>';
 var HTMLgithub = '<li class="flex-item"><span class="orange-text">github</span>'
-                    +'<span class="white-text">%data%</span></li>';
+                    +'<span class="data-text">%data%</span></li>';
 var HTMLblog = '<li class="flex-item"><span class="orange-text">blog</span>'
-                    +'<span class="white-text">%data%</span></li>';
+                    +'<span class="data-text">%data%</span></li>';
 var HTMLlocation = '<li class="flex-item"><span class="orange-text">location</span>'
-                    +'<span class="white-text">%data%</span></li>';
+                    +'<span class="data-text">%data%</span></li>';
 
 var HTMLbioPic = '<div class="biopic"><img src="%data%"></div>';
 // changed to div
@@ -39,12 +39,13 @@ var HTMLWelcomeMsg = '<div class="welcome-message">%data%</div>';
 var HTMLskillsStart = '<div id="skills" class="flex-box">'
                         +'<h3 id="skillsH3">Skills at a Glance</h3></div>';
 var HTMLskills = '<li class="flex-item">'
-                  +'<span class="white-text">%data%</span>'
+                  +'<span class="data-text">%data%</span>'
                   +'<div class="skill-logo"><img src="images/logos-sprite.jpg"></div>'
                   +'<div class="skill-proficiency"></div></li>';
 
 var HTMLworkStart = '<div class="work-entry"></div>';
-var HTMLworkEmployer = '<a href="#">%data%</a>'; // moved closing tag
+// moved closing tag
+var HTMLworkEmployer = '<a href="#">%data%</a>';
 var HTMLworkTitle = ' - %data%';
 var HTMLworkDates = '<div class="date-text">%data%</div>';
 var HTMLworkLocation = '<div class="location-text">%data%</div>';
@@ -58,7 +59,8 @@ var HTMLprojectSkill = '<div class="skill-logo"><img src="images/logos-sprite.jp
 var HTMLprojectImage = '<img src="%data%">';
 
 var HTMLschoolStart = '<div class="education-entry"></div>';
-var HTMLschoolName = '<a href="#">%data%</a>';  // moved closing tag
+// moved closing tag
+var HTMLschoolName = '<a href="#">%data%</a>';
 var HTMLschoolDegree = ' - %data%';
 var HTMLschoolDates = '<div class="date-text">%data%</div>';
 var HTMLschoolLocation = '<div class="location-text">%data%</div>';
@@ -68,11 +70,11 @@ var HTMLschoolMajors = '<br><em>Major: %data%</em>';
 var HTMLonlineClasses = '<h3>Online Classes</h3>';
 // changed name, moved closing tag
 var HTMLonlineName = '<a href="#">%data%</a>';
-// var HTMLonlineTitle = ' - %data%';
+// wrapped in em
+var HTMLonlineTitle = '<br><em>%data%</em>';
 var HTMLonlineDates = '<div class="date-text">%data%</div>';
 var HTMLonlineURL = '<br><a href="#">%data%</a>';
-// added
-var HTMLonlineTitle = '<br><em>%data%</em>';
+
 
 // other reusable elements
 var HTMLcontainer = '<div class="container"></div>';
@@ -237,6 +239,7 @@ function initializeMap() {
     // fit the map to the new marker
     map.fitBounds(bounds);
     // center the map
+    // Opting to center the map on Bozeman instead
     map.setCenter(new google.maps.LatLng(56.64226565583054, -123.18580179218753)); //  bounds.getCenter()
   }
 

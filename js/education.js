@@ -31,6 +31,8 @@ education.display = function () {
 		$colRight = $(HTMLdiv).addClass('col-sm-7'),
 		$row = $(HTMLrow);
 
+	$education.addClass('z1 main-card');
+
 	self.schools.forEach(function(school) {
 
 		var $el = $(HTMLschoolStart);

@@ -100,7 +100,7 @@ bio.display = function() {
 	for(var contact in self.contacts) {
 		var $html = $(window['HTML'+contact].replace('%data%', self.contacts[contact].content));
 		$html.addClass('z3');
-		$html.find('.white-text').wrap(HTMLcontactlink.replace('%data%', self.contacts[contact].url));
+		$html.find('.data-text').wrap(HTMLcontactlink.replace('%data%', self.contacts[contact].url));
 		$('#topContacts, #footerContacts').append($html);
 	}
 	$('#topContacts').append($contactBtn);
@@ -157,7 +157,7 @@ bio.display = function() {
 	$('#topContacts li:not(#contactBtn)').each(function() {
 		var $el = $(this),
 			$label = $el.find('.orange-text'),
-			$content = $el.find('.white-text'),
+			$content = $el.find('.data-text'),
 			txt = $label.text(),
 			iconClass = 'icon-' + bio.contacts[txt].icon,
 			$icon = $(HTMLcontacticon.replace('%class%', iconClass));
@@ -213,7 +213,7 @@ bio.display = function() {
 	function expandContact() {
 		var $el2 = $(this),
 			$label2 = $el2.find('.orange-text'),
-			$content2 = $el2.find('.white-text');
+			$content2 = $el2.find('.data-text');
 		if($el2.hasClass('expanded')) {
 			$el2.each(collapseContact);
 			return;
@@ -235,7 +235,7 @@ bio.display = function() {
 		var el3 = $(this),
 			isExp = el3.hasClass('expanded'),
 			label3 = el3.find('.orange-text'),
-			content3 = el3.find('.white-text'),
+			content3 = el3.find('.data-text'),
 			icon3 = el3.find('.icon-large');
 		el3.animate({
 				width: '60px',

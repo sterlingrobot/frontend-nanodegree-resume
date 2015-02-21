@@ -35,5 +35,7 @@ var locationData = {
 };
 
 locationData.display = function() {
-	$('#mapDiv').append(googleMap);
+
+	$('#mapDiv').append(googleMap).addClass('z1 main-card');
+
 }

@@ -174,7 +174,7 @@ hr {
   margin-top: 0;
 }
 
-#topContacts li.flex-item a .white-text {
+#topContacts li.flex-item a .data-text {
   color: #ff9800;
 }
 
@@ -194,7 +194,7 @@ hr {
   box-shadow: none !important;
 }
 
-#footerContacts .white-text {
+#footerContacts .data-text {
   color: #fff;
 }
 
@@ -330,7 +330,7 @@ hr {
   height: 50px;
 }
 
-#skills .white-text {
+#skills .data-text {
   font-size: 80%;
   margin: 10px;
 }
@@ -376,15 +376,15 @@ hr {
   padding: 0;
 }
 
-#main > div.main-card: nth-child(even) {
+#main > div.main-card:nth-child(even) {
   left: -2%;
 }
 
-#main > div.main-card: nth-child(odd) {
+#main > div.main-card:nth-child(odd) {
   left: 2%;
 }
 
-.main-card > div: last-child, .main-card > div.work-entry > div.work-duty: last-child {
+.main-card > div:last-child, .main-card > div.work-entry > div.work-duty:last-child {
   margin-bottom: 50px;
 }
 
@@ -494,6 +494,19 @@ hr {
   padding: 0;
 }
 
+#map {
+  display: block;
+  height: 90%;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+#mapDiv {
+  clear: both;
+  height: 600px;
+  padding-bottom: 5%;
+}
+
 .orange {
   background-color: #ff9800;
 }
@@ -502,7 +515,7 @@ hr {
   color: #ff9800;
 }
 
-.white-text {
+.data-text {
   font-weight: bold;
   color: #333;
 }
@@ -513,7 +526,7 @@ hr {
   background-color: #fbfbfb;
 }
 
-.dark-gray {
+.dark-blue {
   background-color: #1565c0;
 }
 
@@ -535,11 +548,6 @@ hr {
 
 ul {
   list-style-type: none;
-}
-
-img {
-  /* padding: 10px;
-  */
 }
 
 /* Bar chart stuff */
@@ -575,81 +583,68 @@ span {
 @media only screen and (max-width: 1024px) {
   #letsConnect {
     margin-top: 5%;
-}
+  }
 
 }
 
 @media only screen and (max-width: 900px) {
   .biopic {
     width: 112vw;
-}
+  }
 
-.biopic img {
-  max-width: 120%;
-  margin-left: -30%;
-}
+  .biopic img {
+    max-width: 120%;
+    margin-left: -30%;
+  }
 
 }
 
 @media only screen and (max-width: 768px) {
+
   #navigation {
     font-size: 18px;
-}
+  }
 
-#letsConnect {
-  margin-top: 10%;
-}
+  #letsConnect {
+    margin-top: 10%;
+  }
 
-#header {
-  min-height: 500px;
-  padding: 0;
-}
+  #header {
+    min-height: 500px;
+    padding: 0;
+  }
 
-#skills {
-  top: 0;
-  left: 7%;
-  width: 86%;
-  padding: 0;
-}
+  #skills {
+    top: 0;
+    left: 7%;
+    width: 86%;
+    padding: 0;
+  }
 
-.project-entry {
-  margin-bottom: 25px;
-  padding-bottom: 25px;
-  border-bottom: 1px solid #ccc;
-}
+  .project-entry {
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #ccc;
+  }
 
-.project-entry p {
-  height: auto;
-}
+  .project-entry p {
+    height: auto;
+  }
 
-.project-entry p .moretext {
-  display: none;
-}
+  .project-entry p .moretext {
+    display: none;
+  }
 
-.main-card {
-  left: 0 !important;
-  margin: 10px auto;
-}
+  .main-card {
+    left: 0 !important;
+    margin: 10px auto;
+  }
 
-}
-
-#map {
-  display: block;
-  height: 90%;
-  margin-right: 5%;
-  margin-left: 5%;
-}
-
-#mapDiv {
-  clear: both;
-  height: 600px;
-  padding-bottom: 5%;
 }
 
 @media only screen and (min-width: 768px) {
   #skillsH3, .biopic, .welcome-message, .speech {
     display: block;
-}
+  }
 
 }
-

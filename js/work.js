@@ -94,6 +94,8 @@ work.display = function () {
 		$workExp = $('#workExperience'),
 		$row = $(HTMLrow);
 
+	$workExp.addClass('z1 main-card');
+
 	self.jobs.forEach(function(job) {
 
 		var $el = $(HTMLworkStart);
