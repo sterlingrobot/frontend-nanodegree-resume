@@ -21,7 +21,7 @@ var bio = {
 	      },
 	      linkedin: {
 	      	content: 'Tor\'s Profile',
-	      	url: 'http://www.linkedin.com/pub/tor-gilbertson',
+	      	url: 'https://www.linkedin.com/profile/view?id=224046476',
 	      	icon: 'linked-in'
 	      },
 	      location: {
