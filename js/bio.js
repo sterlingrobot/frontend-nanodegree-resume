@@ -66,7 +66,7 @@ var bio = {
 			{ name: 'Git', logoPos: 19, proficiency: 4 },
 			{ name: 'Bower', logoPos: 21, proficiency: 3 },
 			{ name: 'Grunt', logoPos: 22, proficiency: 2 },
-			{ name: 'Gulp', logoPos: 23, proficiency: 2 },
+			{ name: 'Gulp', logoPos: 23, proficiency: 1 },
 		]
 	},
 	biopic: 'images/bio.jpg'

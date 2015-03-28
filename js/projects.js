@@ -111,6 +111,18 @@ var projects = {
 			url : 'http://www.cherrytreedesign.com/furnishings/flat-screen-tv-cabinets.php',
 			skills: ['JavaScript', 'AngularJS', 'PHP', 'AMFPHP', 'MySQL', 'Bootstrap'],
 			images: []
+		},
+		{
+			title: 'HTML5 Arcade Game',
+			dates: '2015 (development)',
+			description: 'An HTML5 and JavaScript adaptation of a classic arcade game, created for Udacity\'s '
+							+ 'Front End Web Developer Nanodegree.  Written in AMD pattern with '
+							+ '<a href="http://requirejs.org" target="_blank">RequireJS</a>, and utilizing '
+							+ 'Object-Oriented JavaScript inheritance.  Uses Git for version control, Bower '
+							+ 'for package management and Grunt to automate linting tasks.',
+			url: 'https://github.com/sterlingrobot/arcade-game',
+			skills: ['HTML5', 'JavaScript', 'Git', 'Bower', 'Grunt'],
+			images: []
 		}
 	]
 };
