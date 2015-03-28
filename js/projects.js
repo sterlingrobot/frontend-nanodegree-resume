@@ -121,7 +121,10 @@ projects.display = function () {
 		$row = $(HTMLrow);
 
 	$projects.addClass('z3 main-card');
-
+	// sort projects by dates, descending
+	self.projects.sort(function(a,b) {
+		return parseInt(a.dates) > parseInt(b.dates) ? -1 : 1;
+	})
 	self.projects.forEach(function(project) {
 
 		var $el = $(HTMLprojectStart);
@@ -216,4 +219,4 @@ projects.display = function () {
 			});
 		}
 	});
-}
+};

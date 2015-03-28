@@ -2,7 +2,7 @@ var bio = {
 	title: 'Contact',
 	element: '#header',
 	name: 'Tor Gilbertson',
-	role: 'Web Developer',
+	role: 'Designer | Developer',
 	contacts: {
 	      mobile: {
 	      	content: '(406) 624-9775',
@@ -30,17 +30,10 @@ var bio = {
 	      	icon: 'map-marker'
 	      }
   	},
-	welcomeMessage: 'I look forward to honing my web development skills within a team environment '
+	welcomeMessage: 'I look forward to creating engaging, interactive designs within a team environment '
 					+ 'in a challenging and rewarding position that utilizes my creative problem solving '
 					+ 'capabilities and design acumen.',
 	skills: {
-		'Coding': [
-			{ name: 'HTML5', logoPos: 5, proficiency: 4 },
-			{ name: 'CSS3', logoPos: 6, proficiency: 3 },
-			{ name: 'JavaScript', logoPos: 4, proficiency: 4 },
-			{ name: 'PHP', logoPos: 0, proficiency: 4 },
-			{ name: 'ActionScript3', logoPos: 15, proficiency: 4 }
-		],
 		'Design': [
 			{ name: 'Photoshop', logoPos: 9, proficiency: 5 },
 			{ name: 'Illustrator', logoPos: 10, proficiency: 5 },
@@ -48,6 +41,13 @@ var bio = {
 			{ name: 'InDesign', logoPos: 11, proficiency: 4 },
 			{ name: 'Flash', logoPos: 12, proficiency: 4 },
 			{ name: 'Flash Builder', logoPos: 14, proficiency: 3 }
+		],
+		'Coding': [
+			{ name: 'HTML5', logoPos: 5, proficiency: 4 },
+			{ name: 'CSS3', logoPos: 6, proficiency: 3 },
+			{ name: 'JavaScript', logoPos: 4, proficiency: 4 },
+			{ name: 'PHP', logoPos: 0, proficiency: 4 },
+			{ name: 'ActionScript3', logoPos: 15, proficiency: 4 }
 		],
 		'DB & CMS': [
 			{ name: 'MySQL', logoPos: 1, proficiency: 4 },

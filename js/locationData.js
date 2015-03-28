@@ -20,10 +20,11 @@ var locationData = {
 							+ 'then I joined a custom framing shop, which allowed me to utilize some artistic skills. '
 							+ ' Most importantly though, I met my lovely wife there. We just celebrated 10 years of '
 							+ 'marriage!</p>',
-	'Zhongshan, Guangdong, China': '<h4>Huaxia Wood Lighting</h4><p>From 2006 - 2011, Cherry Tree Design worked with '
+	'Guangdong, China': '<h4>You get what you <em>Inspect</em></h4><p>From 2006 - 2011, Cherry Tree Design worked with '
 									+ 'several Chinese factories to produce our line of hardwood lighting and mirrors. '
-									+ 'I coordinated with our agents and the factory to troubleshoot design, '
-									+ 'construction and sourcing challenges, keeping a close eye on quality.</p>',
+									+ 'I coordinated with our agents and the factories to develop new product designs, '
+									+ 'troubleshoot construction and sourcing challenges, oversee quality and '
+									+ 'consistency, and negotiate pricing terms.</p>',
 	'Zhuhai, Guangdong, China' : '<h4>Comfort Electronics</h4><p>Cherry Tree Design\'s third factory partner '
 									+ 'introduced new capabilities with exotic wood veneers and touch-dimmable LED '
 									+ 'lamping. I worked directly with the lead designer to incorporate these elements '
