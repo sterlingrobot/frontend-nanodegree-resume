@@ -6,6 +6,7 @@ var work = {
 		title: 'General Manager',
 		location: ['Bozeman, Montana', 'Guangdong, China'],
 		dates: '2008-present',
+		url: 'http://www.cherrytreedesign.com',
 		description: {
 			'Overview' : {
 				summaries : [
@@ -130,6 +131,8 @@ work.display = function () {
 				}
 			} else if(key === 'title') {
 				$el.find('a').append(window['HTMLwork'+keyTitle].replace('%data%', job[key]));
+			} else if(key === 'url') {
+				$el.find('a').attr('href', job[key]);
 			} else {
 				$el.append(window['HTMLwork'+keyTitle].replace('%data%', job[key]));
 			}
