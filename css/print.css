@@ -1,0 +1,258 @@
+h1 {
+	font-size: 24px;
+	margin-top: 0;
+}
+h2,
+#banner span {
+	font-size: 16px;
+	letter-spacing: normal;
+}
+h3 {
+	font-size: 14px;
+}
+h4 {
+	font-size: 12px;
+}
+p,
+li {
+  font-size: 10px;
+  line-height: 16px;
+}
+#banner {
+	padding: 0;
+	border-bottom: 1px solid #ccc;
+}
+#topContacts {
+	padding: 0;
+}
+#topContacts li.flex-item {
+  	opacity: 1.0;
+  	width: 100%;
+	top: -30px;
+	right: 0;
+	text-align: right;
+}
+#topContacts > li.flex-item:nth-child(2) {
+	top: -15px;
+}
+#topContacts li.flex-item > span.icon-large {
+	display: none;
+}
+#topContacts > li.flex-item:nth-child(1) a .data-text,
+#topContacts > li.flex-item:nth-child(2) a .data-text {
+	display: block !important;
+	visibility: visible !important;
+}
+#topContacts li.flex-item a[href]:after {
+    content: none !important;
+}
+a[href]:after {
+    font-size: 10px;
+}
+#menuBtn,
+#contactBtn,
+#navigation,
+#mapDiv,
+.scrollTop {
+	display: none !important;
+}
+#header {
+	min-height: 0;
+	padding: 0 20px;
+}
+#header .row > .col-sm-4 {
+	display: none;
+}
+#header .row > .col-sm-8 {
+	padding: 0;
+	width: 100%;
+}
+#skills {
+	position: static;
+	padding: 0;
+}
+#skillsH3 {
+	display: block;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+	font-weight: 100;
+}
+#skillsTabs li a {
+	padding-bottom: 0;
+	font-weight: bold;
+}
+#skillsTabs li.active a {
+	border-bottom-color: transparent;
+}
+#skills .tab-content {
+	margin: 0;
+	padding: 0;
+	min-height: 0;
+	display: inherit;
+}
+#skills .tab-content > .tab-pane {
+	display: inline-block;
+	visibility: visible;
+	width: 20%;
+	text-align: center;
+}
+#skills .data-text {
+	margin: 3px 0;
+}
+#skills .skill-proficiency {
+	display: none;
+}
+#skills li.flex-item {
+	height: 12px;
+}
+.skill-legend {
+	display: none;
+}
+.skill-level {
+	/*height: auto;*/
+}
+.main-card {
+	padding: 5px;
+	left: 0 !important;
+  	margin: 0;
+  	width: 100%;
+}
+.main-card > div:last-child,
+.main-card > div.work-entry > div.work-duty:last-child {
+	margin-bottom: 0;
+}
+.main-card h2 {
+  margin: 0 0 5px;
+}
+.work-entry > a {
+  font-size: 14px;
+}
+.work-entry > em {
+  font-size: 11px;
+  display: inline-block;
+}
+.work-entry,
+.project-entry,
+.education-entry {
+	min-height: 0;
+	margin-bottom: 5px;
+	padding-bottom: 0;
+}
+.work-entry hr {
+	margin-bottom: 5px;
+}
+.work-duty {
+	width: 50%;
+	padding: 0;
+	float: left;
+}
+.duty-heading {
+	margin-top: 5px;
+}
+.skill-logo {
+	display: none;
+}
+#projects > .row {
+    display: -ms-flexbox;
+    display: flex;
+        flex-direction: column;
+
+    height: 720px;
+
+    -ms-flex-direction: column;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+}
+.project-entry {
+	width: 50%;
+	/*float: left;*/
+
+}
+.project-entry > a {
+	margin-top: 0;
+}
+.project-entry > a:after {
+	display: block;
+}
+.project-entry h4 {
+	font-weight: bold;
+	display: inline;
+}
+.project-entry p {
+	height: auto;
+	border: none !important;
+}
+.project-entry p .moretext,
+.project-entry p br  {
+	display: none;
+}
+.date-text,
+.location-text {
+  font-size: 10px;
+}
+.project-entry .date-text {
+  float: right;
+  top: 0;
+  position: absolute;
+  right: 30px;
+}
+.education-entry {
+	font-size: 10px;
+	width: 50%;
+	float: left;
+	margin: 0;
+}
+.education-entry a {
+	margin-top: 3px;
+}
+.education-entry .date-text,
+.education-entry .location-text,
+.education-entry br {
+	display: none;
+}
+.education-entry em:before,
+.education-entry em br:before {
+	content: ', ';
+}
+.education-entry em:first-of-type:before {
+	content: none;
+}
+.online-entries h3 {
+	display:none;
+}
+.online-entries > .education-entry:last-child {
+	float: right;
+}
+#letsConnect {
+	margin-top: 15px;
+}
+#letsConnect,
+#letsConnect h2 {
+	position: static;
+	width: auto;
+	padding: 0;
+}
+#letsConnect h2 {
+	text-align: left;
+}
+#footerContacts > li.flex-item {
+	width: 50%;
+	text-align: left;
+	margin-bottom: 5px;
+	float: left;
+}
+#footerContacts > li.flex-item:last-child {
+	display: none;
+}
+#footerContacts > li.flex-item .orange-text {
+	display: inline;
+}
+#footerContacts > li.flex-item a {
+	margin-top: 0;
+}
+#footerContacts > li.flex-item:nth-child(1) a[href]:after,
+#footerContacts > li.flex-item:nth-child(2) a[href]:after {
+	content: none !important;
+}

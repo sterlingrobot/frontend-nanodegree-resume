@@ -3,11 +3,12 @@ var work = {
 	element: '#workExperience',
 	jobs: [{
 		employer: 'Cherry Tree Design',
-		title: 'General Manager',
+		title: ['General Manager', 'Director of Product Development', 'Lead Designer'],
 		location: ['Bozeman, Montana', 'Guangdong, China'],
 		dates: '2008-present',
 		url: 'http://www.cherrytreedesign.com',
 		description: {
+/*
 			'Overview' : {
 				summaries : [
 					'Develop and maintain consistency and continuity among marketing, sales and the final product '
@@ -16,28 +17,35 @@ var work = {
 					'Organize company financial data, budgeting, reporting and analysis'
 				]
 			},
-			'Marketing': {
+*/
+			'Design & Marketing': {
 				summaries: [
-					'Lead website design, layout, development, testing and content creation',
+					'Design and execute all visual communications including website design, development and content, '
+						+ 'catalogs, specifications, instructions and promotional materials, maintaining usability '
+						+ 'functionality and consistency among various media',
 					'Direct AdWords campaign management, spend and focus',
 					'Utilize Google Analytics to analyze website performance and troubleshoot underperforming assets',
-					'Design and direct all visual communications including catalogs, specifications, instructions, '
-						+ 'web assets and promotional materials, maintaining continuity among messaging',
 					'Develop effective, actionable email campaigns, and maintain internal mailing lists',
 					'Design trade show installations, signage and materials'
 				]
 			},
-			'Systems & Development': {
+			'Web Development': {
 				summaries: [
-					'Develop effective web-based admininstrative tools for customer relations, invoicing, staff '
-						+ 'and production scheduling, inventory management and purchasing',
-					'Integrate payment processing solutions via Authorize.net and PayPal, ensuring PCI Compliance',
+					'Create several web applications for the company website to facilitate customer search, design,'
+						+ 'and quoting of Cherry Tree Design product lines',
+					'Develop effective web-based admininstrative tools for customer relations, quoting and '
+						+ 'invoicing, staffing and production scheduling, inventory management and purchasing',
 					'Migrate antiquated software to cloud-based SaaS providers: Google Apps, WORKetc CRM, '
-						+ 'Xero Bookkeeping, and ADP Payroll',
+						+ 'Xero Bookkeeping, and ADP Payroll and develop integrations among services',
+					// 'Write style and script snippets to tailor third-party web applications to CTD workfows',
+					'Integrate payment processing solutions via Authorize.net and PayPal, ensuring PCI compliance',
+/*
 					'Manage company IT infrastructure, LAN, router, switch and wireless access point',
 					'Manage company VPS, web hosting, SSL and domain registration'
+*/
 				]
 			},
+/*
 			'Sales & Customer Service': {
 				summaries : [
 					'Oversee all aspects of sales and office work',
@@ -60,17 +68,19 @@ var work = {
 					['Production procedures, technical specs, instructions for customers']
 				]
 			},
+*/
 			'Product Development': {
 				summaries : [
+/*
 					'Analyze competition and industry trends, looking for new opportunities to bring affordable, '
 						+ 'hand crafted wood products to a national market',
+*/
 					'Design and engineer dozens of new hardwood lighting and mirror accessories, working with '
 						+ 'overseas factories to ensure quality and consistency',
-					'Develop several new product lines within the hardwood screening and sliding door niche '
+					'Develop several new screening and sliding door product lines '
 						+ 'in traditional Japanese, Contemporary and Arts & Crafts styles',
-					'Produce 3D modeling and rendering of product designs in Sketchup',
-					'Determine costing and pricing, maximizing profitability while being sensitive to customer '
-						+ 'budget',
+					'Produce 3D modeling and renderings of product designs in Sketchup',
+					'Determine costing and pricing, balancing profitability and competitiveness',
 					'Optimize production methods and workflows within standardized quality expectations'
 				]
 			},
@@ -95,6 +105,22 @@ var work = {
 				]
 			}
 		}
+	},
+	{
+		employer: 'Freelance Design',
+		title: '',
+		location: ['Bozeman, Montana'],
+		dates: '',
+		url: '',
+		description: {
+			'From Both Sides: Curtis Vs. Daines' : {
+				summaries: [
+					'Create motion graphics in Photoshop for a Montana PBS profile piece on the 2014 '
+					+ 'Montana U.S. Senate Election, produced by Story Architech.'
+				]
+			}
+		}
+
 	}]
 };
 
@@ -116,7 +142,9 @@ work.display = function () {
 			var keyTitle = key.charAt(0).toUpperCase() + key.substr(1).toLowerCase();
 
 			if(Array.isArray(job[key])) {
-				$el.prepend(window['HTMLwork'+keyTitle].replace('%data%', job[key].join('<br>')));
+				job[key].forEach(function(val) {
+					$el.append(window['HTMLwork'+keyTitle].replace('%data%', val));
+				});
 			} else if(key === 'description' && typeof job[key] !== 'string') {
 				for(var duty in job.description) {
 					var $workDuty = $(HTMLworkduty),
@@ -126,11 +154,9 @@ work.display = function () {
 						$summary.append('<li>'+sum+'</li>');
 					});
 					$workDuty.append(hdg).append($summary);
-					if(duty === 'Overview') $workDuty.removeClass('col-sm-6 col-md-4');
+					$workDuty.removeClass('col-md-4');
 					$el.append($workDuty);
 				}
-			} else if(key === 'title') {
-				$el.find('a').append(window['HTMLwork'+keyTitle].replace('%data%', job[key]));
 			} else if(key === 'url') {
 				$el.find('a').attr('href', job[key]);
 			} else {

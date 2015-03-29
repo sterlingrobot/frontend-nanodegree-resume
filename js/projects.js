@@ -5,7 +5,7 @@ var projects = {
 		{
 			title: 'Modular Partition Configurator',
 			dates: '2010',
-			description: 'An ActionScript3 Flash application to select and configure a partition system, from '
+			description: 'An ActionScript3 Flash application to select and configure a partition system from '
 							+ 'hundreds of possible configurations and product options.  Use Flash remoting to '
 							+ 'fetch product data from a MySQL database.  Leverage Flash timeline '
 							+ 'animation with 3D Sketchup to create rotatable models of partitions.',
@@ -17,11 +17,11 @@ var projects = {
 			title: 'Space Creator Shoji Configurator',
 			dates: '2011',
 			description: 'An ActionScript3 Flash application to select, design and configure options for '
-							+ 'Cherry Tree Design\'s In-Stock and Custom Shoji products, which allowed users to '
-							+ 'save multiple projects to a database, and allowed administrators to access customer '
-							+ 'projects, calculate pricing, send an HTML email quote sheet.  Customer requests for '
-							+ 'quotes are also passed into the company\'s Customer Relationship Management service, '
-							+ 'WORKetc, by means of a RESTful web service API, via the PHP SOAP extension module.',
+							+ 'CTD\'s In-Stock and Custom Shoji products, allowing users to '
+							+ 'save projects, and administrators to access customer '
+							+ 'projects, calculate pricing, and send an HTML email quote.  Requests for '
+							+ 'quotes are passed into the company\'s Customer Relationship Management service, '
+							+ 'WORKetc, by means of a RESTful web service API, via the PHP SOAP extension.',
 			url: 'http://www.cherrytreedesign.com/shoji/SpaceCreator2.3.php',
 			skills: ['Flash', 'Flash Builder', 'ActionScript3', 'AMFPHP', 'PHP', 'MySQL'],
 			images: []
@@ -47,28 +47,12 @@ var projects = {
 			images: []
 		},
 		{
-			title: 'CTD Website Redesign',
-			dates: '2014',
-			description: 'Update Cherry Tree Design\'s company website, its primary means of reaching potential '
-							+ 'customers, in order to create a responsive designed, interactive and engaging space '
-							+ 'for interested homeowners, designers and architects to learn, plan, design and price '
-							+ 'Cherry Tree Design stock and custom hardwood shoji and doors.<br>Using Bootstrap and '
-							+ 'jQuery, provide mobile friendly, intuitive tools and resources where customers '
-							+ 'and sales staff can coordinate and plan new construction and remodeling projects.'
-							+ '<br>Integrate with the company Customer Relationship Management platform, WORKetc, '
-							+ 'to create web forms and quoting tools that feed customer and product data directly '
-							+ 'into WORKetc, avoiding unnecessary data entry.',
-			url: '',
-			skills: ['HTML5', 'CSS3', 'JavaScript', 'jQuery', 'Bootstrap', 'WordPress', 'PHP', 'MySQL'],
-			images: []
-		},
-		{
 			title: 'CTD Admin Purchase Orders',
 			dates: '2014',
 			description: 'Extend <a href="http://xataface.com" target="_blank">Xataface</a>, an open-source web '
 							+ 'based GUI for MySQL in JavaScript and PHP to create, '
 							+ 'update and delete company purchase orders and related materials and supplies line '
-							+ 'items.<br>Integrate with Xero, a cloud accounting SaaS, for creating and updating '
+							+ 'items. Integrate with Xero, a cloud accounting SaaS, for creating and updating '
 							+ 'Accounts Payable invoices.  '
 							+ 'Also leverage WORKetc, a cloud CRM SaaS, via their API to create and retrieve '
 							+ 'vendor contact information.',
@@ -88,6 +72,22 @@ var projects = {
 			images: []
 		},
 		{
+			title: 'CTD Website Redesign',
+			dates: '2014',
+			description: 'Update Cherry Tree Design\'s company website, to a responsively designed, interactive '
+							+ 'and engaging space '
+							+ 'for interested homeowners, designers and architects to learn, plan, design and price '
+							+ 'Cherry Tree Design products. <br>Using Bootstrap and '
+							+ 'jQuery, provide mobile friendly, intuitive tools and resources where customers '
+							+ 'and sales staff can coordinate and plan projects. '
+							+ 'Integrate with the company CRM platform, WORKetc, '
+							+ 'to create web forms and quoting tools that feed customer and product data directly '
+							+ 'into the system, avoiding unnecessary data entry.',
+			url: 'http://www.cherrytreedesign.com',
+			skills: ['HTML5', 'CSS3', 'JavaScript', 'jQuery', 'Bootstrap', 'WordPress', 'PHP', 'MySQL'],
+			images: []
+		},
+		{
 			title: 'SUMO Shoji Configurator',
 			dates: '2014',
 			description: 'An HTML5 Canvas and JavaScript adaptation of Space Creator\'s door drawing, '
@@ -100,15 +100,13 @@ var projects = {
 		{
 			title: 'Flat Screen Surrounds Configure',
 			dates: '2015',
-			description: 'A small AngularJS app to load, sort and filter available product options for '
-							+ 'Cherry Tree Design\'s Flat Screen Surround products.  This module on the main landing '
-							+ 'page allows users to quickly select from the web store\'s database of product options '
-							+ 'to configure a SKU and provide a direct link to the web store listing, with all of the '
-							+ 'user\'s choices pre-selected, ready to add to cart.<br>A quick sizing check field '
-							+ 'provides a modal quote request form for custom sizes, with Bootstrap and Angular input '
-							+ 'validation.  The form performs an AJAX submit to an AMFPHP service which sends the '
-							+ 'pertinent information by email to Cherry Tree Design sales staff.',
-			url : 'http://www.cherrytreedesign.com/furnishings/flat-screen-tv-cabinets.php',
+			description: 'This AngularJS module on the main landing page for CTD\'s Flat Screen Surround products '
+							+ 'allows users to quickly configure a SKU and provides a direct link '
+							+ 'to the web store listing, with choices pre-selected, ready to add to cart.  '
+							+ 'A quick sizing check field provides a modal quote request form for custom sizes, '
+							+ 'with Bootstrap and Angular input validation, '
+							+ 'submitted via AJAX to an AMFPHP service to send an email to sales staff.',
+			url : 'http://www.cherrytreedesign.com/flat-screen-surrounds',
 			skills: ['JavaScript', 'AngularJS', 'PHP', 'AMFPHP', 'MySQL', 'Bootstrap'],
 			images: []
 		},
@@ -118,7 +116,7 @@ var projects = {
 			description: 'An HTML5 and JavaScript adaptation of a classic arcade game, created for Udacity\'s '
 							+ 'Front End Web Developer Nanodegree.  Written in AMD pattern with '
 							+ '<a href="http://requirejs.org" target="_blank">RequireJS</a>, and utilizing '
-							+ 'Object-Oriented JavaScript inheritance.  Uses Git for version control, Bower '
+							+ 'Object-Oriented JavaScript inheritance.  Use Git for version control, Bower '
 							+ 'for package management and Grunt to automate linting tasks.',
 			url: 'https://github.com/sterlingrobot/arcade-game',
 			skills: ['HTML5', 'JavaScript', 'Git', 'Bower', 'Grunt'],

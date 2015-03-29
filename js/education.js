@@ -68,7 +68,9 @@ education.display = function () {
 		for(var key in course) {
 			var keyTitle = key.charAt(0).toUpperCase() + key.substr(1).toLowerCase();
 			if(Array.isArray(course[key])) {
-				$el.append(window['HTMLonline'+keyTitle].replace('%data%', course[key].join('<br>')));
+				course[key].forEach(function(val) {
+					$el.append(window['HTMLonline'+keyTitle].replace('%data%', val));
+				});
 			} else if(key === 'url') {
 				$el.find('a').attr('href', course[key]);
 			} else {

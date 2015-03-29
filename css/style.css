@@ -1,650 +1,770 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100,900,700);
 
 * {
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 0;
-  color: rgba(0, 0, 0, .87);
+    font-family: 'Roboto', sans-serif;
+
+    margin: 0;
+    padding: 0;
+
+    color: rgba(0, 0, 0, .87);
 }
 
 h1 {
-  font-size: 48px;
-  font-weight: 100;
-  line-height: 48px;
-  display: inline;
-  color: #fff;
+    font-size: 48px;
+    font-weight: 100;
+    line-height: 48px;
+
+    display: inline;
+
+    color: #fff;
 }
 
 h2 {
-  font-size: 30px;
-  font-weight: 100;
-  margin: 0 0 25px;
-  padding: 0;
-  letter-spacing: -1pt;
-  color: rgba(0, 0, 0, .67);
+    font-size: 30px;
+    font-weight: 100;
+
+    margin: 0 0 25px;
+    padding: 0;
+
+    letter-spacing: -1pt;
+
+    color: rgba(0, 0, 0, .67);
 }
 
 h3 {
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 22px;
-  margin-top: 5px;
-  color: rgba(0, 0, 0, .54);
-  justify-content: none;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 22px;
+
+    margin-top: 5px;
+
+    color: rgba(0, 0, 0, .54);
+
+    justify-content: none;
 }
 
 h4 {
-  font-size: 17px;
-  font-weight: 400;
-  line-height: 17px;
-  color: #6a6a6a;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 17px;
+
+    color: #6a6a6a;
 }
 
 h2,
 h3,
 h4,
 h5 {
-  padding: 10px;
-  padding-right: 5%;
-  padding-left: 5%;
+    padding: 10px;
+    padding-right: 5%;
+    padding-left: 5%;
 }
 
 p {
-  font-size: 14px;
-  line-height: 21px;
-  color: #333;
+    font-size: 14px;
+    line-height: 21px;
+
+    color: #333;
 }
 
 a,
-a:link, a:active, a:visited, a:hover {
-  display: block;
-  margin-top: 10px;
-  text-decoration: none;
-  color: #ff9800;
+a:link,
+a:active,
+a:visited,
+a:hover {
+    display: block;
+
+    margin-top: 10px;
+
+    text-decoration: none;
+
+    color: #ff9800;
 }
 
 a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 p a,
-p a:link, p a:active, p a:visited {
-  display: inline;
+p a:link,
+p a:active,
+p a:visited {
+    display: inline;
 }
 
 hr {
-  clear: both;
+    clear: both;
+
+    margin: 0;
 }
 
 #banner {
-  padding: 50px;
-  background: #2196f3;
-  position: relative;
+    position: relative;
+
+    padding: 50px;
+
+    background: #2196f3;
 }
 
 #banner span {
-  font-size: 30px;
-  font-weight: 100;
-  text-transform: lowercase;
-  color: rgba(255, 255, 255, .67);
+    font-size: 30px;
+    font-weight: 100;
+
+    text-transform: lowercase;
+
+    color: rgba(255, 255, 255, .67);
 }
 
 #menuBtn,
 #navigation {
-  position: absolute;
-  top: 15px;
-  right: 5%;
+    position: absolute;
+    top: 15px;
+    right: 5%;
 }
 
 #menuBtn {
-  z-index: 9;
-  background: none;
-  margin: 0;
-  padding: 0;
+    z-index: 9;
+
+    margin: 0;
+    padding: 0;
+
+    background: none;
 }
 
 #menuBtn .bar {
-  background: #fff;
-  height: 4px;
-  width: 40px;
-  margin: 8px 0;
-  padding: 0;
-  display: block;
+    display: block;
+
+    width: 40px;
+    height: 4px;
+    margin: 8px 0;
+    padding: 0;
+
+    background: #fff;
 }
 
 #navigation {
-  text-align: right;
-  text-transform: uppercase;
-  background: #fdfdfd;
-  padding: 0 15px;
-  margin: 8px 0 0;
+    margin: 8px 0 0;
+    padding: 0 15px;
+
+    text-align: right;
+    text-transform: uppercase;
+
+    background: #fdfdfd;
 }
 
 #navigation li {
-  list-style: none;
-  margin: 15px 5px;
+    margin: 15px 5px;
+
+    list-style: none;
 }
 
 #navigation li a {
-  color: rgba(0, 0, 0, 0.67);
+    color: rgba(0, 0, 0, .67);
 }
 
 #navigation li a:hover {
-  color: #ff9800;
+    color: #ff9800;
 }
 
 #header {
-  overflow: visible;
-  width: 100%;
-  min-height: 400px;
-  padding-top: 0;
-  background: #90caf9;
+    overflow: visible;
+
+    width: 100%;
+    min-height: 400px;
+    padding-top: 0;
+
+    background: #90caf9;
 }
 
 #topContacts {
-  position: relative;
-  top: -40px;
-  width: 100%;
+    position: relative;
+    top: -40px;
+
+    width: 100%;
 }
 
 #topContacts li.flex-item {
-  position: absolute;
-  top: 0;
-  left: 20px;
-  display: inline-block;
-  width: 60px;
-  height: 60px;
-  padding: 20px 0;
-  cursor: pointer;
-  text-align: center;
-  opacity: 0;
-  border-radius: 40px;
-  background: #fff;
+    position: absolute;
+    top: 0;
+    left: 20px;
+
+    display: inline-block;
+
+    width: 60px;
+    height: 60px;
+    padding: 20px 0;
+
+    cursor: pointer;
+    text-align: center;
+
+    opacity: 0;
+    border-radius: 40px;
+    background: #fff;
 }
 
 #topContacts #contactBtn {
-  font-size: 3em;
-  padding-top: 1px;
-  opacity: 1;
-  color: #fff;
-  background: #ff9800;
+    font-size: 3em;
+
+    padding-top: 1px;
+
+    opacity: 1;
+    color: #fff;
+    background: #ff9800;
 }
 
 #topContacts li.flex-item a {
-  margin-top: 0;
+    margin-top: 0;
 }
 
 #topContacts li.flex-item a .data-text {
-  color: #ff9800;
+    color: #ff9800;
 }
 
 #topContacts li.flex-item > span.icon-large {
-  margin-top: -2px;
-  margin-left: 5px;
-  opacity: .8;
+    margin-top: -2px;
+    margin-left: 5px;
+
+    opacity: .8;
 }
 
 #topContacts li.flex-item > span.icon-iphone,
 #topContacts li.flex-item > span.icon-map-marker {
-  margin-left: 14px;
+    margin-left: 14px;
 }
 
 #footerContacts li.flex-item {
-  margin-bottom: 20px;
-  box-shadow: none !important;
+    margin-bottom: 20px;
+
+    box-shadow: none !important;
 }
 
 #footerContacts .data-text {
-  color: #fff;
+    color: #fff;
 }
 
 .scrollTop {
-  font-size: 24px;
-  position: fixed;
-  top: 15px;
-  right: 15px;
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  cursor: pointer;
-  text-align: center;
-  color: #ff9800;
-  border: 1px dotted #ff9800;
-  border-radius: 18px;
-  z-index: 99;
-  background: rgba(255, 255, 255, 0.5);
-  display: none;
+    font-size: 24px;
+
+    position: fixed;
+    z-index: 99;
+    top: 15px;
+    right: 15px;
+
+    display: none;
+
+    width: 36px;
+    height: 36px;
+    padding: 0;
+
+    cursor: pointer;
+    text-align: center;
+
+    color: #ff9800;
+    border: 1px dotted #ff9800;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, .5);
 }
 
 .biopic {
-  display: none;
-  overflow: hidden;
-  width: 100vw;
-  max-height: 40vh;
-  margin: 0 0 20px -25%;
-  padding: 0 15%;
-  background: #1565c0;
+    display: none;
+    overflow: hidden;
+
+    width: 100vw;
+    max-height: 40vh;
+    margin: 0 0 20px -25%;
+    padding: 0 15%;
+
+    background: #1565c0;
 }
 
 .biopic img {
-  max-width: 40%;
+    max-width: 40%;
 }
 
 .speech {
-  position: relative;
-  z-index: 10;
-  top: 5px;
-  display: none;
+    position: relative;
+    z-index: 10;
+    top: 5px;
+
+    display: none;
 }
 
 .welcome-message {
-  font: italic 10pt'Lora', Georgia, serif;
-  line-height: 20px;
-  display: none;
-  margin-bottom: 20px;
-  padding: 20px;
-  color: #1565c0;
-  border: 1px solid #fff;
-  border-radius: 20px;
+    font: italic 10pt'Lora', Georgia, serif;
+    line-height: 20px;
+
+    display: none;
+
+    margin-bottom: 20px;
+    padding: 20px;
+
+    color: #1565c0;
+    border: 1px solid #fff;
+    border-radius: 20px;
 }
 
 #skills {
-  position: absolute;
-  top: -50px;
-  margin-top: 0;
-  background: #fff;
-  justify-content: initial;
+    position: absolute;
+    top: -50px;
+
+    margin-top: 0;
+
+    background: #fff;
+
+    justify-content: initial;
 }
 
 #skillsH3 {
-  display: none;
-  color: #1565c0;
+    display: none;
+
+    color: #1565c0;
 }
 
 #skillsTabs {
-  width: 100%;
+    width: 100%;
 }
 
 #skillsTabs li {
-  width: 20%;
-  text-align: center;
-  white-space: nowrap;
+    width: 20%;
+
+    text-align: center;
+    white-space: nowrap;
 }
 
 #skillsTabs li a {
-  position: relative;
-  z-index: 1;
-  margin: 0 2px;
-  text-transform: uppercase;
-  color: rgba(0, 0, 0, .6);
-  border: none;
-  border-bottom: 2px solid transparent;
-  /* box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+
+    margin: 0 2px;
+
+    text-transform: uppercase;
+
+    color: rgba(0, 0, 0, .6);
+    border: none;
+    border-bottom: 2px solid transparent;
+    /* box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.1);
   */
 }
 
 #skillsTabs li.active a {
-  z-index: 3;
-  color: #ff9800;
-  border-bottom: 2px solid #ff9800;
-  /* box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 3;
+
+    color: #ff9800;
+    border-bottom: 2px solid #ff9800;
+    /* box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
   */
 }
 
 #skills .tab-content {
-  position: relative;
-  width: 100%;
-  min-height: 350px;
-  margin-top: 20px;
-  padding: 20px;
+    position: relative;
+
+    width: 100%;
+    min-height: 350px;
+    margin-top: 20px;
+    padding: 20px;
 }
 
 #skills .skill-legend {
-  position: absolute;
-  top: 0;
-  left: 80px;
-  width: 100%;
+    position: absolute;
+    top: 0;
+    left: 80px;
+
+    width: 100%;
 }
 
 .skill-level {
-  float: left;
-  width: 15%;
-  height: 320px;
-  margin: 0;
-  padding: 0;
-  text-align: left;
-  border-left: 1px dashed rgba(0, 0, 0, .2);
+    float: left;
+
+    width: 15%;
+    height: 320px;
+    margin: 0;
+    padding: 0;
+
+    text-align: left;
+
+    border-left: 1px dashed rgba(0, 0, 0, .2);
 }
 
 .skill-level i {
-  display: block;
-  width: 10px;
-  height: 10px;
-  margin: 0;
-  margin-left: -5px;
-  border-radius: 5px;
-  background: #ff9800;
+    display: block;
+
+    width: 10px;
+    height: 10px;
+    margin: 0;
+    margin-left: -5px;
+
+    border-radius: 5px;
+    background: #ff9800;
 }
 
 #skills li.flex-item {
-  height: 50px;
+    height: 50px;
 }
 
 #skills .data-text {
-  font-size: 80%;
-  margin: 10px;
+    font-size: 80%;
+
+    margin: 10px;
 }
 
 .skill-logo {
-  position: relative;
-  float: left;
-  overflow: hidden;
-  width: 50px;
-  height: 36px;
-  margin: 0;
-  padding: 0;
+    position: relative;
+
+    float: left;
+    overflow: hidden;
+
+    width: 50px;
+    height: 36px;
+    margin: 0;
+    padding: 0;
 }
 
 .skill-logo img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 0;
-  padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    margin: 0;
+    padding: 0;
 }
 
 .skill-proficiency {
-  width: 0;
-  height: 12px;
-  margin: 0 0 0 55px;
-  padding: 2px 6px;
-  opacity: .8;
-  border-radius: 6px;
-  background-color: #ff9800;
+    width: 0;
+    height: 12px;
+    margin: 0 0 0 55px;
+    padding: 2px 6px;
+
+    opacity: .8;
+    border-radius: 6px;
+    background-color: #ff9800;
 }
 
 .main-card {
-  position: relative;
-  width: 90%;
-  margin: -20px auto 0;
-  padding: 50px 10px;
-  background: #fdfdfd;
+    position: relative;
+
+    width: 90%;
+    margin: -20px auto 0;
+    padding: 50px 10px;
+
+    background: #fdfdfd;
 }
 
 .main-card h2 {
-  margin: 0 25px 25px;
-  padding: 0;
+    margin: 0 25px 25px;
+    padding: 0;
 }
 
 #main > div.main-card:nth-child(even) {
-  left: -2%;
+    left: -2%;
 }
 
 #main > div.main-card:nth-child(odd) {
-  left: 2%;
+    left: 2%;
 }
 
-.main-card > div:last-child, .main-card > div.work-entry > div.work-duty:last-child {
-  margin-bottom: 50px;
+.main-card > div:last-child,
+.main-card > div.work-entry > div.work-duty:last-child {
+    margin-bottom: 50px;
 }
 
 #main {
-  background: #badcf4 url(../images/resume-background.png) no-repeat 33% center;
-  background-size: 150%;
-  overflow: hidden;
+    overflow: hidden;
+
+    background: #badcf4 url(../images/resume-background.png) no-repeat 33% center;
+    background-size: 150%;
 }
 
 .education-entry,
 .work-entry,
 .project-entry {
-  margin-bottom: 50px;
-  padding: 0 25px 0;
+    margin-bottom: 50px;
+    padding: 0 25px 0;
 }
 
 .work-entry > a {
-  font-size: 18px;
-  font-weight: bold;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.work-entry > em,
+.work-entry > .location-text {
+    display: inline-block;
+    clear: both;
+
+    margin: 0 10px;
+}
+.work-entry > em:first-of-type {
+  margin-left: 0;
 }
 
 .project-entry {
-  min-height: 260px;
+    min-height: 260px;
 }
 
 .project-entry .skill-logos {
-  clear: both;
+    clear: both;
 }
 
 .project-entry .skill-logo {
-  float: right;
-  margin-top: 15px;
+    float: right;
+
+    margin-top: 15px;
 }
 
 .project-entry h4 {
-  margin: 15px 0 0;
-  padding: 0;
+    margin: 15px 0 0;
+    padding: 0;
 }
 
 .project-entry a > h4 {
-  color: #ff9800;
+    color: #ff9800;
 }
 
 .project-entry p {
-  z-index: 2;
-  clear: both;
-  height: 168px;
-  background: #fdfdfd;
+    z-index: 2;
+
+    clear: both;
+
+    height: 168px;
+
+    background: #fdfdfd;
 }
 
 .project-entry p.truncated {
-  overflow: hidden;
-  border-bottom: 1px solid #ccc;
+    overflow: hidden;
+
+    border-bottom: 1px solid #ccc;
 }
 
 .project-entry p.truncated.expanded {
-  overflow: visible;
+    overflow: visible;
 }
 
 .project-entry p .moretext {
-  font-size: 24px;
-  position: absolute;
-  bottom: -12px;
-  left: 46%;
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  cursor: pointer;
-  text-align: center;
-  color: #ff9800;
-  border: 1px dotted #ff9800;
-  border-radius: 12px;
-  background: #fff;
+    font-size: 24px;
+
+    position: absolute;
+    bottom: -12px;
+    left: 46%;
+
+    width: 24px;
+    height: 24px;
+    padding: 0;
+
+    cursor: pointer;
+    text-align: center;
+
+    color: #ff9800;
+    border: 1px dotted #ff9800;
+    border-radius: 12px;
+    background: #fff;
 }
 
 .duty-heading {
-  clear: both;
-  margin: 2em 0 0;
-  padding: 0;
+    clear: both;
+
+    margin: 2em 0 0;
+    padding: 0;
 }
 
 .duty-summary {
-  margin-left: 2em;
-  list-style: disc;
+    margin-left: 2em;
+
+    list-style: disc;
 }
 
 .date-text {
-  font-size: 14px;
-  font-style: italic;
-  line-height: 16px;
-  float: left;
-  color: #999;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 16px;
+
+    color: #999;
 }
 
 .location-text {
-  font-size: 14px;
-  font-style: italic;
-  line-height: 16px;
-  float: right;
-  text-align: right;
-  color: #999;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 16px;
+
+    float: right;
+
+    text-align: right;
+
+    color: #999;
 }
 
 .location-data > h4 {
-  clear: both;
-  margin: 0 0 5px;
-  padding: 0;
+    clear: both;
+
+    margin: 0 0 5px;
+    padding: 0;
 }
 
 #map {
-  display: block;
-  height: 90%;
-  margin-right: 5%;
-  margin-left: 5%;
+    display: block;
+
+    height: 90%;
+    margin-right: 5%;
+    margin-left: 5%;
 }
 
 #mapDiv {
-  clear: both;
-  height: 600px;
-  padding-bottom: 5%;
+    clear: both;
+
+    height: 600px;
+    padding-bottom: 5%;
 }
 
 .orange {
-  background-color: #ff9800;
+    background-color: #ff9800;
 }
 
 .orange-text {
-  color: #ff9800;
+    color: #ff9800;
 }
 
 .data-text {
-  font-weight: bold;
-  color: #333;
+    font-weight: bold;
+
+    color: #333;
 }
 
 .gray {
-  clear: both;
-  padding-bottom: 10px;
-  background-color: #fbfbfb;
+    clear: both;
+
+    padding-bottom: 10px;
+
+    background-color: #fbfbfb;
 }
 
 .dark-blue {
-  background-color: #1565c0;
+    background-color: #1565c0;
 }
 
 .flex-box {
-  display: -webkit-flex;
-  display: flex;
-  flex-direction: row;
-  padding: 10px;
-  flex-wrap: wrap;
-  justify-content: space-around;
+    display: -webkit-flex;
+    display:         flex;
+    flex-direction: row;
+
+    padding: 10px;
+
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .center-content {
-  padding-top: 2.5%;
-  padding-right: 5%;
-  padding-bottom: 2.5%;
-  padding-left: 5%;
+    padding-top: 2.5%;
+    padding-right: 5%;
+    padding-bottom: 2.5%;
+    padding-left: 5%;
 }
 
 ul {
-  list-style-type: none;
+    list-style-type: none;
 }
 
 /* Bar chart stuff */
 
 .chart div {
-  font: 10px sans-serif;
-  display: inline-block;
-  height: 12px;
-  margin: 1px;
-  padding: 3px;
-  text-align: right;
-  color: white;
-  background-color: #4a4a4a;
+    font: 10px sans-serif;
+
+    display: inline-block;
+
+    height: 12px;
+    margin: 1px;
+    padding: 3px;
+
+    text-align: right;
+
+    color: white;
+    background-color: #4a4a4a;
 }
 
 span {
-  padding: 5px;
+    padding: 5px;
 }
 
 #letsConnect {
-  text-align: center;
+    text-align: center;
 }
 
 #letsConnect h2 {
-  position: relative;
-  top: -20px;
-  left: -20px;
-  width: 260px;
-  margin: 0;
-  color: #fff;
+    position: relative;
+    top: -20px;
+    left: -20px;
+
+    width: 260px;
+    margin: 0;
+
+    color: #fff;
 }
 
 @media only screen and (max-width: 1024px) {
-  #letsConnect {
-    margin-top: 5%;
-  }
-
+    #letsConnect {
+        margin-top: 5%;
+    }
 }
 
 @media only screen and (max-width: 900px) {
-  .biopic {
-    width: 112vw;
-  }
+    .biopic {
+        width: 112vw;
+    }
 
-  .biopic img {
-    max-width: 120%;
-    margin-left: -30%;
-  }
-
+    .biopic img {
+        max-width: 120%;
+        margin-left: -30%;
+    }
 }
 
 @media only screen and (max-width: 768px) {
+    #navigation {
+        font-size: 18px;
+    }
 
-  #navigation {
-    font-size: 18px;
-  }
+    #letsConnect {
+        margin-top: 10%;
+    }
 
-  #letsConnect {
-    margin-top: 10%;
-  }
+    #header {
+        min-height: 500px;
+        padding: 0;
+    }
 
-  #header {
-    min-height: 500px;
-    padding: 0;
-  }
+    #skills {
+        top: 0;
+        left: 7%;
 
-  #skills {
-    top: 0;
-    left: 7%;
-    width: 86%;
-    padding: 0;
-  }
+        width: 86%;
+        padding: 0;
+    }
 
-  .project-entry {
-    margin-bottom: 25px;
-    padding-bottom: 25px;
-    border-bottom: 1px solid #ccc;
-  }
+    .project-entry {
+        margin-bottom: 25px;
+        padding-bottom: 25px;
 
-  .project-entry p {
-    height: auto;
-  }
+        border-bottom: 1px solid #ccc;
+    }
 
-  .project-entry p .moretext {
-    display: none;
-  }
+    .project-entry p {
+        height: auto;
+    }
 
-  .main-card {
-    left: 0 !important;
-    margin: 10px auto;
-  }
+    .project-entry p .moretext {
+        display: none;
+    }
 
+    .main-card {
+        left: 0 !important;
+
+        margin: 10px auto;
+    }
 }
 
 @media only screen and (min-width: 768px) {
-  #skillsH3, .biopic, .welcome-message, .speech {
-    display: block;
-  }
-
+    #skillsH3,
+    .biopic,
+    .welcome-message,
+    .speech {
+        display: block;
+    }
 }
