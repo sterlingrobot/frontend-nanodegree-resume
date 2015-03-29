@@ -49,6 +49,9 @@ li {
 a[href]:after {
     font-size: 10px;
 }
+a[href=""]:after {
+    content: none;
+}
 #menuBtn,
 #contactBtn,
 #navigation,
@@ -151,6 +154,9 @@ a[href]:after {
 .duty-heading {
 	margin-top: 5px;
 }
+#workExperience .row > .work-entry:last-child > a {
+	display: inline;
+}
 .skill-logo {
 	display: none;
 }
@@ -225,9 +231,6 @@ a[href]:after {
 .online-entries > .education-entry:last-child {
 	float: right;
 }
-#letsConnect {
-	margin-top: 15px;
-}
 #letsConnect,
 #letsConnect h2 {
 	position: static;
@@ -236,6 +239,7 @@ a[href]:after {
 }
 #letsConnect h2 {
 	text-align: left;
+	margin-left: 5px;
 }
 #footerContacts > li.flex-item {
 	width: 50%;

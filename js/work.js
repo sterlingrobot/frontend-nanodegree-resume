@@ -75,13 +75,13 @@ var work = {
 					'Analyze competition and industry trends, looking for new opportunities to bring affordable, '
 						+ 'hand crafted wood products to a national market',
 */
-					'Design and engineer dozens of new hardwood lighting and mirror accessories, working with '
+					'Design and engineer new hardwood lighting and mirror accessories, working with '
 						+ 'overseas factories to ensure quality and consistency',
 					'Develop several new screening and sliding door product lines '
 						+ 'in traditional Japanese, Contemporary and Arts & Crafts styles',
-					'Produce 3D modeling and renderings of product designs in Sketchup',
+					'Produce 3D modeling and renderings of products in Sketchup',
 					'Determine costing and pricing, balancing profitability and competitiveness',
-					'Optimize production methods and workflows within standardized quality expectations'
+					'Optimize production methods within standardized quality expectations'
 				]
 			},
 			'Production Management': {

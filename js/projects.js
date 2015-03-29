@@ -74,8 +74,8 @@ var projects = {
 		{
 			title: 'CTD Website Redesign',
 			dates: '2014',
-			description: 'Update Cherry Tree Design\'s company website, to a responsively designed, interactive '
-							+ 'and engaging space '
+			description: 'Update Cherry Tree Design\'s company website, to a responsively designed, interactive, '
+							+ 'engaging space '
 							+ 'for interested homeowners, designers and architects to learn, plan, design and price '
 							+ 'Cherry Tree Design products. <br>Using Bootstrap and '
 							+ 'jQuery, provide mobile friendly, intuitive tools and resources where customers '
@@ -105,7 +105,7 @@ var projects = {
 							+ 'to the web store listing, with choices pre-selected, ready to add to cart.  '
 							+ 'A quick sizing check field provides a modal quote request form for custom sizes, '
 							+ 'with Bootstrap and Angular input validation, '
-							+ 'submitted via AJAX to an AMFPHP service to send an email to sales staff.',
+							+ 'submitted via AJAX to an AMFPHP service email sales staff.',
 			url : 'http://www.cherrytreedesign.com/flat-screen-surrounds',
 			skills: ['JavaScript', 'AngularJS', 'PHP', 'AMFPHP', 'MySQL', 'Bootstrap'],
 			images: []
@@ -115,9 +115,8 @@ var projects = {
 			dates: '2015 (development)',
 			description: 'An HTML5 and JavaScript adaptation of a classic arcade game, created for Udacity\'s '
 							+ 'Front End Web Developer Nanodegree.  Written in AMD pattern with '
-							+ '<a href="http://requirejs.org" target="_blank">RequireJS</a>, and utilizing '
-							+ 'Object-Oriented JavaScript inheritance.  Use Git for version control, Bower '
-							+ 'for package management and Grunt to automate linting tasks.',
+							+ 'RequireJS, utilizing Object-Oriented JavaScript inheritance.  Use Git '
+							+ 'for version control, Bower for package management and Grunt to automate linting tasks.',
 			url: 'https://github.com/sterlingrobot/arcade-game',
 			skills: ['HTML5', 'JavaScript', 'Git', 'Bower', 'Grunt'],
 			images: []

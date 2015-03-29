@@ -18,7 +18,7 @@ var education = {
 	 {
 	 	name: 'Code School',
 	 	dates: 2014,
-	 	title: ['Javascript Road Trip', 'Shaping Up with Angular'],
+	 	title: ['Javascript Road Trip', 'Shaping Up with Angular', 'Git Real'],
 	 	url: 'http://www.codeschool.com'
 	 }]
 };
