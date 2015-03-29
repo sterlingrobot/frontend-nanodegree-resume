@@ -494,7 +494,7 @@ hr {
     margin: 0 10px;
 }
 .work-entry > em:first-of-type {
-  margin-left: 0;
+    margin-left: 0;
 }
 
 .project-entry {
@@ -720,7 +720,9 @@ span {
     #navigation {
         font-size: 18px;
     }
-
+    #banner > span {
+        display: block;
+    }
     #letsConnect {
         margin-top: 10%;
     }
@@ -736,6 +738,14 @@ span {
 
         width: 86%;
         padding: 0;
+    }
+
+    #skillsTabs li a {
+        font-size: 90%;
+
+        padding: 10px 0;
+
+        letter-spacing: -1px;
     }
 
     .project-entry {
@@ -760,11 +770,71 @@ span {
     }
 }
 
+@media only screen and (max-width: 400px) {
+
+    #banner > span {
+        font-size: 24px;
+    }
+
+    #topContacts #contactBtn {
+        line-height: 36px;
+    }
+
+    #topContacts li.flex-item {
+        width: 40px !important;
+        height: 40px !important;
+        padding: 10px 0;
+    }
+
+    #topContacts li.flex-item.expanded {
+        width: auto !important;
+    }
+
+    #skillsTabs li a {
+        font-size: 75%;
+    }
+
+    .skill-level {
+        width: 14%;
+    }
+
+}
+
 @media only screen and (min-width: 768px) {
+
     #skillsH3,
     .biopic,
     .welcome-message,
     .speech {
         display: block;
+    }
+
+    #menuBtn {
+        display: none !important;
+    }
+
+    #navigation {
+        top: 0;
+        right: 0;
+
+        display: block;
+        visibility: visible;
+
+        margin: 0;
+
+        background: none;
+        box-shadow: none !important;
+    }
+
+    #navigation li {
+        display: inline-block;
+
+        margin: 0 15px;
+
+        background: none;
+    }
+
+    #navigation li a {
+        color: #fff;
     }
 }

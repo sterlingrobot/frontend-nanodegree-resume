@@ -224,7 +224,7 @@ bio.display = function() {
 			// adjust left position to keep centered
 			.animate({
 				width: '+=150px',
-				left: '-=75px',
+				left: $el2.offset().left < 75 ? '5px' : '-=75px',
 				top: viewWidth < 768 ? '+=65px' : 0
 			}, 500, 'easeOutCirc')
 				.css('z-index', '+=5' );
